@@ -1,4 +1,4 @@
-Ext.define('BM.controller.BooksController', {
+Ext.define('BM.controller.BooksGridController', {
     extend: 'Ext.app.Controller',
     stores: [
         'BooksStore'
