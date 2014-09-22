@@ -28,11 +28,6 @@ Ext.define('BM.view.book.BooksListView', {
         displayInfo: true
     }],
     
-    listeners: {
-    	itemclick: function(currentView, record, item, index, e, eOpts) {
-    		
-    	}},
-
     initComponent: function() {
         this.columns = this.buildColumns();
         this.callParent(arguments);
