@@ -14,13 +14,14 @@ Ext.define('BM.controller.BooksController', {
 
     init: function() {
         this.control({
-            'viewport > booklistview': { //vezi http://docs.sencha.com/extjs/4.2.2/#!/api/Ext.ComponentQuery
+            'booklistview': { //vezi http://docs.sencha.com/extjs/4.2.2/#!/api/Ext.ComponentQuery
                 itemdblclick: this.editBook
             }
         });
     },
 
     editBook: function(grid, record) {
+        alert('editBook');
         //        var view = Ext.widget('bookedit');
         //        view.down('form').loadRecord(record);
     }
