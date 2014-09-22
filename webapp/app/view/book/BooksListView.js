@@ -11,19 +11,38 @@ Ext.define('BM.view.book.BooksListView', {
 
     plugins: [
         Ext.create('Ext.grid.plugin.RowEditing', {
-            clicksToEdit: 1
+            clicksToEdit: 2
         })
     ],
 
     store: 'BooksStore',
 
-    features: [{
-        ftype: 'grouping'
+//    features: [{
+//        ftype: 'grouping'
+//    }],
+    
+    dockedItems: [{
+        xtype: 'pagingtoolbar',
+        store: 'BooksStore',
+        dock: 'bottom',
+        displayInfo: true
     }],
+    
+    listeners: {
+    	itemclick: function(currentView, record, item, index, e, eOpts) {
+    		
+    	}},
 
     initComponent: function() {
         this.columns = this.buildColumns();
         this.callParent(arguments);
+        
+        this.store.load({
+            params:{
+                start:0,
+                limit: BM.store.BooksStore.itemsPerPage
+            }
+        });
     },
     
     buildColumns : function(){
