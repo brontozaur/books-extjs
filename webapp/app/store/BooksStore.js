@@ -1,4 +1,4 @@
-var itemsPerPage = 1; 
+var itemsPerPage = 1;
 Ext.define('BM.store.BooksStore', {
     extend: 'Ext.data.Store',
     model: 'BM.model.BooksModel',
@@ -8,9 +8,10 @@ Ext.define('BM.store.BooksStore', {
             limit: itemsPerPage
         }
     },
+    autoSync: true,
     pageSize: 1,
 
-//    groupField: 'author',
+    //    groupField: 'author',
 
     proxy: {
         type: 'ajax',
@@ -23,6 +24,11 @@ Ext.define('BM.store.BooksStore', {
             root: 'books',
             successProperty: 'success',
             totalProperty: 'total'
-        }
+        },
+        writer: {
+            type: 'json',
+            writeAllFields: false,
+            root: 'data'
+        },
     }
 });

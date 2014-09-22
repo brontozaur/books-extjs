@@ -14,17 +14,18 @@ Ext.define('BM.view.ButtonGroup',{
 
         items: [{
             text: 'Adauga',
-            name: 'addField',
             action: 'add-book'
         }, {
             text: 'Modifica',
-            name: 'modField',
             action: 'mod-book',
             disabled: true
         },{
             text: 'Sterge',
-            name: 'deField',
             action: 'del-book',
+            disabled: true
+        },{
+            text: 'Salveaza',
+            action: 'save-book',
             disabled: true
         }]
     }]
