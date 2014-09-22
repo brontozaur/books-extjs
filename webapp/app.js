@@ -5,7 +5,8 @@ Ext.application({
     appFolder: 'app',
 
     controllers: [
-        'BooksController'
+        'BooksGridController',
+        'BooksInfoController'
     ],
     
     autoCreateViewport: true,
