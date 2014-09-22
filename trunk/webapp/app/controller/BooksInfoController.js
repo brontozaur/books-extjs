@@ -37,8 +37,24 @@ Ext.define('BM.controller.BooksInfoController', {
     },
 
     modBook: function(button, clickEvent, options) {
-        enableInfoAreaFields(true);
-        enablesavebutton(true);
+//        enableInfoAreaFields(true);
+//        enablesavebutton(true);
+
+        Ext.Ajax.request({ //ajax request care ajunge pe server!!!
+            url : 'books',
+            method:'GET', 
+            params : {
+                loginData: 'aaa'
+            },
+            scope : this,
+            //method to call when the request is successful
+          success : function(result, request) {
+        	alert('success');
+        },
+        failure : function(result, request) {
+        	alert('failure');
+        }
+    });     	
     },
 
     delBook: function(button, clickEvent, options) {
