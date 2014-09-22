@@ -8,7 +8,7 @@ Ext.define('BM.store.BooksStore', {
             limit: itemsPerPage
         }
     },
-    autoSync: true,
+    autoSync: true, //this can cause performance issues!
     pageSize: 1,
 
     //    groupField: 'author',
