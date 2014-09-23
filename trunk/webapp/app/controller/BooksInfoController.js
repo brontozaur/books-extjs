@@ -37,6 +37,20 @@ Ext.define('BM.controller.BooksInfoController', {
     },
 
     modBook: function(button, clickEvent, options) {
+  	  enableInfoAreaFields(true);
+	  enablesavebutton(true);  	
+    },
+
+    delBook: function(button, clickEvent, options) {
+        Ext.Msg.show({
+            title: 'Confirmare stergere',
+            msg: 'Sunteti siguri ca doriti stergerea cartii selectate?',
+            buttons: Ext.Msg.YESNO,
+            icon: Ext.Msg.QUESTION
+        });
+    },
+
+    saveBook: function(button, clickEvent, options) {
     	var autorField = Ext.ComponentQuery.query('bookinfo textfield[name=autorField]')[0];
     	var titleField = Ext.ComponentQuery.query('bookinfo textfield[name=titleField]')[0];
     	var dateField = Ext.ComponentQuery.query('bookinfo textfield[name=dateField]')[0];
@@ -52,43 +66,15 @@ Ext.define('BM.controller.BooksInfoController', {
             },
             scope : this,
           success : function(result, request) {
-        	  alert('success');
-        	  enableInfoAreaFields(true);
-        	  enablesavebutton(true);
+        	  alert('Book was succesfully stored!');
+              clearInfoAreaFields();
+              enableInfoAreaFields(false);
+              enablebuttons(false);
+        	  enablesavebutton(false);
         },
         failure : function(result, request) {
         	alert('Save failed!');
         }
-    });     	
-    },
-
-    delBook: function(button, clickEvent, options) {
-        Ext.Msg.show({
-            title: 'Confirmare stergere',
-            msg: 'Sunteti siguri ca doriti stergerea cartii selectate?',
-            buttons: Ext.Msg.YESNO,
-            icon: Ext.Msg.QUESTION
-        });
-    },
-
-    saveBook: function(button, clickEvent, options) {
-        //1. Get the grid's store
-        //2. Create a new model instance
-        //3. Add model instance to the store.
-
-        var grid = Ext.widget('booklistview');
-        var store = grid.getStore();
-
-        var autorField = Ext.ComponentQuery.query('bookinfo textfield[name=autorField]')[0];
-        var titleField = Ext.ComponentQuery.query('bookinfo textfield[name=titleField]')[0];
-        var dateField = Ext.ComponentQuery.query('bookinfo textfield[name=dateField]')[0];
-
-        store.add({
-            id: '5',
-            author: autorField.getValue(),
-            title: titleField.getValue(),
-            data: dateField.getValue()
-        });
-
+    });  
     },
 });
