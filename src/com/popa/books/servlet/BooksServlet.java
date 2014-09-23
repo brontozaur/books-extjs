@@ -1,23 +1,36 @@
 package com.popa.books.servlet;
  
 import java.io.IOException;
-import java.io.PrintWriter;
- 
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
- 
 
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
+import org.apache.log4j.Logger;
+
+import com.popa.books.init.ApplicationInit;
+import com.popa.books.servlet.handler.EventHandler;
+import com.popa.books.servlet.handler.EventHandlerFactory;
  
 public class BooksServlet extends HttpServlet {
-    private static final long serialVersionUID = 1L;
- 
-    public BooksServlet() {
+
+	private static final long serialVersionUID = 1L;
+	
+	public static Logger logger = Logger.getLogger(BooksServlet.class);
+
+	public BooksServlet() {
         super();
+    }
+    
+    @Override
+    public void init() throws ServletException {
+        ApplicationInit.initialize(getServletContext());
+    }
+    
+    @Override
+    public void destroy() {
+    	ApplicationInit.shutdown();
     }
  
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -25,43 +38,7 @@ public class BooksServlet extends HttpServlet {
     }
  
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    	System.err.println("x");
-  //bla bla bla ;-) -- ajunge aici din requestul ajax din BooksInfoController.js //TODO de facut un punct central din asta care analizeaza requesturile pe baza de eventName
-    /*    String loginData = request.getParameter("loginData");
-        Gson gson = new Gson();
-        UserInfo userInfo = gson.fromJson(loginData, UserInfo.class);
-        String userId = userInfo.getUserId();
-        String password = userInfo.getPassword();
- 
-        PrintWriter out = response.getWriter();
-        response.setContentType("text/html");
-        response.setHeader("Cache-control", "no-cache, no-store");
-        response.setHeader("Pragma", "no-cache");
-        response.setHeader("Expires", "-1");
-        response.setHeader("Access-Control-Allow-Origin", "*");
-        response.setHeader("Access-Control-Allow-Methods", "POST,GET");
-        response.setHeader("Access-Control-Allow-Headers", "Content-Type");
-        response.setHeader("Access-Control-Max-Age", "86400");
- 
-        JsonObject myObj = new JsonObject();
- 
-        //nothing was sent   
-        if(userId == null || password == null){
-            myObj.addProperty("success", false);
-            myObj.addProperty("message", "Please send userId and Password!");
-        }
-        else {
-            if(userId.trim().equals("ajax") && password.trim().equals("request")){
-                myObj.addProperty("success", true);
-                myObj.addProperty("message", "Welcome to as400sampecode.blogspot.com");
-            }
-            else {
-                myObj.addProperty("success", false);
-                myObj.addProperty("message", "Looks like you forgot your login infomartion");
-            }
-        }
-        
-        out.println(myObj.toString());
-        out.close();*/
+      	EventHandler handler = EventHandlerFactory.getHandler(request);
+    	handler.handleEvent(request);
     }
 }
