@@ -11,11 +11,7 @@ package com.popa.books.castor.types;
  //- Imported classes and packages -/
 //---------------------------------/
 
-import java.io.Serializable;
-import java.util.Enumeration;
 import java.util.Hashtable;
-import org.exolab.castor.xml.Marshaller;
-import org.exolab.castor.xml.Unmarshaller;
 
 /**
  * public enum ValidationMode { AUTO, CALLBACK, NONE};

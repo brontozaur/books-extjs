@@ -127,8 +127,10 @@
 		<Context path="/azorica" docBase="C:/devtools/eclipse_jee_luna_r_win32-x86-x64_projects/Azor/webapp/" />
 		<Context path="/crud" docBase="C:/devtools/eclipse_jee_luna_r_win32-x86-x64_projects/CRUD_Demo/webapp/" />
 		<Context path="/neptune" docBase="C:/devtools/eclipse_jee_luna_r_win32-x86-x64_workspace/NeptuneComponents/webapp" />
-		<Context path="/books" docBase="C:/devtools/eclipse_jee_luna_r_win32-x86-x64_projects/books-extjs/webapp/" />
-<!--		<Context path="/dbviewer" docBase="C:/devtools/eclipse_jee_luna_r_win32-x86-x64_projects/DatabaseViewer/webapp/" /> -->
+        <Context path="/books" docBase="C:\devtools\myProjects\books-extjs\webapp\"/>		
+<!--		<Context path="/dbviewer" docBase="C:/devtools/eclipse_jee_luna_r_win32-x86-x64_projects/DatabaseViewer/webapp/" /> 
+     		<Context path="/books" docBase="C:/devtools/eclipse_jee_luna_r_win32-x86-x64_projects/books-extjs/webapp/" />
+-->
 
         <!-- SingleSignOn valve, share authentication between web applications
              Documentation at: /docs/config/valve.html -->
