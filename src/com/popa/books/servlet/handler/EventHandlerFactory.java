@@ -13,6 +13,8 @@ public class EventHandlerFactory {
 			handler = new SaveBookEventHandler();
 		} else if (Events.GET_BOOKS.equals(eventName)) {
 			handler = new GetBooksEventHandler();
+		} else if (Events.DEL_BOOK.equals(eventName)) {
+			handler = new DeleteBookEventHandler();
 		}
 		if (handler == null){
 			throw new NullPointerException("no handler was found for event: "+eventName);

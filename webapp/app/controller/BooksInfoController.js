@@ -1,5 +1,6 @@
 Ext.define('BM.controller.BooksInfoController', {
     extend: 'Ext.app.Controller',
+    requires: ['Ext.window.MessageBox'],
     stores: [
         'BooksStore'
     ],
@@ -34,6 +35,10 @@ Ext.define('BM.controller.BooksInfoController', {
         enableInfoAreaFields(true);
         enablebuttons(false);
         enablesavebutton(true);
+    	var hiddenBookIdField = Ext.ComponentQuery.query('bookinfo hidden[name=bookIdHidden]')[0];
+    	var hiddenAutorIdField = Ext.ComponentQuery.query('bookinfo hidden[name=autorIdHidden]')[0];
+    	hiddenBookIdField.setValue('');
+    	hiddenAutorIdField.setValue('');
     },
 
     modBook: function(button, clickEvent, options) {
@@ -42,13 +47,32 @@ Ext.define('BM.controller.BooksInfoController', {
     },
 
     delBook: function(button, clickEvent, options) {
-        Ext.Msg.show({
-            title: 'Confirmare stergere',
-            msg: 'Sunteti siguri ca doriti stergerea cartii selectate?',
-            buttons: Ext.Msg.YESNO,
-            icon: Ext.Msg.QUESTION,
-            fn: saveOnOK //TODO http://dev.sencha.com/deploy/ext-4.0.0/examples/message-box/msg-box.js
-        });
+    	Ext.MessageBox.confirm('Confirmare', 'Sunteti sigur?', this.deleteBook);
+    },
+    
+    deleteBook: function(btn){
+    	if (btn == 'yes'){
+    		var hiddenBookIdField = Ext.ComponentQuery.query('bookinfo hidden[name=bookIdHidden]')[0];
+            Ext.Ajax.request({
+                url : 'books',
+                method:'POST', 
+                params : {
+                    event: 'del-book',
+                    bookId: hiddenBookIdField.getValue()
+                },
+                scope : this,
+              success : function(result, request) {
+                  clearInfoAreaFields();
+                  enableInfoAreaFields(false);
+                  enablebuttons(false);
+            	  enablesavebutton(false);
+            	  alert('Book was succesfully deleted!');
+            },
+            failure : function(result, request) {
+            	alert('Delete operation has failed miserably!');
+            }
+        });  
+    	}
     },
     
     saveBook: function(button, clickEvent, options) {
@@ -60,7 +84,7 @@ Ext.define('BM.controller.BooksInfoController', {
 
         Ext.Ajax.request({
             url : 'books',
-            method:'GET', 
+            method:'POST', 
             params : {
                 event: 'save-book',
                 autorId: hiddenAutorIdField.getValue(),
