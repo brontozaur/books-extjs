@@ -39,6 +39,10 @@ public class BooksServlet extends HttpServlet {
  
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
       	EventHandler handler = EventHandlerFactory.getHandler(request);
-    	handler.handleEvent(request);
+      	String responseText = handler.handleEvent(request);
+      	if (responseText != null){
+            response.setContentType("text/html;charset=UTF-8");
+            response.getWriter().write(responseText);
+      	}
     }
 }

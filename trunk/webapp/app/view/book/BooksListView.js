@@ -55,7 +55,7 @@ Ext.define('BM.view.book.BooksListView', {
             flex: 1
         }, {
             header: 'Data aparitie',
-            dataIndex: 'data',
+            dataIndex: 'dataAparitie',
             flex: 1,
             editor: 'datefield',
             renderer: function(value) {

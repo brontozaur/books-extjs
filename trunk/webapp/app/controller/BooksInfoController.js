@@ -51,6 +51,7 @@ Ext.define('BM.controller.BooksInfoController', {
     },
 
     saveBook: function(button, clickEvent, options) {
+    	var hiddenBookIdField = Ext.ComponentQuery.query('bookinfo hidden[name=bookIdHidden]')[0];
     	var autorField = Ext.ComponentQuery.query('bookinfo textfield[name=autorField]')[0];
     	var titleField = Ext.ComponentQuery.query('bookinfo textfield[name=titleField]')[0];
     	var dateField = Ext.ComponentQuery.query('bookinfo textfield[name=dateField]')[0];
@@ -60,6 +61,7 @@ Ext.define('BM.controller.BooksInfoController', {
             method:'GET', 
             params : {
                 event: 'save-book',
+                bookId: hiddenBookIdField.getValue(),
                 title: titleField.getValue(),
                 autor: autorField.getValue(),
                 dataAparitie: dateField.getValue()

@@ -19,15 +19,6 @@
         }
     }
     
-    function fillInfoArea(record){
-    	var autorField = Ext.ComponentQuery.query('bookinfo textfield[name=autorField]')[0];
-    	autorField.setValue(record.get('author'));
-    	var titleField = Ext.ComponentQuery.query('bookinfo textfield[name=titleField]')[0];
-    	titleField.setValue(record.get('title'));
-    	var dateField = Ext.ComponentQuery.query('bookinfo textfield[name=dateField]')[0];
-    	dateField.setValue(record.get('data'));    	
-    }
-    
     function clearInfoAreaFields(){
     	var autorField = Ext.ComponentQuery.query('bookinfo textfield[name=autorField]')[0];
     	autorField.setValue("");

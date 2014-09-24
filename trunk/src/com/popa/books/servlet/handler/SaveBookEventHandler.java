@@ -6,6 +6,7 @@ import javax.persistence.EntityManager;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 
 import com.popa.books.dao.Autor;
@@ -17,12 +18,16 @@ public class SaveBookEventHandler extends EventHandler {
 	private static final Logger logger = Logger.getLogger(SaveBookEventHandler.class);
 
 	@Override
-	public void handleEvent(HttpServletRequest request) throws ServletException {
+	public String handleEvent(HttpServletRequest request) throws ServletException {
 		EntityManager conn = null;
 		try {
 			conn = BorgPersistence.getEntityManager();
 			conn.getTransaction().begin();
 			Book book = new Book();
+			String bookId = request.getParameter("bookId");
+			if (StringUtils.isNotEmpty(bookId)){
+				book.setBookId(Integer.valueOf(bookId));
+			}
 			try {
 				book.setDataAparitie(Date.valueOf(request.getParameter("dataAparitie")));
 			} catch (Exception e) {
@@ -32,9 +37,10 @@ public class SaveBookEventHandler extends EventHandler {
 			Autor autor = new Autor();
 			autor.setNume(request.getParameter("autor"));
 			autor.store(conn);
-			book.setAutor(autor);
+			book.setAuthor(autor);
 			book.store(conn);
 			conn.getTransaction().commit();
+			return null;
 		} catch (Exception exc) {
 			conn.getTransaction().rollback();
 			logger.error(exc, exc);

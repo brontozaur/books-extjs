@@ -5,7 +5,7 @@ import javax.servlet.http.HttpServletRequest;
 
 public abstract class EventHandler {
 
-	public abstract void handleEvent(HttpServletRequest request) throws ServletException;
+	public abstract String handleEvent(HttpServletRequest request) throws ServletException;
 	
 	public abstract String getEventName();
 	
