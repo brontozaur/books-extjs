@@ -16,9 +16,9 @@
 			<!-- <property name="javax.persistence.cache.storeMode" value="CacheStoreMode.REFRESH"/> -->
 			<property name="borg.visible.in.login" value="true" />
             <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver" />
-            <property name="hibernate.connection.url" value="jdbc:mysql://localhost/books_manager?autoReconnect=true" />
+            <property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/books_manager?autoReconnect=true" />
             <property name="hibernate.connection.username" value="root" />
-            <property name="hibernate.connection.password" value="thematrix" />
+            <property name="hibernate.connection.password" value="" />
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect" />
 			<property name="hibernate.cache.use_second_level_cache" value="true"/>
 			<property name="hibernate.connection.isolation" value="1" />
@@ -32,6 +32,9 @@
             <property name="hibernate.c3p0.idle_test_period" value="3000" />
 			<property name="hibernate.cache.provider_class" value="org.hibernate.cache.NoCacheProvider" />
 			<property name="hibernate.connection.provider_class" value = "org.hibernate.connection.C3P0ConnectionProvider" /> 
+			
+			<property name="hibernate.transaction.factory_class" value ="org.hibernate.transaction.JDBCTransactionFactory" />
+        	<property name="hibernate.current_session_context_class" value ="thread" />
         </properties>
     </persistence-unit>
 </persistence>
