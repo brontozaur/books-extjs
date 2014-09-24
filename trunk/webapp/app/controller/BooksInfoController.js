@@ -46,12 +46,14 @@ Ext.define('BM.controller.BooksInfoController', {
             title: 'Confirmare stergere',
             msg: 'Sunteti siguri ca doriti stergerea cartii selectate?',
             buttons: Ext.Msg.YESNO,
-            icon: Ext.Msg.QUESTION
+            icon: Ext.Msg.QUESTION,
+            fn: saveOnOK //TODO http://dev.sencha.com/deploy/ext-4.0.0/examples/message-box/msg-box.js
         });
     },
-
+    
     saveBook: function(button, clickEvent, options) {
     	var hiddenBookIdField = Ext.ComponentQuery.query('bookinfo hidden[name=bookIdHidden]')[0];
+    	var hiddenAutorIdField = Ext.ComponentQuery.query('bookinfo hidden[name=autorIdHidden]')[0];
     	var autorField = Ext.ComponentQuery.query('bookinfo textfield[name=autorField]')[0];
     	var titleField = Ext.ComponentQuery.query('bookinfo textfield[name=titleField]')[0];
     	var dateField = Ext.ComponentQuery.query('bookinfo textfield[name=dateField]')[0];
@@ -61,9 +63,10 @@ Ext.define('BM.controller.BooksInfoController', {
             method:'GET', 
             params : {
                 event: 'save-book',
+                autorId: hiddenAutorIdField.getValue(),
                 bookId: hiddenBookIdField.getValue(),
                 title: titleField.getValue(),
-                autor: autorField.getValue(),
+                numeAutor: autorField.getValue(),
                 dataAparitie: dateField.getValue()
             },
             scope : this,

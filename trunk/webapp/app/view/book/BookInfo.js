@@ -4,10 +4,14 @@ Ext.define('BM.view.book.BookInfo',{
     bodyPadding: 10,
     requires: ['BM.view.ButtonGroup'],
     
-    items: [{ 
+    items: [{
     	xtype:'hidden',
     	name:'bookIdHidden',
-    	value:''//no value initially
+    	value:''
+    	},{
+        	xtype:'hidden',
+        	name:'autorIdHidden',
+        	value:''
     	},{
         xtype: 'fieldcontainer',
         defaultType: 'textfield',
