@@ -36,16 +36,7 @@ public class SaveBookEventHandler extends EventHandler {
 			}
 			book.setTitle(request.getParameter("title"));
 			String autorId = request.getParameter("autorId");
-			Autor autor;
-			if (StringUtils.isNotEmpty(autorId)){
-				autor = (Autor) Database.getDbObjectById(Autor.class, Integer.valueOf(autorId));
-			} else {
-				autor = new Autor();
-			}
-			if (!autor.getNume().equals(request.getParameter("numeAutor"))){
-				autor.setNume(request.getParameter("numeAutor"));
-				autor.store(conn);
-			}
+			Autor autor = (Autor) Database.getDbObjectById(Autor.class, Long.valueOf(autorId));
 			book.setAuthor(autor);
 			book.store(conn);
 			conn.getTransaction().commit();

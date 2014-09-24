@@ -20,16 +20,16 @@
     }
     
     function clearInfoAreaFields(){
-    	var autorField = Ext.ComponentQuery.query('bookinfo textfield[name=autorField]')[0];
-    	autorField.setValue("");
     	var titleField = Ext.ComponentQuery.query('bookinfo textfield[name=titleField]')[0];
     	titleField.setValue("");
     	var dateField = Ext.ComponentQuery.query('bookinfo textfield[name=dateField]')[0];
-    	dateField.setValue("");    	
+    	dateField.setValue("");
+    	var autorField = Ext.ComponentQuery.query('bookinfo autorCombo[name=autorField]')[0];
+    	autorField.setValue("");
     }
     
     function enableInfoAreaFields(enable){
-    	var autorField = Ext.ComponentQuery.query('bookinfo textfield[name=autorField]')[0];
+    	var autorField = Ext.ComponentQuery.query('bookinfo autorCombo[name=autorField]')[0];
     	var titleField = Ext.ComponentQuery.query('bookinfo textfield[name=titleField]')[0];
     	var dateField = Ext.ComponentQuery.query('bookinfo textfield[name=dateField]')[0];
     	if (enable){

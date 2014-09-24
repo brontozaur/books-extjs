@@ -1,4 +1,4 @@
-var itemsPerPage = 10;
+var itemsPerPage = 50;
 Ext.define('BM.store.BooksStore', {
     extend: 'Ext.data.Store',
     model: 'BM.model.BooksModel',
@@ -9,7 +9,7 @@ Ext.define('BM.store.BooksStore', {
         }
     },
     autoSync: true, //this can cause performance issues!
-    pageSize: 10,
+    pageSize: itemsPerPage,
 
     proxy: {
         type: 'ajax',
