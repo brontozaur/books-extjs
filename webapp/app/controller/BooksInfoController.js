@@ -95,11 +95,12 @@ Ext.define('BM.controller.BooksInfoController', {
             },
             scope : this,
           success : function(result, request) {
-        	  alert('Book was succesfully stored!');
+//        	  alert('Book was succesfully stored!');
               clearInfoAreaFields();
               enableInfoAreaFields(false);
               enablebuttons(false);
         	  enablesavebutton(false);
+        	  Ext.widget('booklistview').getStore().load();
         },
         failure : function(result, request) {
         	alert('Save failed!');

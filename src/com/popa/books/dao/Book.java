@@ -9,11 +9,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "book")
+@NamedQuery(name="Book.findById", query = "select b from Book b where b.bookId = :bookId")
 public class Book extends AbstractDB implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -26,7 +28,7 @@ public class Book extends AbstractDB implements Serializable {
     private String title = EMPTY;
     @Column(name = "dataAparitie", unique = true)
     private Date dataAparitie = null;
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "idAutor", nullable = false)
     private Autor author;
 

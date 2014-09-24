@@ -26,7 +26,8 @@ public class DeleteBookEventHandler extends EventHandler {
 				logger.error("book id is incorrect: "+ bookId);
 				throw new ServletException("book id is incorrect: "+bookId);
 			}
-			Book book = (Book)Database.getDbObjectById(Book.class, Long.valueOf(bookId));
+			Book book = conn.createNamedQuery("Book.findById", Book.class).setParameter("bookId", Long.valueOf(bookId))
+					.getSingleResult();
 			conn.remove(book);
 			conn.getTransaction().commit();
 			return null;

@@ -53,6 +53,7 @@ public final class Database {
 		return getDbObjectsList(clazz, null, null);
 	}
 
+	//i had some troubles with this one. Use named queries instead. see Book
 	public static AbstractDB getDbObjectById(Class<? extends AbstractDB> clazz, long objectId) throws DatabaseException {
 		EntityManager em = null;
 		try {
