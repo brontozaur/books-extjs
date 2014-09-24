@@ -2,7 +2,8 @@ Ext.define('BM.controller.BooksInfoController', {
     extend: 'Ext.app.Controller',
     requires: ['Ext.window.MessageBox'],
     stores: [
-        'BooksStore'
+        'BooksStore',
+        'AutorStore'
     ],
 
     model: [
@@ -36,9 +37,7 @@ Ext.define('BM.controller.BooksInfoController', {
         enablebuttons(false);
         enablesavebutton(true);
     	var hiddenBookIdField = Ext.ComponentQuery.query('bookinfo hidden[name=bookIdHidden]')[0];
-    	var hiddenAutorIdField = Ext.ComponentQuery.query('bookinfo hidden[name=autorIdHidden]')[0];
     	hiddenBookIdField.setValue('');
-    	hiddenAutorIdField.setValue('');
     },
 
     modBook: function(button, clickEvent, options) {
@@ -66,7 +65,8 @@ Ext.define('BM.controller.BooksInfoController', {
                   enableInfoAreaFields(false);
                   enablebuttons(false);
             	  enablesavebutton(false);
-            	  alert('Book was succesfully deleted!');
+//            	  alert('Book was succesfully deleted!');
+            	  Ext.widget('booklistview').getStore().load();
             },
             failure : function(result, request) {
             	alert('Delete operation has failed miserably!');
@@ -77,8 +77,7 @@ Ext.define('BM.controller.BooksInfoController', {
     
     saveBook: function(button, clickEvent, options) {
     	var hiddenBookIdField = Ext.ComponentQuery.query('bookinfo hidden[name=bookIdHidden]')[0];
-    	var hiddenAutorIdField = Ext.ComponentQuery.query('bookinfo hidden[name=autorIdHidden]')[0];
-    	var autorField = Ext.ComponentQuery.query('bookinfo textfield[name=autorField]')[0];
+    	var autorField = Ext.ComponentQuery.query('bookinfo autorCombo[name=autorField]')[0];
     	var titleField = Ext.ComponentQuery.query('bookinfo textfield[name=titleField]')[0];
     	var dateField = Ext.ComponentQuery.query('bookinfo textfield[name=dateField]')[0];
 
@@ -87,10 +86,9 @@ Ext.define('BM.controller.BooksInfoController', {
             method:'POST', 
             params : {
                 event: 'save-book',
-                autorId: hiddenAutorIdField.getValue(),
                 bookId: hiddenBookIdField.getValue(),
                 title: titleField.getValue(),
-                numeAutor: autorField.getValue(),
+                autorId: autorField.getValue(),
                 dataAparitie: dateField.getValue()
             },
             scope : this,

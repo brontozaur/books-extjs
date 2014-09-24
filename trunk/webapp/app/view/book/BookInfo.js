@@ -2,7 +2,8 @@ Ext.define('BM.view.book.BookInfo',{
 	extend: 'Ext.panel.Panel',
 	alias: 'widget.bookinfo',
     bodyPadding: 10,
-    requires: ['BM.view.ButtonGroup'],
+    requires: ['BM.view.ButtonGroup',
+               'BM.view.AutorCombo'],
     
     items: [{
     	xtype:'hidden',
@@ -28,8 +29,9 @@ Ext.define('BM.view.book.BookInfo',{
         },
 
         items: [{
-            fieldLabel: 'Autor',
-            name: 'autorField',
+        	fieldLabel: 'Autor',
+        	xtype: 'autorCombo',
+        	name: 'autorField',
             disabled: true
         }, {
             fieldLabel: 'Titlu',
