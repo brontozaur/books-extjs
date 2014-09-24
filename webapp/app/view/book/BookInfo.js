@@ -3,8 +3,12 @@ Ext.define('BM.view.book.BookInfo',{
 	alias: 'widget.bookinfo',
     bodyPadding: 10,
     requires: ['BM.view.ButtonGroup'],
-
-    items: [{
+    
+    items: [{ 
+    	xtype:'hidden',
+    	name:'bookIdHidden',
+    	value:''//no value initially
+    	},{
         xtype: 'fieldcontainer',
         defaultType: 'textfield',
 

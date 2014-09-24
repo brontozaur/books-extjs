@@ -28,7 +28,7 @@ public class Book extends AbstractDB implements Serializable {
     private Date dataAparitie = null;
     @ManyToOne
     @JoinColumn(name = "idAutor", nullable = false)
-    private Autor autor;
+    private Autor author;
 
     @Override
     public Book cloneObject() throws CloneNotSupportedException {
@@ -59,12 +59,12 @@ public class Book extends AbstractDB implements Serializable {
 		this.dataAparitie = dataAparitie;
 	}
 
-	public Autor getAutor() {
-		return autor;
+	public Autor getAuthor() {
+		return author;
 	}
 
-	public void setAutor(Autor autor) {
-		this.autor = autor;
+	public void setAuthor(Autor author) {
+		this.author = author;
 	}
 
 	@Override
