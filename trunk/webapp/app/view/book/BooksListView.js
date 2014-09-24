@@ -45,7 +45,10 @@ Ext.define('BM.view.book.BooksListView', {
             header: 'Autor',
             dataIndex: 'author',
             flex: 1,
-            editor: 'textfield'
+            editor: 'textfield',
+            renderer: function(value) {
+                return value.nume;
+            }            	
         }, {
             header: 'Titlu',
             dataIndex: 'title',
