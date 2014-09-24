@@ -24,7 +24,9 @@ Ext.define('BM.controller.BooksGridController', {
     	enablebuttons(true);
     	enablesavebutton(false);
     	enableInfoAreaFields(false);
-    	this.fillInfoArea(selected[0]);
+    	if (selected.length >0) {
+    		this.fillInfoArea(selected[0]);
+    	}
     },
     
     fillInfoArea: function(record){
