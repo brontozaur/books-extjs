@@ -11,6 +11,7 @@ import org.apache.log4j.Logger;
 
 import com.popa.books.dao.Autor;
 import com.popa.books.dao.Book;
+import com.popa.books.dao.Database;
 import com.popa.books.dao.persistence.BorgPersistence;
 
 public class SaveBookEventHandler extends EventHandler {
@@ -34,9 +35,17 @@ public class SaveBookEventHandler extends EventHandler {
 				logger.error("cannot parse date: "+ request.getParameter("dataAparitie"));
 			}
 			book.setTitle(request.getParameter("title"));
-			Autor autor = new Autor();
-			autor.setNume(request.getParameter("autor"));
-			autor.store(conn);
+			String autorId = request.getParameter("autorId");
+			Autor autor;
+			if (StringUtils.isNotEmpty(autorId)){
+				autor = (Autor) Database.getDbObjectById(Autor.class, Integer.valueOf(autorId));
+			} else {
+				autor = new Autor();
+			}
+			if (!autor.getNume().equals(request.getParameter("numeAutor"))){
+				autor.setNume(request.getParameter("numeAutor"));
+				autor.store(conn);
+			}
 			book.setAuthor(autor);
 			book.store(conn);
 			conn.getTransaction().commit();

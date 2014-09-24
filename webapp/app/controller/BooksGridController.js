@@ -29,7 +29,9 @@ Ext.define('BM.controller.BooksGridController', {
     
     fillInfoArea: function(record){
     	var hiddenBookIdField = Ext.ComponentQuery.query('bookinfo hidden[name=bookIdHidden]')[0];
-    	hiddenBookIdField.setValue(record.get('bookId'));
+    	hiddenBookIdField.setValue(record.get('author').autorId);
+    	var hiddenAutorIdField = Ext.ComponentQuery.query('bookinfo hidden[name=autorIdHidden]')[0];
+    	hiddenAutorIdField.setValue(record.get('bookId'));    	
     	var autorField = Ext.ComponentQuery.query('bookinfo textfield[name=autorField]')[0];
     	autorField.setValue(record.get('author').nume);
     	var titleField = Ext.ComponentQuery.query('bookinfo textfield[name=titleField]')[0];
