@@ -42,7 +42,9 @@ Ext.define('BM.controller.BooksInfoController', {
 
     modBook: function(button, clickEvent, options) {
   	  enableInfoAreaFields(true);
-	  enablesavebutton(true);  	
+	  enablesavebutton(true);
+	  var delButton = Ext.ComponentQuery.query('bookinfo button[action=del-book]')[0];
+	  delButton.disable();
     },
 
     delBook: function(button, clickEvent, options) {
