@@ -1,19 +1,18 @@
-Ext.define('BM.view.book.BookInfo',{
-	extend: 'Ext.panel.Panel',
-	alias: 'widget.bookinfo',
+Ext.define('BM.view.book.BookInfo', {
+    extend: 'Ext.panel.Panel',
+    alias: 'widget.bookinfo',
     bodyPadding: 10,
-    requires: ['BM.view.ButtonGroup',
-               'BM.view.AutorCombo'],
-    
+    requires: ['BM.view.AutorCombo'],
+
     items: [{
-    	xtype:'hidden',
-    	name:'bookIdHidden',
-    	value:''
-    	},{
-        	xtype:'hidden',
-        	name:'autorIdHidden',
-        	value:''
-    	},{
+        xtype: 'hidden',
+        name: 'bookIdHidden',
+        value: ''
+    }, {
+        xtype: 'hidden',
+        name: 'autorIdHidden',
+        value: ''
+    }, {
         xtype: 'fieldcontainer',
         defaultType: 'textfield',
 
@@ -29,23 +28,48 @@ Ext.define('BM.view.book.BookInfo',{
         },
 
         items: [{
-        	fieldLabel: 'Autor',
-        	xtype: 'autorCombo',
-        	name: 'autorField',
+            fieldLabel: 'Autor',
+            xtype: 'autorCombo',
+            name: 'autorField',
             disabled: true
         }, {
             fieldLabel: 'Titlu',
             name: 'titleField',
             disabled: true
-        },{
-        	xtype: 'datefield',
+        }, {
+            xtype: 'datefield',
             fieldLabel: 'An aparitie',
             name: 'dateField',
             disabled: true
         }]
     }],
     dockedItems: [{
-        xtype: 'buttongroup',
+        xtype: 'toolbar',
+        items: [{
+            iconCls: 'icon-add',
+            text: 'Adaugare',
+            action: 'add-book',
+            scope: this
+        }, {
+            iconCls: 'icon-mod',
+            text: 'Modificare',
+            disabled: true,
+            action: 'mod-book',
+            scope: this
+        }, {
+            iconCls: 'icon-delete',
+            text: 'Stergere',
+            disabled: true,
+            action: 'del-book',
+            scope: this
+        }],
+        dock: 'top'
+    }, {
+        xtype: 'button',
+        text: 'Salveaza',
+        action: 'save-book',
+        iconCls: 'icon-save',
+        disabled: true,
         dock: 'bottom'
     }]
 });
