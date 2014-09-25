@@ -42,6 +42,13 @@ Ext.define('BM.view.book.BookInfo', {
             name: 'dateField',
             disabled: true
         }]
+    }, {
+        xtype: 'button',
+        text: 'Salveaza',
+        action: 'save-book',
+        iconCls: 'icon-save',
+        disabled: true,
+        dock: 'bottom'
     }],
     dockedItems: [{
         xtype: 'toolbar',
@@ -64,12 +71,5 @@ Ext.define('BM.view.book.BookInfo', {
             scope: this
         }],
         dock: 'top'
-    }, {
-        xtype: 'button',
-        text: 'Salveaza',
-        action: 'save-book',
-        iconCls: 'icon-save',
-        disabled: true,
-        dock: 'bottom'
     }]
 });
