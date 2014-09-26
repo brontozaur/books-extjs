@@ -21,10 +21,10 @@ Ext.define('BM.controller.BooksGridController', {
     },
 
     changeselection: function(selModel, selected, eOpts ) {
-    	enablebuttons(true);
     	enablesavebutton(false);
     	enableInfoAreaFields(false);
     	if (selected.length >0) {
+        	enablebuttons(true);
     		this.fillInfoArea(selected[0]);
     	}
     },
