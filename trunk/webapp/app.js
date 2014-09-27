@@ -6,7 +6,8 @@ Ext.application({
 
     controllers: [
         'BooksGridController',
-        'BooksInfoController'
+        'BooksInfoController',
+        'EastRegionController'
     ],
     
     autoCreateViewport: true,

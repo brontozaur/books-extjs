@@ -1,6 +1,7 @@
 package com.popa.books.dao;
 
 import java.io.Serializable;
+import java.sql.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -21,6 +22,8 @@ public class Autor extends AbstractDB implements Serializable {
     private long autorId;
     @Column(name = "nume", unique = true)
     private String nume = EMPTY;
+    @Column(name = "dataNasterii")
+    private Date dataNasterii = null;
 
     @Override
     public Autor cloneObject() throws CloneNotSupportedException {
@@ -46,6 +49,14 @@ public class Autor extends AbstractDB implements Serializable {
 	@Override
 	public long getId() {
 		return this.autorId;
+	}
+
+	public Date getDataNasterii() {
+		return dataNasterii;
+	}
+
+	public void setDataNasterii(Date dataNasterii) {
+		this.dataNasterii = dataNasterii;
 	}
 
 

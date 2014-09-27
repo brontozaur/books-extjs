@@ -29,10 +29,13 @@ public class SaveBookEventHandler extends EventHandler {
 			if (StringUtils.isNotEmpty(bookId)){
 				book.setBookId(Integer.valueOf(bookId));
 			}
+			String dateParam = request.getParameter("dataAparitie");
 			try {
-				book.setDataAparitie(Date.valueOf(request.getParameter("dataAparitie")));
+				if (StringUtils.isNotEmpty(dateParam)){
+					book.setDataAparitie(new Date(Long.valueOf(dateParam)));
+				}
 			} catch (Exception e) {
-				logger.error("cannot parse date: "+ request.getParameter("dataAparitie"));
+				logger.error("cannot parse date: "+ dateParam);
 			}
 			book.setTitle(request.getParameter("title"));
 			String autorId = request.getParameter("autorId");

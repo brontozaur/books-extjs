@@ -1,7 +1,7 @@
 Ext.define('BM.view.Viewport', {
     extend: 'Ext.container.Viewport',
     requires: ['Ext.layout.container.Border',
-               'BM.view.book.BookInfo'],
+               'BM.view.EastRegion'],
     layout: 'border',
     items: [{
         xtype: 'toolbar',
@@ -12,7 +12,6 @@ Ext.define('BM.view.Viewport', {
         html: 'Books Manager'
     }, {
         xtype: 'panel',
-        itemId: 'centerregion',
         region: 'center',
         items: [{
             xtype: 'booklistview'
@@ -20,13 +19,13 @@ Ext.define('BM.view.Viewport', {
     }, {
         xtype: 'panel',
         region: 'east',
-        width: 300,
+        width: '30%',
         collapseDirection: 'right',
         collapsible: true,
         split: true,
         title:'Book info',
         items: [{
-            xtype: 'bookinfo'
+            xtype: 'eastregion'
         }]
     }, {
         xtype: 'panel',

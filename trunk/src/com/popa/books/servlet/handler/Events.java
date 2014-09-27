@@ -6,4 +6,5 @@ public interface Events {
 	String DEL_BOOK = "del-book";
 	String GET_BOOKS = "get-books";
 	String GET_AUTORS = "get-autors";
+	String GET_EDITURI = "get-edituri";
 }
