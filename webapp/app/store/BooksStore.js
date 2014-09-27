@@ -13,6 +13,7 @@ Ext.define('BM.store.BooksStore', {
 
     proxy: {
         type: 'ajax',
+        url:'books?event=save-book', //TOOD send the parameters
         api: {
         	read: 'books?event=get-books'
         }
