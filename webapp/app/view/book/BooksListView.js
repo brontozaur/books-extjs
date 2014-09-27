@@ -8,6 +8,8 @@ Ext.define('BM.view.book.BooksListView', {
     title: 'Books',
 
     selType: 'rowmodel',
+    
+    columnLines: true,
 
     plugins: [
         Ext.create('Ext.grid.plugin.RowEditing', {

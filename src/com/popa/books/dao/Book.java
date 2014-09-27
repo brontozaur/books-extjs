@@ -26,7 +26,7 @@ public class Book extends AbstractDB implements Serializable {
     private long bookId;
     @Column(name = "title", unique = true)
     private String title = EMPTY;
-    @Column(name = "dataAparitie", unique = true)
+    @Column(name = "dataAparitie")
     private Date dataAparitie = null;
     @OneToOne
     @JoinColumn(name = "idAutor", nullable = false)

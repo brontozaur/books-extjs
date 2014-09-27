@@ -17,6 +17,8 @@ public class EventHandlerFactory {
 			handler = new DeleteBookEventHandler();
 		} else if (Events.GET_AUTORS.equals(eventName)) {
 			handler = new GetAutorsEventHandler();
+		} else if (Events.GET_EDITURI.equals(eventName)) {
+			handler = new GetEdituriEventHandler();
 		}
 		if (handler == null){
 			throw new NullPointerException("no handler was found for event: "+eventName);

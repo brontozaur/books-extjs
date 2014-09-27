@@ -3,7 +3,8 @@ Ext.define('BM.controller.BooksInfoController', {
     requires: ['Ext.window.MessageBox'],
     stores: [
         'BooksStore',
-        'AutorStore'
+        'AutorStore',
+        'EdituraStore'
     ],
 
     model: [
@@ -81,8 +82,12 @@ Ext.define('BM.controller.BooksInfoController', {
     	var hiddenBookIdField = Ext.ComponentQuery.query('bookinfo hidden[name=bookIdHidden]')[0];
     	var autorField = Ext.ComponentQuery.query('bookinfo autorCombo[name=autorField]')[0];
     	var titleField = Ext.ComponentQuery.query('bookinfo textfield[name=titleField]')[0];
-    	var dateField = Ext.ComponentQuery.query('bookinfo textfield[name=dateField]')[0];
-
+    	var dateField = Ext.ComponentQuery.query('bookinfo datefield[name=dateField]')[0];
+    	
+    	if (!this.validate()){
+    		return;
+    	}
+    	
         Ext.Ajax.request({
             url : 'books',
             method:'POST', 
@@ -91,7 +96,7 @@ Ext.define('BM.controller.BooksInfoController', {
                 bookId: hiddenBookIdField.getValue(),
                 title: titleField.getValue(),
                 autorId: autorField.getValue(),
-                dataAparitie: dateField.getValue()
+                dataAparitie: dateField.parseDate(dateField.getValue())
             },
             scope : this,
           success : function(result, request) {
@@ -107,4 +112,49 @@ Ext.define('BM.controller.BooksInfoController', {
         }
     });  
     },
+    validate : function(){
+    	var autorField = Ext.ComponentQuery.query('bookinfo autorCombo[name=autorField]')[0]
+    	if (Ext.isEmpty(autorField.getValue())){
+			Ext.Msg.show({
+			    title: 'Autor neselectat',
+			    msg: 'Selectati autorul',
+			    width: 300,
+			    buttons: Ext.Msg.OK,
+			    animateTarget: autorField,
+			    icon: Ext.window.MessageBox.WARNING
+			});
+			autorField.focus();
+			return false;
+    	}
+    	
+    	var titleField = Ext.ComponentQuery.query('bookinfo textfield[name=titleField]')[0]
+    	if (Ext.isEmpty(titleField.getValue())){
+			Ext.Msg.show({
+			    title: 'Nume necompletat',
+			    msg: 'Introduceti numele cartii',
+			    width: 300,
+			    buttons: Ext.Msg.OK,
+			    animateTarget: titleField,
+			    icon: Ext.window.MessageBox.WARNING
+			});
+			return false;
+    	}
+    	
+    	var dateField = Ext.ComponentQuery.query('bookinfo datefield[name=dateField]')[0]
+    	if (!Ext.isEmpty(dateField.getValue())){
+    		if (!dateField.isValid()){
+    			Ext.Msg.show({
+    			    title: 'Data invalida',
+    			    msg: 'Introduceti o data corecta.',
+    			    width: 300,
+    			    buttons: Ext.Msg.OK,
+    			    animateTarget: dateField,
+    			    icon: Ext.window.MessageBox.WARNING
+    			});
+    			return false;
+    		}
+    	}
+    	
+    	return true;
+    }
 });

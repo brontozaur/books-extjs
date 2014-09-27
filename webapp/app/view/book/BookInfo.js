@@ -3,6 +3,7 @@ Ext.define('BM.view.book.BookInfo', {
     alias: 'widget.bookinfo',
     bodyPadding: 10,
     requires: ['BM.view.AutorCombo'],
+    title: 'Carte',
 
     items: [{
         xtype: 'hidden',
