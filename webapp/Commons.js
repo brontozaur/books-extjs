@@ -1,6 +1,6 @@
     function enablebuttons(enable){
-        var modButton = Ext.ComponentQuery.query('bookinfo button[action=mod-book]')[0];
-        var delButton = Ext.ComponentQuery.query('bookinfo button[action=del-book]')[0];
+        var modButton = Ext.ComponentQuery.query('booksgrid button[action=mod-book]')[0];
+        var delButton = Ext.ComponentQuery.query('booksgrid button[action=del-book]')[0];
         if (enable){
         	modButton.enable();
         	delButton.enable();

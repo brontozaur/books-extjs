@@ -1,14 +1,14 @@
-Ext.define('BM.view.book.BooksListView', {
+Ext.define('BM.view.book.BooksGrid', {
     extend: 'Ext.grid.Panel',
-    alias: 'widget.booklistview',
+    alias: 'widget.booksgrid',
     requires: [
         'BM.core.format.DateFormatter'
     ],
 
-    title: 'Books',
+    title: 'Lista carti',
 
     selType: 'rowmodel',
-    
+
     columnLines: true,
 
     plugins: [
@@ -19,38 +19,55 @@ Ext.define('BM.view.book.BooksListView', {
 
     store: 'BooksStore',
 
-//    features: [{
-//        ftype: 'grouping'
-//    }],
-    
     dockedItems: [{
         xtype: 'pagingtoolbar',
         store: 'BooksStore',
         dock: 'bottom',
         displayInfo: true
+    }, {
+        xtype: 'toolbar',
+        items: [{
+            iconCls: 'icon-add',
+            text: 'Adaugare',
+            action: 'add-book',
+            scope: this
+        }, {
+            iconCls: 'icon-mod',
+            text: 'Modificare',
+            disabled: true,
+            action: 'mod-book',
+            scope: this
+        }, {
+            iconCls: 'icon-delete',
+            text: 'Stergere',
+            disabled: true,
+            action: 'del-book',
+            scope: this
+        }],
+        dock: 'top'
     }],
-    
+
     initComponent: function() {
         this.columns = this.buildColumns();
         this.callParent(arguments);
-        
+
         this.store.load({
-            params:{
-                start:0,
+            params: {
+                start: 0,
                 limit: BM.store.BooksStore.itemsPerPage
             }
         });
     },
-    
-    buildColumns : function(){
-    	return [{
+
+    buildColumns: function() {
+        return [{
             header: 'Autor',
             dataIndex: 'author',
             flex: 1,
             editor: 'textfield',
             renderer: function(value) {
                 return value.nume;
-            }            	
+            }
         }, {
             header: 'Titlu',
             dataIndex: 'title',
