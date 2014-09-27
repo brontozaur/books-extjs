@@ -3,6 +3,7 @@ Ext.define('BM.store.AutorStore', {
     model: 'BM.model.AutorModel',
     autoLoad: true,
     autoSync: true,
+//    groupField: 'name',
     proxy: {
         type: 'ajax',
         api: {

@@ -1,9 +1,6 @@
 Ext.define('BM.view.book.BooksGrid', {
     extend: 'Ext.grid.Panel',
     alias: 'widget.booksgrid',
-    requires: [
-        'BM.core.format.DateFormatter'
-    ],
 
     title: 'Lista carti',
 
@@ -77,9 +74,7 @@ Ext.define('BM.view.book.BooksGrid', {
             dataIndex: 'dataAparitie',
             flex: 1,
             editor: 'datefield',
-            renderer: function(value) {
-                return DATEFORMATTER.getDate(value);
-            }
+            renderer: Ext.util.Format.dateRenderer('m/d/Y')
         }];
     }
 });

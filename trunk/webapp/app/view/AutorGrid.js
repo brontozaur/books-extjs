@@ -1,9 +1,6 @@
 Ext.define('BM.view.AutorGrid', {
     extend: 'Ext.grid.Panel',
     alias: 'widget.autorgrid',
-    requires: [
-        'BM.core.format.DateFormatter'
-    ],
 
     title: 'Autori',
     
@@ -19,9 +16,9 @@ Ext.define('BM.view.AutorGrid', {
 
     store: 'AutorStore',
 
-    features: [{
-        ftype: 'grouping'
-    }],
+//    features: [{
+//        ftype: 'grouping',
+//    }],
     
 //    dockedItems: [{
 //        xtype: 'pagingtoolbar',
@@ -44,7 +41,8 @@ Ext.define('BM.view.AutorGrid', {
         }, {
             header: 'Data nasterii',
             dataIndex: 'dataNasterii',
-            flex: 1
+            flex: 1,
+            renderer: Ext.util.Format.dateRenderer('m/d/Y')
         }];
     }
 });
