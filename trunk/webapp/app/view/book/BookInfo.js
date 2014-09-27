@@ -3,7 +3,7 @@ Ext.define('BM.view.book.BookInfo', {
     alias: 'widget.bookinfo',
     bodyPadding: 10,
     requires: ['BM.view.AutorCombo'],
-    title: 'Carte',
+    title: 'Detalii carte',
 
     items: [{
         xtype: 'hidden',
@@ -50,27 +50,5 @@ Ext.define('BM.view.book.BookInfo', {
         iconCls: 'icon-save',
         disabled: true,
         dock: 'bottom'
-    }],
-    dockedItems: [{
-        xtype: 'toolbar',
-        items: [{
-            iconCls: 'icon-add',
-            text: 'Adaugare',
-            action: 'add-book',
-            scope: this
-        }, {
-            iconCls: 'icon-mod',
-            text: 'Modificare',
-            disabled: true,
-            action: 'mod-book',
-            scope: this
-        }, {
-            iconCls: 'icon-delete',
-            text: 'Stergere',
-            disabled: true,
-            action: 'del-book',
-            scope: this
-        }],
-        dock: 'top'
     }]
 });
