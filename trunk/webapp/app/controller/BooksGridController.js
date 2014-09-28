@@ -1,23 +1,19 @@
 Ext.define('BM.controller.BooksGridController', {
     extend: 'Ext.app.Controller',
-    stores: [
-        'BooksStore'
-    ],
+    stores: ['BooksStore'],
 
-    model: [
-        'BooksModel'
-    ],
+    model: ['BooksModel'],
 
-    views: [
-        'book.BooksGrid',
+    views: ['book.BooksGrid',
         'book.BookWindow'
     ],
 
     init: function() {
         this.control({
-            'booksgrid': { //vezi http://docs.sencha.com/extjs/4.2.2/#!/api/Ext.ComponentQuery
-            	selectionchange: this.changeselection
-            }, 'booksgrid button[action=add-book]': {
+            'booksgrid': {
+                selectionchange: this.changeselection
+            },
+            'booksgrid button[action=add-book]': {
                 click: this.addBook
             },
             'booksgrid button[action=mod-book]': {
@@ -29,85 +25,90 @@ Ext.define('BM.controller.BooksGridController', {
         });
     },
 
-    changeselection: function(selModel, selected, eOpts ) {
-    	if (selected.length >0) {
-        	enablebuttons(true);
-    		this.fillInfoArea(selected[0]);
-    	}
+    changeselection: function(selModel, selected, eOpts) {
+        if (selected.length > 0) {
+            enablebuttons(true);
+            this.fillInfoArea(selected[0]);
+        }
     },
-    
-    fillInfoArea: function(record){
-    	var autorField = Ext.ComponentQuery.query('bookinfo autorCombo[name=autorField]')[0];
-    	autorField.setValue(record.get('author').autorId);
-    	var titleField = Ext.ComponentQuery.query('bookinfo textfield[name=titleField]')[0];
-    	titleField.setValue(record.get('title'));
-    	var dateField = Ext.ComponentQuery.query('bookinfo textfield[name=dateField]')[0];
-    	dateField.setValue(record.get('dataAparitie')); 
+
+    fillInfoArea: function(record) {
+        var autorField = Ext.ComponentQuery
+            .query('bookinfo autorCombo[name=autorField]')[0];
+        autorField.setValue(record.get('author').autorId);
+        var titleField = Ext.ComponentQuery
+            .query('bookinfo textfield[name=titleField]')[0];
+        titleField.setValue(record.get('title'));
+        var dateField = Ext.ComponentQuery
+            .query('bookinfo textfield[name=dateField]')[0];
+        dateField.setValue(record.get('dataAparitie'));
     },
-    
+
     addBook: function(button, clickEvent, options) {
-    	var window = Ext.widget('bookwindow');
-    	var selectedBook = Ext.widget('booksgrid').getSelectionModel().getSelection()[0];
-    	window.show();
+        var window = Ext.widget('bookwindow');
+        window.show();
     },
 
     modBook: function(button, clickEvent, options) {
-	  var delButton = Ext.ComponentQuery.query('booksgrid button[action=del-book]')[0];
-	  delButton.disable();
-    	var window = Ext.widget('bookwindow');
-    	var selectionModel = button.up('viewport').down('booksgrid').getSelectionModel();
-    	if (!selectionModel.hasSelection){
-			Ext.Msg.show({
-			    title: 'Carte neselectata',
-			    msg: 'Selectati o carte',
-			    width: 300,
-			    buttons: Ext.Msg.OK,
-			    icon: Ext.window.MessageBox.WARNING
-			});
-			return;
-    	}
-    	var selectedBook = selectionModel.getSelection()[0];
-    	var bookForm = window.down('form[itemId=bookform]'); 
-    	bookForm.loadRecord(selectedBook);
-    	window.show();
+        var delButton = Ext.ComponentQuery
+            .query('booksgrid button[action=del-book]')[0];
+        delButton.disable();
+        var window = Ext.widget('bookwindow');
+        var selectionModel = button.up('viewport').down('booksgrid')
+            .getSelectionModel();
+        if (!selectionModel.hasSelection) {
+            Ext.Msg.show({
+                title: 'Carte neselectata',
+                msg: 'Selectati o carte',
+                width: 300,
+                buttons: Ext.Msg.OK,
+                icon: Ext.window.MessageBox.WARNING
+            });
+            return;
+        }
+        var selectedBook = selectionModel.getSelection()[0];
+        var bookForm = window.down('form[itemId=bookform]');
+        bookForm.loadRecord(selectedBook);
+        window.show();
     },
 
     delBook: function(button, clickEvent, options) {
-    	Ext.MessageBox.confirm('Confirmare', 'Sunteti sigur?', this.deleteBook);
+        Ext.MessageBox.confirm('Confirmare', 'Sunteti sigur?',
+            this.deleteBook);
     },
-    
-    deleteBook: function(btn){
-    	if (btn == 'yes'){
-    		var booksGrid = Ext.ComponentQuery.query('booksgrid')[0];
-    		var selectionModel = booksGrid.getSelectionModel();
-        	if (!selectionModel.hasSelection){
-    			Ext.Msg.show({
-    			    title: 'Carte neselectata',
-    			    msg: 'Selectati o carte',
-    			    width: 300,
-    			    buttons: Ext.Msg.OK,
-    			    icon: Ext.window.MessageBox.WARNING
-    			});
-    			return;
-        	}
-        	var selectedBook = selectionModel.getSelection()[0];
+
+    deleteBook: function(btn) {
+        if (btn == 'yes') {
+            var booksGrid = Ext.ComponentQuery.query('booksgrid')[0];
+            var selectionModel = booksGrid.getSelectionModel();
+            if (!selectionModel.hasSelection) {
+                Ext.Msg.show({
+                    title: 'Carte neselectata',
+                    msg: 'Selectati o carte',
+                    width: 300,
+                    buttons: Ext.Msg.OK,
+                    icon: Ext.window.MessageBox.WARNING
+                });
+                return;
+            }
+            var selectedBook = selectionModel.getSelection()[0];
             Ext.Ajax.request({
-                url : 'books',
-                method:'POST', 
-                params : {
+                url: 'books',
+                method: 'POST',
+                params: {
                     event: 'del-book',
                     bookId: selectedBook.get('bookId')
                 },
-                scope : this,
-              success : function(result, request) {
-                  clearInfoAreaFields();
-                  enablebuttons(false);
-            	  Ext.widget('booksgrid').getStore().load();
-            },
-            failure : function(result, request) {
-            	alert('Delete operation has failed miserably!');
-            }
-        });  
-    	}
+                scope: this,
+                success: function(result, request) {
+                    clearInfoAreaFields();
+                    enablebuttons(false);
+                    Ext.widget('booksgrid').getStore().load();
+                },
+                failure: function(result, request) {
+                    alert('Delete operation has failed miserably!');
+                }
+            });
+        }
     }
 });
