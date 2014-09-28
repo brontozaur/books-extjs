@@ -2,7 +2,7 @@ Ext.define('BM.view.book.BookInfo', {
     extend: 'Ext.panel.Panel',
     alias: 'widget.bookinfo',
     bodyPadding: 10,
-    requires: ['BM.view.AutorCombo'],
+    requires: ['BM.view.autor.AutorCombo'],
     title: 'Detalii carte',
 
     items: [{
@@ -40,12 +40,5 @@ Ext.define('BM.view.book.BookInfo', {
             fieldLabel: 'An aparitie',
             name: 'dateField'
         }]
-    }, {
-        xtype: 'button',
-        text: 'Salveaza',
-        action: 'save-book',
-        iconCls: 'icon-save',
-        disabled: true,
-        dock: 'bottom'
     }]
 });

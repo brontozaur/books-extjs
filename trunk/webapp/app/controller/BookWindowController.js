@@ -29,7 +29,7 @@ Ext.define('BM.controller.BookWindowController', {
     	var form = button.up('bookwindow').down('form[itemId=bookform]');
     	var me = this;
     	if (form.isValid()) {
-    		var dataAparitie = form.down('datefield[name=dataAparitie]')
+    		var dataAparitie = form.down('datefield[name=dataAparitie]');
     	    form.submit({
                 url : 'books',
                 method:'POST', 

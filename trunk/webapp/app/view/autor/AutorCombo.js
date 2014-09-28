@@ -1,4 +1,4 @@
-Ext.define('BM.view.AutorCombo', {
+Ext.define('BM.view.autor.AutorCombo', {
 	extend: 'Ext.form.field.ComboBox',
 	xtype: 'autorCombo',
 	model:'BM.model.AutorModel',

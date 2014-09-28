@@ -7,12 +7,12 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 
-import com.popa.books.dao.Book;
+import com.popa.books.dao.Editura;
 import com.popa.books.dao.persistence.BorgPersistence;
 
-public class DeleteBookEventHandler extends EventHandler {
+public class SaveEdituraEventHandler extends EventHandler {
 
-	private static final Logger logger = Logger.getLogger(DeleteBookEventHandler.class);
+	private static final Logger logger = Logger.getLogger(SaveEdituraEventHandler.class);
 
 	@Override
 	public String handleEvent(HttpServletRequest request) throws ServletException {
@@ -20,20 +20,19 @@ public class DeleteBookEventHandler extends EventHandler {
 		try {
 			conn = BorgPersistence.getEntityManager();
 			conn.getTransaction().begin();
-			String bookId = request.getParameter("bookId");
-			if (StringUtils.isEmpty(bookId)){
-				logger.error("book id is incorrect: "+ bookId);
-				throw new ServletException("book id is incorrect: "+bookId);
+			Editura editura = new Editura();
+			String idEditura = request.getParameter("idEditura");
+			if (StringUtils.isNotEmpty(idEditura)) {
+				editura.setIdEditura(Integer.valueOf(idEditura));
 			}
-			Book book = conn.createNamedQuery("Book.findById", Book.class).setParameter("bookId", Long.valueOf(bookId))
-					.getSingleResult();
-			conn.remove(book);
+			editura.setNumeEditura(request.getParameter("numeEditura"));
+			editura.store(conn);
 			conn.getTransaction().commit();
 			return null;
 		} catch (Exception exc) {
 			conn.getTransaction().rollback();
 			logger.error(exc, exc);
-			throw new ServletException("error writing to db: "+exc.getMessage());
+			throw new ServletException("error writing to db: " + exc.getMessage());
 		} finally {
 			if (conn != null) {
 				conn.close();

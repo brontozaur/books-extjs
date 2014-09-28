@@ -2,11 +2,9 @@ Ext.define('BM.view.book.BookWindow', {
     extend: 'Ext.window.Window',
     alias: 'widget.bookwindow',
     title: 'Editare detalii carte',
-    requires: ['BM.view.AutorCombo'],
+    requires: ['BM.view.autor.AutorCombo'],
     minHeight: 300,
     minWidth: 500,
-    maximizable: true,
-    minimizable: true,
     items: [{
         xtype: 'form',
         itemId: 'bookform',

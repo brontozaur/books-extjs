@@ -11,13 +11,11 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 
 import com.popa.books.dao.Autor;
-import com.popa.books.dao.Book;
-import com.popa.books.dao.Database;
 import com.popa.books.dao.persistence.BorgPersistence;
 
-public class SaveBookEventHandler extends EventHandler {
+public class SaveAutorEventHandler extends EventHandler {
 
-	private static final Logger logger = Logger.getLogger(SaveBookEventHandler.class);
+	private static final Logger logger = Logger.getLogger(SaveAutorEventHandler.class);
 
 	@Override
 	public String handleEvent(HttpServletRequest request) throws ServletException {
@@ -25,31 +23,28 @@ public class SaveBookEventHandler extends EventHandler {
 		try {
 			conn = BorgPersistence.getEntityManager();
 			conn.getTransaction().begin();
-			Book book = new Book();
-			String bookId = request.getParameter("bookId");
-			if (StringUtils.isNotEmpty(bookId)){
-				book.setBookId(Integer.valueOf(bookId));
+			Autor autor = new Autor();
+			String autorId = request.getParameter("autorId");
+			if (StringUtils.isNotEmpty(autorId)) {
+				autor.setAutorId(Integer.valueOf(autorId));
 			}
-			String dateParam = request.getParameter("dataAparitie");
+			String dateParam = request.getParameter("dataNasterii");
 			try {
-				if (StringUtils.isNotEmpty(dateParam)){
+				if (StringUtils.isNotEmpty(dateParam)) {
 					SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-					book.setDataAparitie(new Date(sdf.parse(dateParam).getTime()));
+					autor.setDataNasterii(new Date(sdf.parse(dateParam).getTime()));
 				}
 			} catch (Exception e) {
-				logger.error("cannot parse date: "+ dateParam);
+				logger.error("cannot parse date: " + dateParam);
 			}
-			book.setTitle(request.getParameter("title"));
-			String autorId = request.getParameter("autorId");
-			Autor autor = (Autor) Database.getDbObjectById(Autor.class, Long.valueOf(autorId));
-			book.setAuthor(autor);
-			book.store(conn);
+			autor.setNume(request.getParameter("nume"));
+			autor.store(conn);
 			conn.getTransaction().commit();
 			return null;
 		} catch (Exception exc) {
 			conn.getTransaction().rollback();
 			logger.error(exc, exc);
-			throw new ServletException("error writing to db: "+exc.getMessage());
+			throw new ServletException("error writing to db: " + exc.getMessage());
 		} finally {
 			if (conn != null) {
 				conn.close();

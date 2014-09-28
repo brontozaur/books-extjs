@@ -8,12 +8,6 @@ Ext.define('BM.view.book.BooksGrid', {
 
     columnLines: true,
 
-    plugins: [
-        Ext.create('Ext.grid.plugin.RowEditing', {
-            clicksToEdit: 2
-        })
-    ],
-
     store: 'BooksStore',
 
     dockedItems: [{
