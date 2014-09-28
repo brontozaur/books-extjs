@@ -59,12 +59,9 @@ Ext.define('BM.view.book.BooksGrid', {
     buildColumns: function() {
         return [{
             header: 'Autor',
-            dataIndex: 'author',
+            dataIndex: 'authorName',
             flex: 1,
             editor: 'textfield',
-            renderer: function(value) {
-                return value.nume;
-            }
         }, {
             header: 'Titlu',
             dataIndex: 'title',
