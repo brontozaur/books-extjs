@@ -18,3 +18,27 @@
     	var autorField = Ext.ComponentQuery.query('bookinfo autorCombo[name=autorField]')[0];
     	autorField.setValue("");
     }
+    
+    function enablebuttonsAutor(enable){
+        var modButton = Ext.ComponentQuery.query('autorgrid button[action=mod-autor]')[0];
+        var delButton = Ext.ComponentQuery.query('autorgrid button[action=del-autor]')[0];
+        if (enable){
+        	modButton.enable();
+        	delButton.enable();
+        } else {
+        	modButton.disable();
+        	delButton.disable();
+        }
+    }
+    
+    function enablebuttonsEditura(enable){
+        var modButton = Ext.ComponentQuery.query('edituragrid button[action=mod-editura]')[0];
+        var delButton = Ext.ComponentQuery.query('edituragrid button[action=del-editura]')[0];
+        if (enable){
+        	modButton.enable();
+        	delButton.enable();
+        } else {
+        	modButton.disable();
+        	delButton.disable();
+        }
+    }

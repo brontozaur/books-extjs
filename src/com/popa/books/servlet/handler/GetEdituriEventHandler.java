@@ -28,10 +28,4 @@ public class GetEdituriEventHandler extends EventHandler {
 			throw new ServletException(e);
 		}
 	}
-
-	@Override
-	public String getEventName() {
-		return Events.GET_EDITURI;
-	}
-
 }

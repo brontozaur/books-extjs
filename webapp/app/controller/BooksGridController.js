@@ -11,7 +11,8 @@ Ext.define('BM.controller.BooksGridController', {
     init: function() {
         this.control({
             'booksgrid': {
-                selectionchange: this.changeselection
+                selectionchange: this.changeselection,
+                celldblclick: this.celldblclick
             },
             'booksgrid button[action=add-book]': {
                 click: this.addBook
@@ -32,15 +33,17 @@ Ext.define('BM.controller.BooksGridController', {
         }
     },
 
+    celldblclick: function(grid, td, cellIndex, record, tr, rowIndex, e) {
+        var modButton = Ext.ComponentQuery.query('booksgrid button[action=mod-book]')[0];
+        this.modBook(modButton);
+    },
+
     fillInfoArea: function(record) {
-        var autorField = Ext.ComponentQuery
-            .query('bookinfo autorCombo[name=autorField]')[0];
+        var autorField = Ext.ComponentQuery.query('bookinfo autorCombo[name=autorField]')[0];
         autorField.setValue(record.get('author').autorId);
-        var titleField = Ext.ComponentQuery
-            .query('bookinfo textfield[name=titleField]')[0];
+        var titleField = Ext.ComponentQuery.query('bookinfo textfield[name=titleField]')[0];
         titleField.setValue(record.get('title'));
-        var dateField = Ext.ComponentQuery
-            .query('bookinfo textfield[name=dateField]')[0];
+        var dateField = Ext.ComponentQuery.query('bookinfo textfield[name=dateField]')[0];
         dateField.setValue(record.get('dataAparitie'));
     },
 
@@ -50,12 +53,10 @@ Ext.define('BM.controller.BooksGridController', {
     },
 
     modBook: function(button, clickEvent, options) {
-        var delButton = Ext.ComponentQuery
-            .query('booksgrid button[action=del-book]')[0];
+        var delButton = Ext.ComponentQuery.query('booksgrid button[action=del-book]')[0];
         delButton.disable();
         var window = Ext.widget('bookwindow');
-        var selectionModel = button.up('viewport').down('booksgrid')
-            .getSelectionModel();
+        var selectionModel = button.up('viewport').down('booksgrid').getSelectionModel();
         if (!selectionModel.hasSelection) {
             Ext.Msg.show({
                 title: 'Carte neselectata',

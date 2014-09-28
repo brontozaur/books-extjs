@@ -1,8 +1,8 @@
 Ext.define('BM.view.EastRegion', {
     extend: 'Ext.panel.Panel',
     alias: 'widget.eastregion',
-    requires: ['BM.view.EdituraGrid',
-               'BM.view.AutorGrid'],
+    requires: ['BM.view.editura.EdituraGrid',
+               'BM.view.autor.AutorGrid'],
     layout: {
         type: 'accordion',
         titleCollapse: true,

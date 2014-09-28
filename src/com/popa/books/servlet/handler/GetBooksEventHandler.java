@@ -28,10 +28,4 @@ public class GetBooksEventHandler extends EventHandler {
 			throw new ServletException(e);
 		}
 	}
-
-	@Override
-	public String getEventName() {
-		return Events.GET_BOOKS;
-	}
-
 }
