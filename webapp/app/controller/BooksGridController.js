@@ -9,7 +9,8 @@ Ext.define('BM.controller.BooksGridController', {
     ],
 
     views: [
-        'book.BooksGrid'
+        'book.BooksGrid',
+        'book.BookWindow'
     ],
 
     init: function() {
@@ -29,8 +30,6 @@ Ext.define('BM.controller.BooksGridController', {
     },
 
     changeselection: function(selModel, selected, eOpts ) {
-    	enablesavebutton(false);
-    	enableInfoAreaFields(false);
     	if (selected.length >0) {
         	enablebuttons(true);
     		this.fillInfoArea(selected[0]);
@@ -38,30 +37,39 @@ Ext.define('BM.controller.BooksGridController', {
     },
     
     fillInfoArea: function(record){
-    	var hiddenBookIdField = Ext.ComponentQuery.query('bookinfo hidden[name=bookIdHidden]')[0];
-    	hiddenBookIdField.setValue(record.get('bookId'));
     	var autorField = Ext.ComponentQuery.query('bookinfo autorCombo[name=autorField]')[0];
     	autorField.setValue(record.get('author').autorId);
     	var titleField = Ext.ComponentQuery.query('bookinfo textfield[name=titleField]')[0];
     	titleField.setValue(record.get('title'));
     	var dateField = Ext.ComponentQuery.query('bookinfo textfield[name=dateField]')[0];
-    	dateField.setValue(record.get('dataAparitie'));    	
+    	dateField.setValue(record.get('dataAparitie')); 
     },
     
     addBook: function(button, clickEvent, options) {
-        clearInfoAreaFields();
-        enableInfoAreaFields(true);
-        enablebuttons(false);
-        enablesavebutton(true);
-    	var hiddenBookIdField = Ext.ComponentQuery.query('bookinfo hidden[name=bookIdHidden]')[0];
-    	hiddenBookIdField.setValue('');
+    	var window = Ext.widget('bookwindow');
+    	var selectedBook = Ext.widget('booksgrid').getSelectionModel().getSelection()[0];
+    	window.show();
     },
 
     modBook: function(button, clickEvent, options) {
-  	  enableInfoAreaFields(true);
-	  enablesavebutton(true);
 	  var delButton = Ext.ComponentQuery.query('booksgrid button[action=del-book]')[0];
 	  delButton.disable();
+    	var window = Ext.widget('bookwindow');
+    	var selectionModel = button.up('viewport').down('booksgrid').getSelectionModel();
+    	if (!selectionModel.hasSelection){
+			Ext.Msg.show({
+			    title: 'Carte neselectata',
+			    msg: 'Selectati o carte',
+			    width: 300,
+			    buttons: Ext.Msg.OK,
+			    icon: Ext.window.MessageBox.WARNING
+			});
+			return;
+    	}
+    	var selectedBook = selectionModel.getSelection()[0];
+    	var bookForm = window.down('form[itemId=bookform]'); 
+    	bookForm.loadRecord(selectedBook);
+    	window.show();
     },
 
     delBook: function(button, clickEvent, options) {
@@ -70,21 +78,30 @@ Ext.define('BM.controller.BooksGridController', {
     
     deleteBook: function(btn){
     	if (btn == 'yes'){
-    		var hiddenBookIdField = Ext.ComponentQuery.query('bookinfo hidden[name=bookIdHidden]')[0];
+    		var booksGrid = Ext.ComponentQuery.query('booksgrid')[0];
+    		var selectionModel = booksGrid.getSelectionModel();
+        	if (!selectionModel.hasSelection){
+    			Ext.Msg.show({
+    			    title: 'Carte neselectata',
+    			    msg: 'Selectati o carte',
+    			    width: 300,
+    			    buttons: Ext.Msg.OK,
+    			    icon: Ext.window.MessageBox.WARNING
+    			});
+    			return;
+        	}
+        	var selectedBook = selectionModel.getSelection()[0];
             Ext.Ajax.request({
                 url : 'books',
                 method:'POST', 
                 params : {
                     event: 'del-book',
-                    bookId: hiddenBookIdField.getValue()
+                    bookId: selectedBook.get('bookId')
                 },
                 scope : this,
               success : function(result, request) {
                   clearInfoAreaFields();
-                  enableInfoAreaFields(false);
                   enablebuttons(false);
-            	  enablesavebutton(false);
-//            	  alert('Book was succesfully deleted!');
             	  Ext.widget('booksgrid').getStore().load();
             },
             failure : function(result, request) {

@@ -4,5 +4,5 @@ Ext.define('BM.view.AutorCombo', {
 	model:'BM.model.AutorModel',
 	displayField:'nume',
 	valueField:'autorId',
-	store: 'AutorStore'
+	store: 'AutorStore',
 });

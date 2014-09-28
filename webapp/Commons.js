@@ -10,15 +10,6 @@
         }
     }
     
-    function enablesavebutton(enable){
-        var saveButton = Ext.ComponentQuery.query('bookinfo button[action=save-book]')[0];
-        if (enable){
-        	saveButton.enable();
-        } else {
-        	saveButton.disable();
-        }
-    }
-    
     function clearInfoAreaFields(){
     	var titleField = Ext.ComponentQuery.query('bookinfo textfield[name=titleField]')[0];
     	titleField.setValue("");
@@ -27,18 +18,3 @@
     	var autorField = Ext.ComponentQuery.query('bookinfo autorCombo[name=autorField]')[0];
     	autorField.setValue("");
     }
-    
-    function enableInfoAreaFields(enable){
-    	var autorField = Ext.ComponentQuery.query('bookinfo autorCombo[name=autorField]')[0];
-    	var titleField = Ext.ComponentQuery.query('bookinfo textfield[name=titleField]')[0];
-    	var dateField = Ext.ComponentQuery.query('bookinfo textfield[name=dateField]')[0];
-    	if (enable){
-    		autorField.enable();
-    		titleField.enable();
-    		dateField.enable();
-    	}else {
-    		autorField.disable();
-    		titleField.disable();
-    		dateField.disable();    		
-    	}
-    }    

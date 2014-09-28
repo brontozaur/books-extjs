@@ -1,6 +1,7 @@
 package com.popa.books.servlet.handler;
 
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 
 import javax.persistence.EntityManager;
 import javax.servlet.ServletException;
@@ -32,7 +33,8 @@ public class SaveBookEventHandler extends EventHandler {
 			String dateParam = request.getParameter("dataAparitie");
 			try {
 				if (StringUtils.isNotEmpty(dateParam)){
-					book.setDataAparitie(new Date(Long.valueOf(dateParam)));
+					SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+					book.setDataAparitie(new Date(sdf.parse(dateParam).getTime()));
 				}
 			} catch (Exception e) {
 				logger.error("cannot parse date: "+ dateParam);

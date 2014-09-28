@@ -7,11 +7,11 @@ Ext.define('BM.view.book.BookInfo', {
 
     items: [{
         xtype: 'hidden',
-        name: 'bookIdHidden',
+        name: 'bookId',
         value: ''
     }, {
         xtype: 'hidden',
-        name: 'autorIdHidden',
+        name: 'autorId',
         value: ''
     }, {
         xtype: 'fieldcontainer',
@@ -31,17 +31,14 @@ Ext.define('BM.view.book.BookInfo', {
         items: [{
             fieldLabel: 'Autor',
             xtype: 'autorCombo',
-            name: 'autorField',
-            disabled: true
+            name: 'autorField'
         }, {
             fieldLabel: 'Titlu',
-            name: 'titleField',
-            disabled: true
+            name: 'titleField'
         }, {
             xtype: 'datefield',
             fieldLabel: 'An aparitie',
-            name: 'dateField',
-            disabled: true
+            name: 'dateField'
         }]
     }, {
         xtype: 'button',
