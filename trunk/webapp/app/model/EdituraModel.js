@@ -1,4 +1,4 @@
 Ext.define('BM.model.EdituraModel', {
-    extend: 'Ext.data.Model',
-    fields: ['idEditura', 'numeEditura']
-});
+			extend : 'Ext.data.Model',
+			fields : ['idEditura', 'numeEditura']
+		});
