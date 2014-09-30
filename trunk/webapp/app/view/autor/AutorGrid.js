@@ -1,13 +1,9 @@
 Ext.define('BM.view.autor.AutorGrid', {
             extend : 'Ext.grid.Panel',
             alias : 'widget.autorgrid',
-
             title : 'Autori',
-
             selType : 'rowmodel',
-
             columnLines : true,
-
             store : 'AutorStore',
 
             // plugins: [

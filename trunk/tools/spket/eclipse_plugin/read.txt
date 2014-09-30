@@ -1,2 +1,3 @@
-spket-1.6.23.zip = full untouched eclipse plugin
-com.spket.js_1.6.23.jar = modified js plugin (com.spket.js.internal.formatter.preferences.ModifyDialog)
+spket-1.6.23.zip = full untouched eclipse plugin. Contains all the jars.
+com.spket.js_1.6.23.jar = modified js plugin (com.spket.js.internal.formatter.preferences.ModifyDialog). This is the jar contained by Spket plugin, as installed by updating from update source http://www.agpad.com/update/. 
+To activate code formatter save, copy in eclipse in \plugins, overwriting the existent file.
