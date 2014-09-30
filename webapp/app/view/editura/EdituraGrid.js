@@ -1,15 +1,10 @@
 Ext.define('BM.view.editura.EdituraGrid', {
             extend : 'Ext.grid.Panel',
             alias : 'widget.edituragrid',
-
             title : 'Edituri',
-
             selType : 'rowmodel',
-
             columnLines : true,
-
             store : 'EdituraStore',
-
             dockedItems : [{
                         xtype : 'toolbar',
                         items : [{

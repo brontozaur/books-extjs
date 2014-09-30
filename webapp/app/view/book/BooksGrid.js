@@ -1,15 +1,10 @@
 Ext.define('BM.view.book.BooksGrid', {
             extend : 'Ext.grid.Panel',
             alias : 'widget.booksgrid',
-
             title : 'Lista carti',
-
             selType : 'rowmodel',
-
             columnLines : true,
-
             store : 'BooksStore',
-
             dockedItems : [{
                         xtype : 'pagingtoolbar',
                         store : 'BooksStore',

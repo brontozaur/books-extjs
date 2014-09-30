@@ -37,12 +37,20 @@ Ext.define('BM.controller.BooksGridController', {
             },
 
             fillInfoArea : function(record) {
-                var autorField = Ext.ComponentQuery.query('bookinfo autorCombo[name=autorField]')[0];
-                autorField.setValue(record.get('author').autorId);
-                var titleField = Ext.ComponentQuery.query('bookinfo textfield[name=titleField]')[0];
-                titleField.setValue(record.get('title'));
-                var dateField = Ext.ComponentQuery.query('bookinfo textfield[name=dateField]')[0];
-                dateField.setValue(record.get('dataAparitie'));
+                var autorField = Ext.ComponentQuery.query('bookinfo label[itemId=autor]')[0];
+                autorField.setText('Autor: ');
+                var autorFieldValue = Ext.ComponentQuery.query('bookinfo label[itemId=autorValue]')[0];
+                autorFieldValue.setText(record.get('author').nume);
+
+                var titleField = Ext.ComponentQuery.query('bookinfo label[itemId=title]')[0];
+                titleField.setText('Title: ');
+                var titleFieldValue = Ext.ComponentQuery.query('bookinfo label[itemId=titleValue]')[0];
+                titleFieldValue.setText(record.get('title'));
+
+                var dateField = Ext.ComponentQuery.query('bookinfo label[itemId=data]')[0];
+                dateField.setText('Data aparitie: ');
+                var dateFieldValue = Ext.ComponentQuery.query('bookinfo label[itemId=dataValue]')[0];
+                dateFieldValue.setText(Ext.util.Format.date(record.get('dataAparitie')));
             },
 
             addBook : function(button, clickEvent, options) {

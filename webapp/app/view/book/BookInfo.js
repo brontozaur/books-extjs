@@ -3,7 +3,6 @@ Ext.define('BM.view.book.BookInfo', {
             alias : 'widget.bookinfo',
             bodyPadding : 10,
             title : 'Detalii carte',
-            requires : ['BM.view.autor.AutorCombo'],
             items : [{
                         xtype : 'hidden',
                         name : 'bookId',
@@ -13,31 +12,34 @@ Ext.define('BM.view.book.BookInfo', {
                         name : 'autorId',
                         value : ''
                     }, {
-                        xtype : 'fieldcontainer',
-                        defaultType : 'textfield',
-
-                        layout : 'anchor',
-                        defaults : {
-                            layout : '100%'
-                        },
-
-                        fieldDefaults : {
-                            msgTarget : 'side',
-                            labelAlign : 'side',
-                            labelWidth : 50
-                        },
-
-                        items : [{
-                                    fieldLabel : 'Autor',
-                                    xtype : 'autorCombo',
-                                    name : 'autorField'
-                                }, {
-                                    fieldLabel : 'Titlu',
-                                    name : 'titleField'
-                                }, {
-                                    xtype : 'datefield',
-                                    fieldLabel : 'An aparitie',
-                                    name : 'dateField'
-                                }]
+                        xtype : 'label',
+                        text : '',
+                        itemId : 'autor',
+                        baseCls: 'book-info-label'
+                    }, {
+                        xtype : 'label',
+                        text : '',
+                        itemId : 'autorValue',
+                        baseCls: 'book-info-label-value'
+                    }, {
+                        xtype : 'label',
+                        text : '',
+                        itemId : 'title',
+                        baseCls: 'book-info-label'
+                    }, {
+                        xtype : 'label',
+                        text : '',
+                        itemId : 'titleValue',
+                        baseCls: 'book-info-label-value'
+                    }, {
+                        xtype : 'label',
+                        text : '',
+                        itemId : 'data',
+                        baseCls: 'book-info-label'
+                    }, {
+                        xtype : 'label',
+                        text : '',
+                        itemId : 'dataValue',
+                        baseCls: 'book-info-label-value'
                     }]
         });
