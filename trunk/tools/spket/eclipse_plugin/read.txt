@@ -1,0 +1,2 @@
+spket-1.6.23.zip = full untouched eclipse plugin
+com.spket.js_1.6.23.jar = modified js plugin (com.spket.js.internal.formatter.preferences.ModifyDialog)
