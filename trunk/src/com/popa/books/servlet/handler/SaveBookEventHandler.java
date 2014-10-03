@@ -12,7 +12,9 @@ import org.apache.log4j.Logger;
 
 import com.popa.books.dao.Autor;
 import com.popa.books.dao.Book;
+import com.popa.books.dao.Categorie;
 import com.popa.books.dao.Database;
+import com.popa.books.dao.Editura;
 import com.popa.books.dao.persistence.BorgPersistence;
 
 public class SaveBookEventHandler extends EventHandler {
@@ -40,9 +42,25 @@ public class SaveBookEventHandler extends EventHandler {
                 logger.error("cannot parse date: " + dateParam);
             }
             book.setTitle(request.getParameter("title"));
+
             String autorId = request.getParameter("autorId");
-            Autor autor = (Autor) Database.getDbObjectById(Autor.class, Long.valueOf(autorId));
-            book.setAuthor(autor);
+            if (StringUtils.isNotEmpty(autorId)) {
+                Autor autor = (Autor) Database.getDbObjectById(Autor.class, Long.valueOf(autorId));
+                book.setAuthor(autor);
+            }
+
+            String idCategorie = request.getParameter("idCategorie");
+            if (StringUtils.isNotEmpty(idCategorie)) {
+                Categorie categorie = (Categorie) Database.getDbObjectById(Categorie.class, Long.valueOf(idCategorie));
+                book.setCategorie(categorie);
+            }
+
+            String idEditura = request.getParameter("idEditura");
+            if (StringUtils.isNotEmpty(idEditura)) {
+                Editura editura = (Editura) Database.getDbObjectById(Editura.class, Long.valueOf(idEditura));
+                book.setEditura(editura);
+            }
+
             book.store(conn);
             conn.getTransaction().commit();
             return null;
