@@ -24,32 +24,32 @@ public class Book extends AbstractDB implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "bookId", nullable = false, unique = true)
     private long bookId;
-    @Column(name = "title", nullable = false)
+    @Column(name = "title")
     private String title;
-    @Column(name = "originalTitle", nullable = false)
+    @Column(name = "originalTitle")
     private String originalTitle;
     @Column(name = "dataAparitie")
     private Date dataAparitie = null;
     @OneToOne
-    @JoinColumn(name = "idAutor", nullable = false)
+    @JoinColumn(name = "idAutor")
     private Autor author;
-    @Column(name = "nrPagini", nullable = false)
+    @Column(name = "nrPagini")
     private int nrPagini;
-    @Column(name = "width", nullable = false)
+    @Column(name = "width")
     private int width;
-    @Column(name = "height", nullable = false)
+    @Column(name = "height")
     private int height;
-    @Column(name = "frontCoverPath", nullable = false)
+    @Column(name = "frontCoverPath")
     private String frontCoverPath;
-    @Column(name = "backCoverPath", nullable = false)
+    @Column(name = "backCoverPath")
     private String backCoverPath;
-    @Column(name = "isbn", nullable = false)
+    @Column(name = "isbn")
     private String isbn;
-    @Column(name = "citita", nullable = false)
+    @Column(name = "citita")
     private boolean citita;
-    @JoinColumn(name = "idEditura", nullable = false)
+    @JoinColumn(name = "idEditura")
     private Editura editura;
-    @JoinColumn(name = "idCategorie", nullable = false)
+    @JoinColumn(name = "idCategorie")
     private Categorie categorie;
 
     @Override

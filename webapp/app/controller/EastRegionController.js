@@ -1,9 +1,9 @@
 Ext.define('BM.controller.EastRegionController', {
             extend : 'Ext.app.Controller',
             requires : ['Ext.window.MessageBox'],
-            stores : ['BooksStore', 'AutorStore', 'EdituraStore'],
+            stores : ['BooksStore', 'AutorStore', 'EdituraStore', 'CategorieStore'],
 
-            model : ['BooksModel', 'AutorModel', 'EdituraModel'],
+            model : ['BooksModel', 'AutorModel', 'EdituraModel', 'CategorieModel'],
 
             views : ['EastRegion', 'editura.EdituraWindow', 'autor.AutorWindow'],
 

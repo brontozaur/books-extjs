@@ -1,7 +1,7 @@
 Ext.define('BM.view.EastRegion', {
             extend : 'Ext.panel.Panel',
             alias : 'widget.eastregion',
-            requires : ['BM.view.editura.EdituraGrid', 'BM.view.autor.AutorGrid'],
+            requires : ['BM.view.editura.EdituraGrid', 'BM.view.autor.AutorGrid', 'BM.view.categorie.CategorieGrid'],
             layout : {
                 type : 'accordion',
                 titleCollapse : true,
@@ -16,5 +16,8 @@ Ext.define('BM.view.EastRegion', {
                     }, {
                         xtype : 'autorgrid',
                         html : 'Autori'
+                    }, {
+                        xtype : 'categoriegrid',
+                        html : 'Categorii'
                     }]
         });
