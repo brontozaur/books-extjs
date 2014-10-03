@@ -15,7 +15,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "book")
-@NamedQuery(name="Book.findById", query = "select b from Book b where b.bookId = :bookId")
+@NamedQuery(name = "Book.findById", query = "select b from Book b where b.bookId = :bookId")
 public class Book extends AbstractDB implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -24,28 +24,28 @@ public class Book extends AbstractDB implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "bookId", nullable = false, unique = true)
     private long bookId;
-    @Column(name = "title")
-    private String title = EMPTY;
-    @Column(name = "originalTitle")
-    private String originalTitle = EMPTY;
+    @Column(name = "title", nullable = false)
+    private String title;
+    @Column(name = "originalTitle", nullable = false)
+    private String originalTitle;
     @Column(name = "dataAparitie")
     private Date dataAparitie = null;
     @OneToOne
     @JoinColumn(name = "idAutor", nullable = false)
     private Autor author;
-    @Column(name = "nrPagini")
+    @Column(name = "nrPagini", nullable = false)
     private int nrPagini;
-    @Column(name = "width")
+    @Column(name = "width", nullable = false)
     private int width;
-    @Column(name = "height")
+    @Column(name = "height", nullable = false)
     private int height;
-    @Column(name = "frontCoverPath")
-    private String frontCoverPath = EMPTY;
-    @Column(name = "backCoverPath")
-    private String backCoverPath = EMPTY;
-    @Column(name = "isbn")
-    private String isbn = EMPTY;
-    @Column(name = "citita")
+    @Column(name = "frontCoverPath", nullable = false)
+    private String frontCoverPath;
+    @Column(name = "backCoverPath", nullable = false)
+    private String backCoverPath;
+    @Column(name = "isbn", nullable = false)
+    private String isbn;
+    @Column(name = "citita", nullable = false)
     private boolean citita;
     @JoinColumn(name = "idEditura", nullable = false)
     private Editura editura;
@@ -57,42 +57,42 @@ public class Book extends AbstractDB implements Serializable {
         return (Book) this.clone();
     }
 
-	public long getBookId() {
-		return bookId;
-	}
+    public long getBookId() {
+        return bookId;
+    }
 
-	public void setBookId(final long bookId) {
-		this.bookId = bookId;
-	}
+    public void setBookId(final long bookId) {
+        this.bookId = bookId;
+    }
 
-	public String getTitle() {
-		return title;
-	}
+    public String getTitle() {
+        return title;
+    }
 
-	public void setTitle(final String title) {
-		this.title = title;
-	}
+    public void setTitle(final String title) {
+        this.title = title;
+    }
 
-	public Date getDataAparitie() {
-		return dataAparitie;
-	}
+    public Date getDataAparitie() {
+        return dataAparitie;
+    }
 
-	public void setDataAparitie(final Date dataAparitie) {
-		this.dataAparitie = dataAparitie;
-	}
+    public void setDataAparitie(final Date dataAparitie) {
+        this.dataAparitie = dataAparitie;
+    }
 
-	public Autor getAuthor() {
-		return author;
-	}
+    public Autor getAuthor() {
+        return author;
+    }
 
-	public void setAuthor(final Autor author) {
-		this.author = author;
-	}
+    public void setAuthor(final Autor author) {
+        this.author = author;
+    }
 
-	@Override
-	public long getId() {
-		return this.bookId;
-	}
+    @Override
+    public long getId() {
+        return this.bookId;
+    }
 
     public String getOriginalTitle() {
         return originalTitle;

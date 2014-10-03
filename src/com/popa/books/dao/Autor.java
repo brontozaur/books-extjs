@@ -13,7 +13,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "autor")
-@NamedQuery(name="Autor.findById", query = "select a from Autor a where a.autorId = :autorId")
+@NamedQuery(name = "Autor.findById", query = "select a from Autor a where a.autorId = :autorId")
 public class Autor extends AbstractDB implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -32,35 +32,33 @@ public class Autor extends AbstractDB implements Serializable {
         return (Autor) this.clone();
     }
 
-	public long getAutorId() {
-		return autorId;
-	}
+    public long getAutorId() {
+        return autorId;
+    }
 
-	public void setAutorId(long autorId) {
-		this.autorId = autorId;
-	}
+    public void setAutorId(long autorId) {
+        this.autorId = autorId;
+    }
 
-	public String getNume() {
-		return nume;
-	}
+    public String getNume() {
+        return nume;
+    }
 
-	public void setNume(String nume) {
-		this.nume = nume;
-	}
+    public void setNume(String nume) {
+        this.nume = nume;
+    }
 
-	@Override
-	public long getId() {
-		return this.autorId;
-	}
+    @Override
+    public long getId() {
+        return this.autorId;
+    }
 
-	public Date getDataNasterii() {
-		return dataNasterii;
-	}
+    public Date getDataNasterii() {
+        return dataNasterii;
+    }
 
-	public void setDataNasterii(Date dataNasterii) {
-		this.dataNasterii = dataNasterii;
-	}
+    public void setDataNasterii(Date dataNasterii) {
+        this.dataNasterii = dataNasterii;
+    }
 
-
-    
 }

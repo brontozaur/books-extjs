@@ -12,7 +12,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "categorie")
-@NamedQuery(name="Categorie.findById", query = "select c from Categorie c where e.idCategorie = :idCategorie")
+@NamedQuery(name = "Categorie.findById", query = "select c from Categorie c where c.idCategorie = :idCategorie")
 public class Categorie extends AbstractDB implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -49,6 +49,5 @@ public class Categorie extends AbstractDB implements Serializable {
     public void setIdCategorie(final long idCategorie) {
         this.idCategorie = idCategorie;
     }
-
 
 }
