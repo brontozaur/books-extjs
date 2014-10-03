@@ -7,7 +7,7 @@ public class EventHandlerFactory {
 	private EventHandlerFactory() {
 	}
 
-	public static EventHandler getHandler(HttpServletRequest request) {
+	public static EventHandler getHandler(final HttpServletRequest request) {
 		final String eventName = request.getParameter("event");
 		EventHandler handler = null;
 		if (Events.SAVE_BOOK.equals(eventName)) {
@@ -28,7 +28,13 @@ public class EventHandlerFactory {
 			handler = new DeleteAutorEventHandler();
 		} else if (Events.SAVE_AUTOR.equals(eventName)) {
 			handler = new SaveAutorEventHandler();
-		}
+		} else if (Events.SAVE_CATEGORIE.equals(eventName)) {
+            handler = new SaveCategorieEventHandler();
+        } else if (Events.DEL_CATEGORIE.equals(eventName)) {
+            handler = new DeleteCategorieEventHandler();
+        } else if (Events.GET_CATEGORII.equals(eventName)) {
+            handler = new GetCategoriiEventHandler();
+        }
 		if (handler == null) {
 			throw new NullPointerException("no handler was found for event: " + eventName);
 		}
