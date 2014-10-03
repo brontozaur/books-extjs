@@ -24,13 +24,33 @@ public class Book extends AbstractDB implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "bookId", nullable = false, unique = true)
     private long bookId;
-    @Column(name = "title", unique = true)
+    @Column(name = "title")
     private String title = EMPTY;
+    @Column(name = "originalTitle")
+    private String originalTitle = EMPTY;
     @Column(name = "dataAparitie")
     private Date dataAparitie = null;
     @OneToOne
     @JoinColumn(name = "idAutor", nullable = false)
     private Autor author;
+    @Column(name = "nrPagini")
+    private int nrPagini;
+    @Column(name = "width")
+    private int width;
+    @Column(name = "height")
+    private int height;
+    @Column(name = "frontCoverPath")
+    private String frontCoverPath = EMPTY;
+    @Column(name = "backCoverPath")
+    private String backCoverPath = EMPTY;
+    @Column(name = "isbn")
+    private String isbn = EMPTY;
+    @Column(name = "citita")
+    private boolean citita;
+    @JoinColumn(name = "idEditura", nullable = false)
+    private Editura editura;
+    @JoinColumn(name = "idCategorie", nullable = false)
+    private Categorie categorie;
 
     @Override
     public Book cloneObject() throws CloneNotSupportedException {
@@ -41,7 +61,7 @@ public class Book extends AbstractDB implements Serializable {
 		return bookId;
 	}
 
-	public void setBookId(long bookId) {
+	public void setBookId(final long bookId) {
 		this.bookId = bookId;
 	}
 
@@ -49,7 +69,7 @@ public class Book extends AbstractDB implements Serializable {
 		return title;
 	}
 
-	public void setTitle(String title) {
+	public void setTitle(final String title) {
 		this.title = title;
 	}
 
@@ -57,7 +77,7 @@ public class Book extends AbstractDB implements Serializable {
 		return dataAparitie;
 	}
 
-	public void setDataAparitie(Date dataAparitie) {
+	public void setDataAparitie(final Date dataAparitie) {
 		this.dataAparitie = dataAparitie;
 	}
 
@@ -65,7 +85,7 @@ public class Book extends AbstractDB implements Serializable {
 		return author;
 	}
 
-	public void setAuthor(Autor author) {
+	public void setAuthor(final Autor author) {
 		this.author = author;
 	}
 
@@ -74,5 +94,83 @@ public class Book extends AbstractDB implements Serializable {
 		return this.bookId;
 	}
 
-    
+    public String getOriginalTitle() {
+        return originalTitle;
+    }
+
+    public void setOriginalTitle(final String originalTitle) {
+        this.originalTitle = originalTitle;
+    }
+
+    public int getNrPagini() {
+        return nrPagini;
+    }
+
+    public void setNrPagini(final int nrPagini) {
+        this.nrPagini = nrPagini;
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public void setWidth(final int width) {
+        this.width = width;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public void setHeight(final int height) {
+        this.height = height;
+    }
+
+    public String getFrontCoverPath() {
+        return frontCoverPath;
+    }
+
+    public void setFrontCoverPath(final String frontCoverPath) {
+        this.frontCoverPath = frontCoverPath;
+    }
+
+    public String getBackCoverPath() {
+        return backCoverPath;
+    }
+
+    public void setBackCoverPath(final String backCoverPath) {
+        this.backCoverPath = backCoverPath;
+    }
+
+    public String getIsbn() {
+        return isbn;
+    }
+
+    public void setIsbn(final String isbn) {
+        this.isbn = isbn;
+    }
+
+    public boolean isCitita() {
+        return citita;
+    }
+
+    public void setCitita(final boolean citita) {
+        this.citita = citita;
+    }
+
+    public Editura getEditura() {
+        return editura;
+    }
+
+    public void setEditura(final Editura editura) {
+        this.editura = editura;
+    }
+
+    public Categorie getCategorie() {
+        return categorie;
+    }
+
+    public void setCategorie(final Categorie categorie) {
+        this.categorie = categorie;
+    }
 }
