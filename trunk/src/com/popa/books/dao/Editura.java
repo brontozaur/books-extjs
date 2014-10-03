@@ -12,7 +12,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "editura")
-@NamedQuery(name="Editura.findById", query = "select e from Editura e where e.idEditura = :idEditura")
+@NamedQuery(name = "Editura.findById", query = "select e from Editura e where e.idEditura = :idEditura")
 public class Editura extends AbstractDB implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -29,26 +29,25 @@ public class Editura extends AbstractDB implements Serializable {
         return (Editura) this.clone();
     }
 
-	public String getNumeEditura() {
-		return numeEditura;
-	}
+    public String getNumeEditura() {
+        return numeEditura;
+    }
 
-	public void setNumeEditura(String numeEditura) {
-		this.numeEditura = numeEditura;
-	}
+    public void setNumeEditura(String numeEditura) {
+        this.numeEditura = numeEditura;
+    }
 
-	@Override
-	public long getId() {
-		return this.idEditura;
-	}
+    @Override
+    public long getId() {
+        return this.idEditura;
+    }
 
-	public long getIdEditura() {
-		return idEditura;
-	}
+    public long getIdEditura() {
+        return idEditura;
+    }
 
-	public void setIdEditura(long idEditura) {
-		this.idEditura = idEditura;
-	}
+    public void setIdEditura(long idEditura) {
+        this.idEditura = idEditura;
+    }
 
-    
 }
