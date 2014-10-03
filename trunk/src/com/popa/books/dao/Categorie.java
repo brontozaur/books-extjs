@@ -20,7 +20,7 @@ public class Categorie extends AbstractDB implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "idCategorie", nullable = false, unique = true)
-    private long idCategorie;
+    private Long idCategorie;
     @Column(name = "numeCategorie", unique = true)
     private String numeCategorie = EMPTY;
 

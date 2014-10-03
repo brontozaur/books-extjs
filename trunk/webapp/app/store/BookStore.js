@@ -1,7 +1,7 @@
 var itemsPerPage = 50;
-Ext.define('BM.store.BooksStore', {
+Ext.define('BM.store.BookStore', {
             extend : 'Ext.data.Store',
-            model : 'BM.model.BooksModel',
+            model : 'BM.model.BookModel',
             autoLoad : {
                 params : {
                     start : 0,

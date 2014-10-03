@@ -1,10 +1,18 @@
 Ext.define('BM.controller.BookWindowController', {
             extend : 'Ext.app.Controller',
-            stores : ['BooksStore', 'AutorStore', 'EdituraStore'],
+            stores : [
+                'BookStore',
+                'AutorStore',
+                'EdituraStore'
+            ],
 
-            model : ['BooksModel'],
+            model : [
+                'BookModel'
+            ],
 
-            views : ['book.BookWindow'],
+            views : [
+                'book.BookWindow'
+            ],
 
             init : function() {
                 this.control({
