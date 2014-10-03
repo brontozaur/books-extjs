@@ -23,7 +23,7 @@ public class Book extends AbstractDB implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "bookId", nullable = false, unique = true)
-    private long bookId;
+    private Long bookId;
     @Column(name = "title")
     private String title;
     @Column(name = "originalTitle")
@@ -34,11 +34,11 @@ public class Book extends AbstractDB implements Serializable {
     @JoinColumn(name = "idAutor")
     private Autor author;
     @Column(name = "nrPagini")
-    private int nrPagini;
+    private Integer nrPagini;
     @Column(name = "width")
-    private int width;
+    private Integer width;
     @Column(name = "height")
-    private int height;
+    private Integer height;
     @Column(name = "frontCoverPath")
     private String frontCoverPath;
     @Column(name = "backCoverPath")
@@ -46,7 +46,7 @@ public class Book extends AbstractDB implements Serializable {
     @Column(name = "isbn")
     private String isbn;
     @Column(name = "citita")
-    private boolean citita;
+    private Boolean citita;
     @JoinColumn(name = "idEditura")
     private Editura editura;
     @JoinColumn(name = "idCategorie")

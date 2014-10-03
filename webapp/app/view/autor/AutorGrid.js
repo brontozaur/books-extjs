@@ -16,33 +16,40 @@ Ext.define('BM.view.autor.AutorGrid', {
             // ftype: 'grouping',
             // }],
 
-            dockedItems : [{
-                        xtype : 'toolbar',
-                        items : [{
-                                    iconCls : 'icon-add',
-                                    text : 'Adaugare',
-                                    action : 'add-autor',
-                                    scope : this
-                                }, {
-                                    iconCls : 'icon-mod',
-                                    text : 'Modificare',
-                                    disabled : true,
-                                    action : 'mod-autor',
-                                    scope : this
-                                }, {
-                                    iconCls : 'icon-delete',
-                                    text : 'Stergere',
-                                    disabled : true,
-                                    action : 'del-autor',
-                                    scope : this
-                                }, {
-                                    iconCls : 'icon-refresh',
-                                    text : 'Refresh',
-                                    action : 'refresh-autor',
-                                    scope : this
-                                }],
-                        dock : 'top'
-                    }],
+            dockedItems : [
+                {
+                    xtype : 'toolbar',
+                    items : [
+                        {
+                            iconCls : 'icon-add',
+                            text : 'Adaugare',
+                            action : 'add-autor',
+                            scope : this
+                        },
+                        {
+                            iconCls : 'icon-mod',
+                            text : 'Modificare',
+                            disabled : true,
+                            action : 'mod-autor',
+                            scope : this
+                        },
+                        {
+                            iconCls : 'icon-delete',
+                            text : 'Stergere',
+                            disabled : true,
+                            action : 'del-autor',
+                            scope : this
+                        },
+                        {
+                            iconCls : 'icon-refresh',
+                            text : 'Refresh',
+                            action : 'refresh-autor',
+                            scope : this
+                        }
+                    ],
+                    dock : 'top'
+                }
+            ],
 
             initComponent : function() {
                 this.columns = this.buildColumns();
@@ -50,16 +57,19 @@ Ext.define('BM.view.autor.AutorGrid', {
             },
 
             buildColumns : function() {
-                return [{
-                            header : 'Nume',
-                            dataIndex : 'nume',
-                            flex : 1,
-                            editor : 'textfield'
-                        }, {
-                            header : 'Data nasterii',
-                            dataIndex : 'dataNasterii',
-                            flex : 1,
-                            renderer : Ext.util.Format.dateRenderer('m/d/Y')
-                        }];
+                return [
+                    {
+                        header : 'Nume',
+                        dataIndex : 'nume',
+                        flex : 1,
+                        editor : 'textfield'
+                    },
+                    {
+                        header : 'Data nasterii',
+                        dataIndex : 'dataNasterii',
+                        flex : 1,
+                        renderer : Ext.util.Format.dateRenderer('m/d/Y')
+                    }
+                ];
             }
         });

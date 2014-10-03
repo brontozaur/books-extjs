@@ -20,7 +20,7 @@ public class Editura extends AbstractDB implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "idEditura", nullable = false, unique = true)
-    private long idEditura;
+    private Long idEditura;
     @Column(name = "numeEditura", unique = true)
     private String numeEditura = EMPTY;
 
