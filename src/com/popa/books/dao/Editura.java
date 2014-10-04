@@ -38,7 +38,7 @@ public class Editura extends AbstractDB implements Serializable {
     }
 
     @Override
-    public long getId() {
+    public Long getId() {
         return this.idEditura;
     }
 

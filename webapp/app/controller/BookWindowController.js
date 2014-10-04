@@ -41,8 +41,10 @@ Ext.define('BM.controller.BookWindowController', {
                                 },
                                 success: function(form, action) {
                                     me.closeWindow(button);
+                                    clearInfoAreaFields();
                                     enablebuttons(false);
-                                    Ext.widget('booksgrid').getStore().load();
+                                    var grid = Ext.widget('booksgrid');
+                                    grid.getStore().load();
                                 },
 
                                 failure: function(form, action) {

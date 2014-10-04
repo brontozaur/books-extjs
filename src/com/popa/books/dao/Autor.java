@@ -49,7 +49,7 @@ public class Autor extends AbstractDB implements Serializable {
     }
 
     @Override
-    public long getId() {
+    public Long getId() {
         return this.autorId;
     }
 

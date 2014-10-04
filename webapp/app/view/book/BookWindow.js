@@ -57,17 +57,17 @@ Ext.define('BM.view.book.BookWindow', {
                             name: 'serie'
                         },
                         {
-                            xtype: 'textfield',
+                            xtype: 'numberfield',
                             fieldLabel: 'Nr pagini',
                             name: 'nrPagini'
                         },
                         {
-                            xtype: 'textfield',
+                            xtype: 'numberfield',
                             fieldLabel: 'Latime',
                             name: 'width'
                         },
                         {
-                            xtype: 'textfield',
+                            xtype: 'numberfield',
                             fieldLabel: 'Inaltime',
                             name: 'height'
                         },
