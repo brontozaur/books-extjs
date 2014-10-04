@@ -36,7 +36,7 @@ Ext.define('BM.view.book.BookInfo', {
             },
             getGenField: function() {
                 return Ext.ComponentQuery.query('bookinfo displayfield[itemId=numeCategorie]')[0];
-            }                          
+            }
         });
 
 function buildItems() {
