@@ -3,6 +3,12 @@ Ext.define('BM.view.book.BookInfo', {
             alias: 'widget.bookinfo',
             bodyPadding: 20,
             title: 'Detalii carte',
+            defaults: {
+                xtype: 'displayfield',
+                labelCls: 'book-info-label',
+                fieldCls: 'book-info-label-value',
+                hidden:true
+            },
             items: this.buildItems(),
             getAutorField: function() {
                 return Ext.ComponentQuery.query('bookinfo displayfield[itemId=autor]')[0];
@@ -42,81 +48,48 @@ Ext.define('BM.view.book.BookInfo', {
 function buildItems() {
     return [
         {
-            xtype: 'displayfield',
             fieldLabel: 'Autor',
-            itemId: 'autor',
-            labelCls: 'book-info-label',
-            fieldCls: 'book-info-label-value'
+            itemId: 'autor'
         },
         {
-            xtype: 'displayfield',
             fieldLabel: 'Titlu',
-            itemId: 'title',
-            labelCls: 'book-info-label',
-            fieldCls: 'book-info-label-value'
+            itemId: 'title'
         },
         {
-            xtype: 'displayfield',
             fieldLabel: 'Data aparitie',
-            itemId: 'data',
-            labelCls: 'book-info-label',
-            fieldCls: 'book-info-label-value'
+            itemId: 'data'
         },
         {
-            xtype: 'displayfield',
             fieldLabel: 'Titlu original',
-            itemId: 'originalTitle',
-            labelCls: 'book-info-label',
-            fieldCls: 'book-info-label-value'
+            itemId: 'originalTitle'
         },
         {
-            xtype: 'displayfield',
             fieldLabel: 'ISBN',
-            itemId: 'isbn',
-            labelCls: 'book-info-label',
-            fieldCls: 'book-info-label-value'
+            itemId: 'isbn'
         },
         {
-            xtype: 'displayfield',
             fieldLabel: 'Citita',
-            itemId: 'citita',
-            labelCls: 'book-info-label',
-            fieldCls: 'book-info-label-value'
+            itemId: 'citita'
         },
         {
-            xtype: 'displayfield',
             fieldLabel: 'Serie',
-            itemId: 'serie',
-            labelCls: 'book-info-label',
-            fieldCls: 'book-info-label-value'
+            itemId: 'serie'
         },
         {
-            xtype: 'displayfield',
             fieldLabel: 'Nr pagini',
-            itemId: 'nrPagini',
-            labelCls: 'book-info-label',
-            fieldCls: 'book-info-label-value'
+            itemId: 'nrPagini'
         },
         {
-            xtype: 'displayfield',
             fieldLabel: 'Dimensiuni',
-            itemId: 'dimensiuni',
-            labelCls: 'book-info-label',
-            fieldCls: 'book-info-label-value'
+            itemId: 'dimensiuni'
         },
         {
-            xtype: 'displayfield',
             fieldLabel: 'Editura',
-            itemId: 'numeEditura',
-            labelCls: 'book-info-label',
-            fieldCls: 'book-info-label-value'
+            itemId: 'numeEditura'
         },
         {
-            xtype: 'displayfield',
             fieldLabel: 'Gen',
-            itemId: 'numeCategorie',
-            labelCls: 'book-info-label',
-            fieldCls: 'book-info-label-value'
+            itemId: 'numeCategorie'
         }
     ];
 }

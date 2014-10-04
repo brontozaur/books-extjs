@@ -1,14 +1,21 @@
 Ext.application({
-            requires : ['Ext.container.Viewport'],
-            name : 'BM',
+            requires: [
+                'Ext.container.Viewport'
+            ],
+            name: 'BM',
 
-            appFolder : 'app',
+            appFolder: 'app',
 
-            controllers : ['BooksGridController', 'EastRegionController', 'BookWindowController'],
+            controllers: [
+                'BooksGridController',
+                'EastRegionController',
+                'BookWindowController',
+                'ErrorWindowController'
+            ],
 
-            autoCreateViewport : true,
+            autoCreateViewport: true,
 
-            launch : function() {
+            launch: function() {
                 // nothing to do for now ;-)
             }
         });

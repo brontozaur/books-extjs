@@ -6,8 +6,10 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
+import org.hibernate.exception.ConstraintViolationException;
 
 import com.popa.books.dao.Editura;
+import com.popa.books.dao.ExceptionUtil;
 import com.popa.books.dao.persistence.BorgPersistence;
 
 public class DeleteEdituraEventHandler extends EventHandler {
@@ -31,9 +33,15 @@ public class DeleteEdituraEventHandler extends EventHandler {
 			conn.getTransaction().commit();
 			return null;
 		} catch (Exception exc) {
-			conn.getTransaction().rollback();
-			logger.error(exc, exc);
-			throw new ServletException("error writing to db: "+exc.getMessage());
+			if (conn.getTransaction().isActive()) {
+				conn.getTransaction().rollback();
+			}
+			logger.error(exc.getMessage(), exc);
+			if (exc.getCause().getCause() instanceof ConstraintViolationException){
+				setErrorMessage("Editura este utilizata pe una sau mai multe carti!");
+				throw new ServletException(ExceptionUtil.getExceptionCause(exc));
+			}
+			throw new ServletException(exc);
 		} finally {
 			if (conn != null) {
 				conn.close();

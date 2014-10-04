@@ -21,7 +21,8 @@ Ext.define('BM.controller.EastRegionController', {
                 'EastRegion',
                 'editura.EdituraWindow',
                 'autor.AutorWindow',
-                'categorie.CategorieWindow'
+                'categorie.CategorieWindow',
+                'ErrorWindow'
             ],
 
             init: function() {
@@ -170,7 +171,7 @@ Ext.define('BM.controller.EastRegionController', {
                                     Ext.widget('autorgrid').getStore().load();
                                 },
                                 failure: function(result, request) {
-                                    alert('Delete operation has failed miserably!');
+                                    createErrorWindow(result);
                                 }
                             });
                 }
@@ -199,7 +200,7 @@ Ext.define('BM.controller.EastRegionController', {
                                 },
 
                                 failure: function(form, action) {
-                                    Ext.Msg.alert('Failed', action.result ? action.result.message : 'No response');
+                                    createErrorWindow(result);
                                 }
                             });
                 }
@@ -276,7 +277,7 @@ Ext.define('BM.controller.EastRegionController', {
                                     Ext.widget('edituragrid').getStore().load();
                                 },
                                 failure: function(result, request) {
-                                    alert('Delete operation has failed miserably!');
+                                    createErrorWindow(result);
                                 }
                             });
                 }
@@ -305,7 +306,7 @@ Ext.define('BM.controller.EastRegionController', {
                                 },
 
                                 failure: function(form, action) {
-                                    Ext.Msg.alert('Failed', action.result ? action.result.message : 'No response');
+                                    createErrorWindow(result);
                                 }
                             });
                 }
@@ -314,7 +315,7 @@ Ext.define('BM.controller.EastRegionController', {
             refreshEdituraGrid: function(button, clickEvent, options) {
                 button.up('eastregion').down('edituragrid').getStore().reload();
             },
-            
+
             changeselectionCategorie: function(selModel, selected, eOpts) {
                 enablebuttonsCategorie(selected.length > 0);
             },
@@ -382,7 +383,7 @@ Ext.define('BM.controller.EastRegionController', {
                                     Ext.widget('categoriegrid').getStore().load();
                                 },
                                 failure: function(result, request) {
-                                    alert('Delete operation has failed miserably!');
+                                    createErrorWindow(result);
                                 }
                             });
                 }
@@ -411,7 +412,7 @@ Ext.define('BM.controller.EastRegionController', {
                                 },
 
                                 failure: function(form, action) {
-                                    Ext.Msg.alert('Failed', action.result ? action.result.message : 'No response');
+                                    createErrorWindow(result);
                                 }
                             });
                 }
@@ -419,5 +420,5 @@ Ext.define('BM.controller.EastRegionController', {
 
             refreshCategorieGrid: function(button, clickEvent, options) {
                 button.up('eastregion').down('categoriegrid').getStore().reload();
-            }            
+            }
         });

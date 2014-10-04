@@ -30,9 +30,11 @@ public class SaveEdituraEventHandler extends EventHandler {
 			conn.getTransaction().commit();
 			return null;
 		} catch (Exception exc) {
-			conn.getTransaction().rollback();
+			if (conn.getTransaction().isActive()) {
+				conn.getTransaction().rollback();
+			}
 			logger.error(exc, exc);
-			throw new ServletException("error writing to db: " + exc.getMessage());
+			throw new ServletException(exc);
 		} finally {
 			if (conn != null) {
 				conn.close();
