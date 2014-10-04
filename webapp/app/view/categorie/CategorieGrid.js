@@ -1,57 +1,57 @@
 Ext.define('BM.view.categorie.CategorieGrid', {
-            extend : 'Ext.grid.Panel',
-            alias : 'widget.categoriegrid',
-            title : 'Categorii',
-            selType : 'rowmodel',
-            columnLines : true,
-            store : 'CategorieStore',
-            dockedItems : [
+            extend: 'Ext.grid.Panel',
+            alias: 'widget.categoriegrid',
+            title: 'Categorii',
+            selType: 'rowmodel',
+            columnLines: true,
+            store: 'CategorieStore',
+            dockedItems: [
                 {
-                    xtype : 'toolbar',
-                    items : [
+                    xtype: 'toolbar',
+                    items: [
                         {
-                            iconCls : 'icon-add',
-                            text : 'Adaugare',
-                            action : 'add-categorie',
-                            scope : this
+                            iconCls: 'icon-add',
+                            text: 'Adaugare',
+                            action: 'add-categorie',
+                            scope: this
                         },
                         {
-                            iconCls : 'icon-mod',
-                            text : 'Modificare',
-                            disabled : true,
-                            action : 'mod-categorie',
-                            scope : this
+                            iconCls: 'icon-mod',
+                            text: 'Modificare',
+                            disabled: true,
+                            action: 'mod-categorie',
+                            scope: this
                         },
                         {
-                            iconCls : 'icon-delete',
-                            text : 'Stergere',
-                            disabled : true,
-                            action : 'del-categorie',
-                            scope : this
+                            iconCls: 'icon-delete',
+                            text: 'Stergere',
+                            disabled: true,
+                            action: 'del-categorie',
+                            scope: this
                         },
                         {
-                            iconCls : 'icon-refresh',
-                            text : 'Refresh',
-                            action : 'refresh-categorie',
-                            scope : this
+                            iconCls: 'icon-refresh',
+                            text: 'Refresh',
+                            action: 'refresh-categorie',
+                            scope: this
                         }
                     ],
-                    dock : 'top'
+                    dock: 'top'
                 }
             ],
 
-            initComponent : function() {
+            initComponent: function() {
                 this.columns = this.buildColumns();
                 this.callParent(arguments);
             },
 
-            buildColumns : function() {
+            buildColumns: function() {
                 return [
                     {
-                        header : 'Nume categorie',
-                        dataIndex : 'numeCategorie',
-                        flex : 1,
-                        editor : 'textfield'
+                        header: 'Nume categorie',
+                        dataIndex: 'numeCategorie',
+                        flex: 1,
+                        editor: 'textfield'
                     }
                 ];
             }
