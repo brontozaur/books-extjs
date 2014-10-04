@@ -113,6 +113,9 @@ Ext.define('BM.view.book.BooksGrid', {
                         flex: 1
                     },
                     {
+                        xtype: 'booleancolumn',
+                        falseText: 'Nu',
+                        trueText: 'Da',
                         header: 'Citita',
                         dataIndex: 'citita',
                         flex: 1

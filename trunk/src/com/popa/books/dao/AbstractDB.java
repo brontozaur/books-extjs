@@ -12,11 +12,11 @@ public abstract class AbstractDB implements Cloneable {
 
     public abstract AbstractDB cloneObject() throws CloneNotSupportedException;
 
-    public abstract long getId();
+    public abstract Long getId();
 
     public void store(EntityManager em) {
         // setServer_timestamp(BorgPersistence.getServerTimestamp());
-        if (getId() <= 0) {
+        if (getId() <= 0 || getId() == null) {
             em.persist(this);
         } else {
             em.merge(this);

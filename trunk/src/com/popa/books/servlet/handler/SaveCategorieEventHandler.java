@@ -20,13 +20,13 @@ public class SaveCategorieEventHandler extends EventHandler {
         try {
             conn = BorgPersistence.getEntityManager();
             conn.getTransaction().begin();
-            Categorie Categorie = new Categorie();
+            Categorie categorie = new Categorie();
             String idCategorie = request.getParameter("idCategorie");
             if (StringUtils.isNotEmpty(idCategorie)) {
-                Categorie.setIdCategorie(Integer.valueOf(idCategorie));
+            	categorie.setIdCategorie(Integer.valueOf(idCategorie));
             }
-            Categorie.setNumeCategorie(request.getParameter("numeCategorie"));
-            Categorie.store(conn);
+            categorie.setNumeCategorie(request.getParameter("numeCategorie"));
+            categorie.store(conn);
             conn.getTransaction().commit();
             return null;
         } catch (Exception exc) {
