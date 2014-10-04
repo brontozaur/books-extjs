@@ -4,16 +4,15 @@ Ext.define('BM.view.book.BookWindow', {
             title: 'Editare detalii carte',
             requires: [
                 'BM.view.autor.AutorCombo',
-                'BM.view.editura.EdituraCombo'
+                'BM.view.editura.EdituraCombo',
+                'BM.view.categorie.CategorieCombo'
             ],
             minHeight: 300,
-            minWidth: 500,
+            minWidth: 300,
             items: [
                 {
                     xtype: 'form',
                     itemId: 'bookform',
-                    minHeight: 300,
-                    minWidth: 500,
                     bodyPadding: 10,
                     items: [
                         {
@@ -32,6 +31,11 @@ Ext.define('BM.view.book.BookWindow', {
                             name: 'title'
                         },
                         {
+                            xtype: 'textfield',
+                            fieldLabel: 'Titlu original',
+                            name: 'originalTitle'
+                        },
+                        {
                             xtype: 'datefield',
                             fieldLabel: 'An aparitie',
                             name: 'dataAparitie'
@@ -42,9 +46,9 @@ Ext.define('BM.view.book.BookWindow', {
                             name: 'idEditura'
                         },
                         {
-                            xtype: 'textfield',
-                            fieldLabel: 'Titlu original',
-                            name: 'originalTitle'
+                            fieldLabel: 'Categorie',
+                            xtype: 'categorieCombo',
+                            name: 'idCategorie'
                         },
                         {
                             xtype: 'textfield',

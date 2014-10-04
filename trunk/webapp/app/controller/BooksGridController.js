@@ -17,7 +17,8 @@ Ext.define('BM.controller.BooksGridController', {
                 this.control({
                             'booksgrid': {
                                 selectionchange: this.changeselection,
-                                celldblclick: this.celldblclick
+                                celldblclick: this.celldblclick,
+                                itemkeydown: this.handleKeyPress
                             },
                             'booksgrid button[action=add-book]': {
                                 click: this.addBook
@@ -27,6 +28,9 @@ Ext.define('BM.controller.BooksGridController', {
                             },
                             'booksgrid button[action=del-book]': {
                                 click: this.delBook
+                            },
+                            'booksgrid textfield[name=searchField]': {
+                                change: this.searchBooks
                             }
                         });
             },
@@ -41,6 +45,12 @@ Ext.define('BM.controller.BooksGridController', {
             celldblclick: function(grid, td, cellIndex, record, tr, rowIndex, e) {
                 var modButton = Ext.ComponentQuery.query('booksgrid button[action=mod-book]')[0];
                 this.modBook(modButton);
+            },
+            
+            handleKeyPress: function(grid, record, item, index, event, eOpts ){
+            	if (event.keycode = Ext.EventObject.DELETE){
+            		this.delBook();
+            	}
             },
 
             fillInfoArea: function(record) {
@@ -96,7 +106,7 @@ Ext.define('BM.controller.BooksGridController', {
             },
 
             delBook: function(button, clickEvent, options) {
-                Ext.MessageBox.confirm('Confirmare', 'Sunteti sigur?', this.deleteBook);
+                Ext.MessageBox.confirm('Confirmare stergere', 'Sunteti sigur ca doriti sa stergeti cartea selectata?', this.deleteBook);
             },
 
             deleteBook: function(btn) {
@@ -132,5 +142,23 @@ Ext.define('BM.controller.BooksGridController', {
                                 }
                             });
                 }
+            },
+
+            searchBooks: function(textfield, newValue, oldValue) {
+                var grid = Ext.widget('booksgrid');
+                var store = grid.getStore();
+                store.clearFilter(true);
+                store.filter([
+                    {
+                        filterFn: function(record) {
+                            if (Ext.isEmpty(newValue)) {
+                                return true;
+                            }
+                            var numeAutor = record.get('authorName');
+                            var title = record.get('title');
+                            return numeAutor.indexOf(newValue) > -1 || title.indexOf(newValue) > -1;
+                        }
+                    }
+                ]);
             }
         });
