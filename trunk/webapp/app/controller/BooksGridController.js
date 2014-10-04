@@ -66,7 +66,7 @@ Ext.define('BM.controller.BooksGridController', {
                 var edituraField = bookInfo.getEdituraField();
                 edituraField.setValue(record.get('numeEditura'));
                 var genField = bookInfo.getGenField();
-                genField.setValue(record.get('numeCategorie'));                
+                genField.setValue(record.get('numeCategorie'));
             },
 
             addBook: function(button, clickEvent, options) {

@@ -1,6 +1,6 @@
 Ext.define('BM.model.BookModel', {
-            extend : 'Ext.data.Model',
-            fields : [
+            extend: 'Ext.data.Model',
+            fields: [
                 'bookId',
                 'author',
                 'title',
@@ -14,32 +14,32 @@ Ext.define('BM.model.BookModel', {
                 'width',
                 'height',
                 {
-                    name : 'authorId',
-                    mapping : 'author.autorId'
+                    name: 'authorId',
+                    mapping: 'author.autorId'
                 },
                 {
-                    name : 'authorName',
-                    mapping : 'author.nume'
+                    name: 'authorName',
+                    mapping: 'author.nume'
                 },
                 {
-                    name : 'dataAparitie',
-                    type : 'date'
+                    name: 'dataAparitie',
+                    type: 'date'
                 },
                 {
-                    name : 'idEditura',
-                    mapping : 'editura.idEditura'
+                    name: 'idEditura',
+                    mapping: 'editura.idEditura'
                 },
                 {
-                    name : 'numeEditura',
-                    mapping : 'editura.numeEditura'
+                    name: 'numeEditura',
+                    mapping: 'editura.numeEditura'
                 },
                 {
-                    name : 'idCategorie',
-                    mapping : 'categorie.idCategorie'
+                    name: 'idCategorie',
+                    mapping: 'categorie.idCategorie'
                 },
                 {
-                    name : 'numeCategorie',
-                    mapping : 'categorie.numeCategorie'
+                    name: 'numeCategorie',
+                    mapping: 'categorie.numeCategorie'
                 }
             ]
         });
