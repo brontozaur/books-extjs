@@ -1,10 +1,10 @@
 Ext.define('BM.view.autor.AutorGrid', {
-            extend : 'Ext.grid.Panel',
-            alias : 'widget.autorgrid',
-            title : 'Autori',
-            selType : 'rowmodel',
-            columnLines : true,
-            store : 'AutorStore',
+            extend: 'Ext.grid.Panel',
+            alias: 'widget.autorgrid',
+            title: 'Autori',
+            selType: 'rowmodel',
+            columnLines: true,
+            store: 'AutorStore',
 
             // plugins: [
             // Ext.create('Ext.grid.plugin.RowEditing', {
@@ -16,59 +16,59 @@ Ext.define('BM.view.autor.AutorGrid', {
             // ftype: 'grouping',
             // }],
 
-            dockedItems : [
+            dockedItems: [
                 {
-                    xtype : 'toolbar',
-                    items : [
+                    xtype: 'toolbar',
+                    items: [
                         {
-                            iconCls : 'icon-add',
-                            text : 'Adaugare',
-                            action : 'add-autor',
-                            scope : this
+                            iconCls: 'icon-add',
+                            text: 'Adaugare',
+                            action: 'add-autor',
+                            scope: this
                         },
                         {
-                            iconCls : 'icon-mod',
-                            text : 'Modificare',
-                            disabled : true,
-                            action : 'mod-autor',
-                            scope : this
+                            iconCls: 'icon-mod',
+                            text: 'Modificare',
+                            disabled: true,
+                            action: 'mod-autor',
+                            scope: this
                         },
                         {
-                            iconCls : 'icon-delete',
-                            text : 'Stergere',
-                            disabled : true,
-                            action : 'del-autor',
-                            scope : this
+                            iconCls: 'icon-delete',
+                            text: 'Stergere',
+                            disabled: true,
+                            action: 'del-autor',
+                            scope: this
                         },
                         {
-                            iconCls : 'icon-refresh',
-                            text : 'Refresh',
-                            action : 'refresh-autor',
-                            scope : this
+                            iconCls: 'icon-refresh',
+                            text: 'Refresh',
+                            action: 'refresh-autor',
+                            scope: this
                         }
                     ],
-                    dock : 'top'
+                    dock: 'top'
                 }
             ],
 
-            initComponent : function() {
+            initComponent: function() {
                 this.columns = this.buildColumns();
                 this.callParent(arguments);
             },
 
-            buildColumns : function() {
+            buildColumns: function() {
                 return [
                     {
-                        header : 'Nume',
-                        dataIndex : 'nume',
-                        flex : 1,
-                        editor : 'textfield'
+                        header: 'Nume',
+                        dataIndex: 'nume',
+                        flex: 1,
+                        editor: 'textfield'
                     },
                     {
-                        header : 'Data nasterii',
-                        dataIndex : 'dataNasterii',
-                        flex : 1,
-                        renderer : Ext.util.Format.dateRenderer('m/d/Y')
+                        header: 'Data nasterii',
+                        dataIndex: 'dataNasterii',
+                        flex: 1,
+                        renderer: Ext.util.Format.dateRenderer('m/d/Y')
                     }
                 ];
             }
