@@ -57,13 +57,13 @@ Ext.define('BM.view.book.BooksGrid', {
                     {
                         header : 'Autor',
                         dataIndex : 'authorName',
-                        flex : 1,
+                        flex : 2,
                         editor : 'textfield'
                     },
                     {
                         header : 'Titlu',
                         dataIndex : 'title',
-                        flex : 1
+                        flex : 2
                     },
                     {
                         header : 'Data aparitie',
@@ -71,6 +71,51 @@ Ext.define('BM.view.book.BooksGrid', {
                         flex : 1,
                         editor : 'datefield',
                         renderer : Ext.util.Format.dateRenderer('m/d/Y')
+                    },
+                    {
+                        header : 'Titlu original',
+                        dataIndex : 'originalTitle',
+                        flex : 1
+                    },
+                    {
+                        header : 'ISBN',
+                        dataIndex : 'isbn',
+                        flex : 1
+                    },
+                    {
+                        header : 'Serie',
+                        dataIndex : 'serie',
+                        flex : 1
+                    },
+                    {
+                        header : 'Nr pagini',
+                        dataIndex : 'nrPagini',
+                        flex : 1
+                    },
+                    {
+                        header : 'Editura',
+                        dataIndex : 'numeEditura',
+                        flex : 1
+                    },
+                    {
+                        header : 'Gen',
+                        dataIndex : 'numeCategorie',
+                        flex : 1
+                    },
+                    {
+                        header : 'Latime (mm)',
+                        dataIndex : 'width',
+                        flex : 1
+                    },
+                    {
+                        header : 'Inaltime (mm)',
+                        dataIndex : 'height',
+                        flex : 1
+                    },
+                    {
+                        header : 'Citita',
+                        dataIndex : 'citita',
+                        flex : 1
                     }
                 ];
             }
