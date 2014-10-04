@@ -34,6 +34,12 @@ Ext.define('BM.view.book.BooksGrid', {
                             disabled: true,
                             action: 'del-book',
                             scope: this
+                        },
+                        '->',
+                        {
+                            xtype: 'textfield',
+                            name: 'searchField',
+                            emptyText: 'enter search term'
                         }
                     ],
                     dock: 'top'
