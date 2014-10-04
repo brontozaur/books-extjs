@@ -47,6 +47,8 @@ public class Book extends AbstractDB implements Serializable {
     private String isbn;
     @Column(name = "citita")
     private Boolean citita;
+    @Column(name = "serie")
+    private String serie;    
     @JoinColumn(name = "idEditura")
     private Editura editura;
     @JoinColumn(name = "idCategorie")
@@ -173,4 +175,36 @@ public class Book extends AbstractDB implements Serializable {
     public void setCategorie(final Categorie categorie) {
         this.categorie = categorie;
     }
+
+	public Boolean getCitita() {
+		return citita;
+	}
+
+	public void setCitita(Boolean citita) {
+		this.citita = citita;
+	}
+
+	public String getSerie() {
+		return serie;
+	}
+
+	public void setSerie(String serie) {
+		this.serie = serie;
+	}
+
+	public void setBookId(Long bookId) {
+		this.bookId = bookId;
+	}
+
+	public void setNrPagini(Integer nrPagini) {
+		this.nrPagini = nrPagini;
+	}
+
+	public void setWidth(Integer width) {
+		this.width = width;
+	}
+
+	public void setHeight(Integer height) {
+		this.height = height;
+	}
 }

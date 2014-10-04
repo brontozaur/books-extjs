@@ -7,7 +7,8 @@ Ext.define('BM.controller.BookWindowController', {
             ],
 
             model : [
-                'BookModel'
+                'BookModel',
+                'EdituraModel'
             ],
 
             views : [
@@ -29,16 +30,14 @@ Ext.define('BM.controller.BookWindowController', {
                 var form = button.up('bookwindow').down('form[itemId=bookform]');
                 var me = this;
                 if (form.isValid()) {
-                    var dataAparitie = form.down('datefield[name=dataAparitie]');
                     form.submit({
                                 url : 'books',
                                 method : 'POST',
                                 params : {
                                     event : 'save-book',
                                     bookId : form.down('hidden[name=bookId]').getValue(),
-                                    title : form.down('textfield[name=title]').getValue(),
                                     autorId : form.down('autorCombo[name=authorId]').getValue(),
-                                    dataAparitie : dataAparitie.getValue()
+                                    idEditura : form.down('edituraCombo[name=idEditura]').getValue()
                                 },
                                 success : function(form, action) {
                                     me.closeWindow(button);
