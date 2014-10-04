@@ -21,19 +21,20 @@ public class DeleteBookEventHandler extends EventHandler {
 			conn = BorgPersistence.getEntityManager();
 			conn.getTransaction().begin();
 			String bookId = request.getParameter("bookId");
-			if (StringUtils.isEmpty(bookId)){
-				logger.error("book id is incorrect: "+ bookId);
-				throw new ServletException("book id is incorrect: "+bookId);
+			if (StringUtils.isEmpty(bookId)) {
+				logger.error("book id is incorrect: " + bookId);
+				throw new ServletException("book id is incorrect: " + bookId);
 			}
-			Book book = conn.createNamedQuery("Book.findById", Book.class).setParameter("bookId", Long.valueOf(bookId))
-					.getSingleResult();
+			Book book = conn.createNamedQuery("Book.findById", Book.class).setParameter("bookId", Long.valueOf(bookId)).getSingleResult();
 			conn.remove(book);
 			conn.getTransaction().commit();
 			return null;
 		} catch (Exception exc) {
-			conn.getTransaction().rollback();
+			if (conn.getTransaction().isActive()) {
+				conn.getTransaction().rollback();
+			}
 			logger.error(exc, exc);
-			throw new ServletException("error writing to db: "+exc.getMessage());
+			throw new ServletException(exc);
 		} finally {
 			if (conn != null) {
 				conn.close();

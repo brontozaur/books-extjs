@@ -46,37 +46,52 @@ Ext.define('BM.controller.BooksGridController', {
                 var modButton = Ext.ComponentQuery.query('booksgrid button[action=mod-book]')[0];
                 this.modBook(modButton);
             },
-            
-            handleKeyPress: function(grid, record, item, index, event, eOpts ){
-            	if (event.keycode = Ext.EventObject.DELETE){
-            		this.delBook();
-            	}
+
+            handleKeyPress: function(grid, record, item, index, event, eOpts) {
+                if (event.keyCode == Ext.EventObject.DELETE && grid.getSelectionModel().hasSelection()) {
+                    this.delBook();
+                }
             },
 
             fillInfoArea: function(record) {
                 var bookInfo = Ext.ComponentQuery.query('bookinfo')[0];
                 var autorField = bookInfo.getAutorField();
                 autorField.setValue(record.get('author').nume);
+                autorField.setVisible(true);
                 var titleField = bookInfo.getTitleField();
                 titleField.setValue(record.get('title'));
+                titleField.setVisible(true);
                 var dateField = bookInfo.getDataAparitieField();
                 dateField.setValue(Ext.util.Format.date(record.get('dataAparitie')));
+                dateField.setVisible(true);
                 var originalTitleField = bookInfo.getOriginalTitleField();
                 originalTitleField.setValue(record.get('originalTitle'));
+                originalTitleField.setVisible(true);
                 var isbnField = bookInfo.getIsbnField();
                 isbnField.setValue(record.get('isbn'));
+                isbnField.setVisible(true);
                 var cititaField = bookInfo.getCititaField();
                 cititaField.setValue(record.get('citita'));
+                cititaField.setVisible(true);
                 var serieField = bookInfo.getSerieField();
                 serieField.setValue(record.get('serie'));
+                serieField.setVisible(true);
                 var nrPaginiField = bookInfo.getNrPaginiField();
                 nrPaginiField.setValue(record.get('nrPagini'));
+                nrPaginiField.setVisible(true);
                 var dimensiuniField = bookInfo.getDimensiuniField();
-                dimensiuniField.setValue(record.get('width') + ' x ' + record.get('height'));
+                if (record.get('width') > 0 || record.get('height') > 0) {
+                    dimensiuniField.setValue(record.get('width') + ' x ' + record.get('height'));
+                } else {
+                    dimensiuniField.setValue('');
+                }
+                dimensiuniField.setVisible(true);
                 var edituraField = bookInfo.getEdituraField();
                 edituraField.setValue(record.get('numeEditura'));
+                edituraField.setVisible(true);
                 var genField = bookInfo.getGenField();
                 genField.setValue(record.get('numeCategorie'));
+                genField.setVisible(true);
             },
 
             addBook: function(button, clickEvent, options) {
@@ -138,7 +153,7 @@ Ext.define('BM.controller.BooksGridController', {
                                     Ext.widget('booksgrid').getStore().load();
                                 },
                                 failure: function(result, request) {
-                                    alert('Delete operation has failed miserably!');
+                                    createErrorWindow(result);
                                 }
                             });
                 }

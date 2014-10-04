@@ -48,7 +48,7 @@ Ext.define('BM.controller.BookWindowController', {
                                 },
 
                                 failure: function(form, action) {
-                                    Ext.Msg.alert('Failed', action.result ? action.result.message : 'No response');
+                                    createErrorWindow(result);
                                 }
                             });
                 }

@@ -48,9 +48,11 @@ public class Book extends AbstractDB implements Serializable {
     @Column(name = "citita")
     private Boolean citita;
     @Column(name = "serie")
-    private String serie;    
+    private String serie;
+    @OneToOne
     @JoinColumn(name = "idEditura")
     private Editura editura;
+    @OneToOne
     @JoinColumn(name = "idCategorie")
     private Categorie categorie;
 

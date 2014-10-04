@@ -34,6 +34,18 @@ function clearInfoAreaFields() {
     edituraField.setValue("");
     var genField = bookInfo.getGenField();
     genField.setValue("");
+
+    autorField.setVisible(false);
+    titleField.setVisible(false);
+    dateField.setVisible(false);
+    originalTitleField.setVisible(false);
+    isbnField.setVisible(false);
+    cititaField.setVisible(false);
+    serieField.setVisible(false);
+    nrPaginiField.setVisible(false);
+    dimensiuniField.setVisible(false);
+    edituraField.setVisible(false);
+    genField.setVisible(false);
 }
 
 function enablebuttonsAutor(enable) {
@@ -70,4 +82,18 @@ function enablebuttonsCategorie(enable) {
         modButton.disable();
         delButton.disable();
     }
+}
+
+function createErrorWindow(response) {
+    var window = Ext.widget('errorwindow');
+    var errorMessage = response.getAllResponseHeaders().error_message;
+    var errorRootCasue = response.getAllResponseHeaders().error_root_cause;
+    var errorStackTrace = response.getAllResponseHeaders().error_stacktrace;
+    window.setTitle('Mesaj de eroare');
+    if (!Ext.isEmpty(errorMessage)) {
+        window.setStackTace('Cauza:\n-----------------\n' + errorMessage + '\n\nDetalii:\n-----------------\n' + errorStackTrace);
+    } else {
+        window.setStackTace('Cauza:\n-----------------\n' + errorRootCasue + '\n\nDetalii:\n-----------------\n' + errorStackTrace);
+    }
+    window.show();
 }
