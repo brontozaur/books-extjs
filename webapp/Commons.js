@@ -91,9 +91,10 @@ function createErrorWindow(response) {
     var errorStackTrace = response.getAllResponseHeaders().error_stacktrace;
     window.setTitle('Mesaj de eroare');
     if (!Ext.isEmpty(errorMessage)) {
-        window.setStackTace('Cauza:\n-----------------\n' + errorMessage + '\n\nDetalii:\n-----------------\n' + errorStackTrace);
+		window.setErrorMessage(errorMessage);
     } else {
-        window.setStackTace('Cauza:\n-----------------\n' + errorRootCasue + '\n\nDetalii:\n-----------------\n' + errorStackTrace);
+    	window.setErrorMessage('A intervenit o eroare!');
     }
+    window.setStackTace('Cauza:\n-----------------\n' + errorRootCasue + '\n\nDetalii:\n-----------------\n' + errorStackTrace);
     window.show();
 }
