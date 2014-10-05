@@ -9,10 +9,7 @@ Ext.define('BM.view.book.BookWindow', {
             ],
             minHeight: 300,
             minWidth: 400,
-            layout: {
-                type: 'vbox',
-                align: 'stretch'
-            },
+            layout:'fit',
             items: [
                 {
                     xtype: 'form',
