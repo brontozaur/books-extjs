@@ -21,7 +21,7 @@ Ext.define('BM.view.ErrorWindow', {
                             text: 'A intervenit o eroare.',
                             baseCls: 'app-header',
                             itemId: 'errorName',
-                            padding: '5 5 5 30'
+                            padding: '10 5 5 30'
                         }
                     ]
                 },
