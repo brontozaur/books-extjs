@@ -7,17 +7,15 @@ Ext.define('BM.view.book.BookWindow', {
                 'BM.view.editura.EdituraCombo',
                 'BM.view.categorie.CategorieCombo'
             ],
-            minHeight: 300,
-            minWidth: 400,
-            layout:'fit',
+            minWidth: 600,
+            layout: 'fit',
             items: [
                 {
                     xtype: 'form',
                     itemId: 'bookform',
                     bodyPadding: 10,
-                    fieldDefaults: {
-                        labelAlign: 'left',
-                        labelWidth: 90
+                    defaults: {
+                        labelStyle: 'font-weight:bold;'
                     },
                     items: [
                         {
@@ -26,132 +24,115 @@ Ext.define('BM.view.book.BookWindow', {
                             value: ''
                         },
                         {
-                            fieldLabel: 'Autor',
-                            xtype: 'autorCombo',
-                            name: 'authorId'
-                        },
-                        {
-                            xtype: 'textfield',
-                            fieldLabel: 'Titlu',
-                            name: 'title'
-                        },
-                        {
-                            xtype: 'textfield',
-                            fieldLabel: 'Titlu original',
-                            name: 'originalTitle'
-                        },
-                        {
-                            xtype: 'datefield',
-                            fieldLabel: 'An aparitie',
-                            name: 'dataAparitie'
-                        },
-                        {
-                            fieldLabel: 'Editura',
-                            xtype: 'edituraCombo',
-                            name: 'idEditura'
-                        },
-                        {
-                            fieldLabel: 'Categorie',
-                            xtype: 'categorieCombo',
-                            name: 'idCategorie'
-                        },
-                        {
-                            xtype: 'textfield',
-                            fieldLabel: 'ISBN',
-                            name: 'isbn'
-                        },
-                        {
-                            xtype: 'textfield',
-                            fieldLabel: 'Serie',
-                            name: 'serie'
-                        },
-                        {
-                            xtype: 'numberfield',
-                            fieldLabel: 'Nr pagini',
-                            name: 'nrPagini'
-                        },
-                        {
-                            xtype: 'numberfield',
-                            fieldLabel: 'Latime',
-                            name: 'width'
-                        },
-                        {
-                            xtype: 'numberfield',
-                            fieldLabel: 'Inaltime',
-                            name: 'height'
-                        },
-                        {
-                            xtype: 'checkbox',
-                            fieldLabel: 'Citita',
-                            name: 'citita'
-                        },
-                        {
                             xtype: 'panel',
                             hideLabel: true,
                             layout: 'hbox',
-                            height: 100,
                             border: false,
                             items: [
                                 {
-                                    xtype: 'label',
-                                    text: 'Front cover:',
-                                    width: 90
+                                    xtype: 'panel',
+                                    hideLabel: true,
+                                    border: false,
+                                    defaults: {
+                                        labelStyle: 'font-weight:bold;'
+//                                        labelAlign: 'top'
+                                    },
+                                    items: [
+                                        {
+                                            xtype: 'textfield',
+                                            fieldLabel: 'Titlu',
+                                            name: 'title'
+                                        },
+                                        {
+                                            fieldLabel: 'Autor',
+                                            xtype: 'autorCombo',
+                                            name: 'authorId'
+                                        },
+                                        {
+                                            xtype: 'textfield',
+                                            fieldLabel: 'Titlu original',
+                                            name: 'originalTitle'
+                                        },
+                                        {
+                                            fieldLabel: 'Editura',
+                                            xtype: 'edituraCombo',
+                                            name: 'idEditura'
+                                        },
+                                        {
+                                            xtype: 'textfield',
+                                            fieldLabel: 'ISBN',
+                                            name: 'isbn'
+                                        },
+                                        {
+                                            xtype: 'checkbox',
+                                            fieldLabel: 'Citita',
+                                            name: 'citita'
+                                        },
+                                        {
+                                            fieldLabel: 'Categorie',
+                                            xtype: 'categorieCombo',
+                                            name: 'idCategorie'
+                                        },
+                                        {
+                                            xtype: 'textfield',
+                                            fieldLabel: 'Serie',
+                                            name: 'serie'
+                                        },
+                                        {
+                                            xtype: 'numberfield',
+                                            fieldLabel: 'Inaltime',
+                                            name: 'height',
+                                            width: 150
+                                        },
+                                        {
+                                            xtype: 'datefield',
+                                            fieldLabel: 'An aparitie',
+                                            name: 'dataAparitie',
+                                            width: 150
+                                        },
+                                        {
+                                            xtype: 'numberfield',
+                                            fieldLabel: 'Nr pagini',
+                                            name: 'nrPagini',
+                                            width: 160
+                                        },
+                                        {
+                                            xtype: 'numberfield',
+                                            fieldLabel: 'Latime',
+                                            name: 'width',
+                                            width: 150
+                                        }
+                                    ]
                                 },
                                 {
-                                    xtype: 'component',
-                                    height: 100,
-                                    width: 100,
-                                    autoEl: {
-                                        tag: 'img',
-                                        src: 'https://d.gr-assets.com/books/1353277730m/11588.jpg',
-                                        itemId: 'frontCoverPreview'
-                                    }
-                                },
-                                {
-                                    xtype: 'filefield',
-                                    buttonOnly: false,
-                                    buttonText: "Upload",
-                                    name: 'frontCoverUpload',
-                                    buttonOnly: true,
-                                    buttonCfg: {
-                                        text: '',
-                                        iconCls: 'icon-upload'
-                                    }
-                                }
-                            ]
-                        },
-                        {
-                            xtype: 'panel',
-                            hideLabel: true,
-                            layout: 'hbox',
-                            height: 100,
-                            border: false,
-                            items: [
-                                {
-                                    xtype: 'label',
-                                    text: 'Back cover:',
-                                    width: 90
-                                },
-                                {
-                                    xtype: 'component',
-                                    height: 100,
-                                    width: 100,
-                                    autoEl: {
-                                        tag: 'img',
-                                        src: 'http://img.timeinc.net/time/photoessays/2009/top10_airport_books/davinci_code.jpg',
-                                        itemId: 'backCoverPreview'
-                                    }
-                                },
-                                {
-                                    xtype: 'filefield',
-                                    buttonOnly: false,
-                                    buttonText: "Upload",
-                                    name: 'backCoverUpload',
-                                    buttonOnly: true,
-                                    buttonCfg: {
-                                        text: '',
-                                        iconCls: 'icon-upload'
-                                    }
+                                    xtype: 'panel',
+                                    hideLabel: true,
+                                    layout: 'vbox',
+                                    border: false,
+                                    padding: '0 0 0 50',
+                                    items: [
+                                        {
+                                            xtype: 'component',
+                                            height: 164,
+                                            width: 128,
+                                            autoEl: {
+                                                tag: 'img',
+                                                src: 'https://d.gr-assets.com/books/1353277730m/11588.jpg',
+                                                itemId: 'frontCoverPreview'
+                                            }
+                                        },
+                                        {
+                                            xtype: 'filefield',
+                                            buttonOnly: false,
+                                            labelAlign: 'top',
+                                            labelStyle: 'font-weight:bold;',
+                                            fieldLabel: 'Front cover',
+                                            width: 164,
+                                            buttonText: "Upload",
+                                            name: 'frontCoverUpload',
+                                            iconCls: 'icon-upload'
+                                        }
+                                    ]
                                 }
                             ]
                         }
