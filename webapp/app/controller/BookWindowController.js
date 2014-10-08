@@ -12,7 +12,11 @@ Ext.define('BM.controller.BookWindowController', {
             ],
 
             views: [
-                'book.BookWindow'
+                'book.BookWindow',
+                'editura.EdituraWindow',
+                'autor.AutorWindow',
+                'categorie.CategorieWindow',
+                'ErrorWindow'                
             ],
 
             init: function() {
@@ -22,6 +26,24 @@ Ext.define('BM.controller.BookWindowController', {
                             },
                             'bookwindow button[itemId=cancelBtn]': {
                                 click: this.closeWindow
+                            },
+                            'bookwindow button[itemId=addAutor]': {
+                                click: function(button, clickEvent, options) {
+                                    var window = Ext.widget('autorwindow');
+                                    window.show();
+                                }
+                            },
+                            'bookwindow button[itemId=addEditura]': {
+                                click: function(button, clickEvent, options) {
+                                    var window = Ext.widget('editurawindow');
+                                    window.show();
+                                }
+                            },
+                            'bookwindow button[itemId=addCategorie]': {
+                                click: function(button, clickEvent, options) {
+                                    var window = Ext.widget('categoriewindow');
+                                    window.show();
+                                }
                             }
                         });
             },
