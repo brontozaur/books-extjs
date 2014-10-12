@@ -84,6 +84,15 @@ function enablebuttonsCategorie(enable) {
     }
 }
 
+function createFormErrorWindow(formAction) {
+    var window = Ext.widget('errorwindow');
+    var errorStackTrace = formAction.response.responseText;
+    window.setTitle('Mesaj de eroare');
+    window.setErrorMessage('A intervenit o eroare!');
+    window.setStackTace('Detalii:\n-----------------\n' + errorStackTrace);
+    window.show();
+}
+
 function createErrorWindow(response) {
     var window = Ext.widget('errorwindow');
     var errorMessage = response.getAllResponseHeaders().error_message;
@@ -91,9 +100,9 @@ function createErrorWindow(response) {
     var errorStackTrace = response.getAllResponseHeaders().error_stacktrace;
     window.setTitle('Mesaj de eroare');
     if (!Ext.isEmpty(errorMessage)) {
-		window.setErrorMessage(errorMessage);
+        window.setErrorMessage(errorMessage);
     } else {
-    	window.setErrorMessage('A intervenit o eroare!');
+        window.setErrorMessage('A intervenit o eroare!');
     }
     window.setStackTace('Cauza:\n-----------------\n' + errorRootCasue + '\n\nDetalii:\n-----------------\n' + errorStackTrace);
     window.show();
