@@ -70,7 +70,7 @@ Ext.define('BM.controller.BookWindowController', {
                                 },
 
                                 failure: function(form, action) {
-                                    createErrorWindow(result);
+                                    createFormErrorWindow(action);
                                 }
                             });
                 }

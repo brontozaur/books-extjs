@@ -200,7 +200,7 @@ Ext.define('BM.view.book.BookWindow', {
                                                 itemId: 'frontCoverPreview'
                                             }
                                         },
-                                        {
+                                        { // din cauza la asta crapa submit-ul. Vezi: http://jsfiddle.net/e3M3e/e8V7g/
                                             xtype: 'filefield',
                                             buttonOnly: false,
                                             labelAlign: 'top',

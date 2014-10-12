@@ -200,7 +200,7 @@ Ext.define('BM.controller.EastRegionController', {
                                 },
 
                                 failure: function(form, action) {
-                                    createErrorWindow(result);
+                                    createFormErrorWindow(action);
                                 }
                             });
                 }
@@ -306,7 +306,7 @@ Ext.define('BM.controller.EastRegionController', {
                                 },
 
                                 failure: function(form, action) {
-                                    createErrorWindow(result);
+                                    createFormErrorWindow(action);
                                 }
                             });
                 }
@@ -412,7 +412,7 @@ Ext.define('BM.controller.EastRegionController', {
                                 },
 
                                 failure: function(form, action) {
-                                    createErrorWindow(result);
+                                    createFormErrorWindow(action);
                                 }
                             });
                 }
