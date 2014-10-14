@@ -196,10 +196,10 @@ Ext.define('BM.view.book.BookWindow', {
                                             xtype: 'component',
                                             height: 164,
                                             width: 128,
+                                            itemId: 'frontCoverPreview',
                                             autoEl: {
                                                 tag: 'img',
-                                                src: 'https://d.gr-assets.com/books/1353277730m/11588.jpg',
-                                                itemId: 'frontCoverPreview'
+                                                src: 'https://d.gr-assets.com/books/1353277730m/11588.jpg'
                                             }
                                         },
                                         { // din cauza la asta crapa submit-ul. Vezi: http://jsfiddle.net/e3M3e/e8V7g/

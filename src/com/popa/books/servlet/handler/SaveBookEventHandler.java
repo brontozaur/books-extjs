@@ -1,7 +1,5 @@
 package com.popa.books.servlet.handler;
 
-import java.io.File;
-import java.io.FileOutputStream;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 
@@ -71,10 +69,6 @@ public class SaveBookEventHandler extends EventHandler {
             book.setWidth(NumberUtils.toInt(RequestUtils.getString(request, "width"), 0));
             book.setHeight(NumberUtils.toInt(RequestUtils.getString(request, "height"), 0));
             book.setCitita("on".equals(RequestUtils.getString(request, "citita")));
-            byte[] frontCover = RequestUtils.getByteArray(request, "frontCoverUpload");
-            FileOutputStream fso = new FileOutputStream(new File("c:\\tmp\\test.png"));
-            fso.write(frontCover);
-            fso.close();
 
             book.store(conn);
             conn.getTransaction().commit();

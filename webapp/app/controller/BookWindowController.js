@@ -44,6 +44,8 @@ Ext.define('BM.controller.BookWindowController', {
                                     var window = Ext.widget('categoriewindow');
                                     window.show();
                                 }
+                            }, 'bookwindow filefield[name=frontCoverUpload]': {
+                                change: this.uploadFile
                             }
                         });
             },
@@ -79,5 +81,28 @@ Ext.define('BM.controller.BookWindowController', {
             closeWindow: function(button, clickEvent, options) {
                 var window = button.up('bookwindow');
                 window.close();
+            },
+            
+            uploadFile: function(fileUploadField, value, eOpts ){
+                var form = fileUploadField.up('bookwindow').down('form[itemId=uploadform]');
+                if (form.isValid()) {
+                    form.submit({
+                                url: 'books',
+                                method: 'POST',
+                                params: {
+                                    event: 'upload-front-cover'
+                                },
+                                success: function(form, action) {
+                                    var response = Ext.JSON.decode(action.response.responseText);
+                                    var imageCanvas = Ext.ComponentQuery.query('component[itemId=frontCoverPreview]')[0];
+                                    //todo sa folosesc image de la sencha
+                                    imageCanvas.autoEl.src= response.filePath;
+                                },
+
+                                failure: function(form, action) {
+                                    createFormErrorWindow(action);
+                                }
+                            });
+                }
             }
         });
