@@ -17,4 +17,6 @@ public interface Events {
     String GET_CATEGORII = "get-categorii";
     String DEL_CATEGORIE = "del-categorie";
     String SAVE_CATEGORIE = "save-categorie";
+
+    String UPLOAD_FRONT_COVER = "upload-front-cover";
 }
