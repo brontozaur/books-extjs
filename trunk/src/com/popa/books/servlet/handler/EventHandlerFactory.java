@@ -10,7 +10,7 @@ public class EventHandlerFactory {
     }
 
     public static EventHandler getHandler(final HttpServletRequest request) throws ServletException {
-        final String eventName = RequestUtils.getParameterValueFromRequest(request, "event");
+        final String eventName = RequestUtils.getString(request, "event");
         EventHandler handler = null;
         if (Events.SAVE_BOOK.equals(eventName)) {
             handler = new SaveBookEventHandler();
