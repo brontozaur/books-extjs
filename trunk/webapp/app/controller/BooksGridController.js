@@ -121,7 +121,7 @@ Ext.define('BM.controller.BooksGridController', {
                 var bookForm = window.down('form[itemId=bookform]');
                 bookForm.loadRecord(selectedBook);
                 var uploadForm = window.down('form[itemId=uploadform]');
-                uploadForm.down('image[itemId=frontCoverPreview]').src = selectedBook.get('frontCoverPath');
+                uploadForm.down('image[itemId=frontCoverPreview]').src = 'covers/'+ selectedBook.get('frontCoverPath');
                 window.show();
             },
 
