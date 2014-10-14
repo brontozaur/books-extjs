@@ -52,7 +52,7 @@ Ext.define('BM.view.book.BookWindow', {
                                                     fieldLabel: 'Autor',
                                                     name: 'authorId',
                                                     labelWidth: 50,
-                                                    width: 170,
+                                                    width: 190,
                                                     margin: '0 0 5 0'
                                                 },
                                                 {
@@ -193,18 +193,15 @@ Ext.define('BM.view.book.BookWindow', {
                                     padding: '0 0 0 60',
                                     items: [
                                         {
-                                            xtype: 'component',
+                                            xtype: 'image',
                                             height: 164,
                                             width: 128,
                                             itemId: 'frontCoverPreview',
-                                            autoEl: {
-                                                tag: 'img',
-                                                src: 'https://d.gr-assets.com/books/1353277730m/11588.jpg'
-                                            }
+                                            name:'frontCoverPath'
                                         },
-                                        { // din cauza la asta crapa submit-ul. Vezi: http://jsfiddle.net/e3M3e/e8V7g/
+                                        {
                                             xtype: 'filefield',
-                                            buttonOnly: false,
+                                            buttonOnly: true,
                                             labelAlign: 'top',
                                             labelStyle: 'font-weight:bold;',
                                             fieldLabel: 'Front cover',
