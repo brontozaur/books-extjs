@@ -17,6 +17,7 @@ import com.popa.books.dao.Categorie;
 import com.popa.books.dao.Database;
 import com.popa.books.dao.Editura;
 import com.popa.books.dao.persistence.BorgPersistence;
+import com.popa.books.servlet.util.RequestUtils;
 
 public class SaveBookEventHandler extends EventHandler {
 
@@ -29,11 +30,11 @@ public class SaveBookEventHandler extends EventHandler {
 			conn = BorgPersistence.getEntityManager();
 			conn.getTransaction().begin();
 			Book book = new Book();
-			String bookId = request.getParameter("bookId");
+			String bookId = RequestUtils.getParameterValueFromRequest(request, "bookId");
 			if (StringUtils.isNotEmpty(bookId)) {
 				book.setBookId(Integer.valueOf(bookId));
 			}
-			String dateParam = request.getParameter("dataAparitie");
+			String dateParam = RequestUtils.getParameterValueFromRequest(request, "dataAparitie");
 			try {
 				if (StringUtils.isNotEmpty(dateParam)) {
 					SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
@@ -42,32 +43,32 @@ public class SaveBookEventHandler extends EventHandler {
 			} catch (Exception e) {
 				logger.error("cannot parse date: " + dateParam);
 			}
-			book.setTitle(request.getParameter("title"));
+			book.setTitle(RequestUtils.getParameterValueFromRequest(request, "title"));
 
-			String autorId = request.getParameter("autorId");
+			String autorId = RequestUtils.getParameterValueFromRequest(request, "autorId");
 			if (StringUtils.isNotEmpty(autorId)) {
 				Autor autor = (Autor) Database.getDbObjectById(Autor.class, Long.valueOf(autorId));
 				book.setAuthor(autor);
 			}
 
-			String idCategorie = request.getParameter("idCategorie");
+			String idCategorie = RequestUtils.getParameterValueFromRequest(request, "idCategorie");
 			if (StringUtils.isNotEmpty(idCategorie)) {
 				Categorie categorie = (Categorie) Database.getDbObjectById(Categorie.class, Long.valueOf(idCategorie));
 				book.setCategorie(categorie);
 			}
 
-			String idEditura = request.getParameter("idEditura");
+			String idEditura = RequestUtils.getParameterValueFromRequest(request, "idEditura");
 			if (StringUtils.isNotEmpty(idEditura)) {
 				Editura editura = (Editura) Database.getDbObjectById(Editura.class, Long.valueOf(idEditura));
 				book.setEditura(editura);
 			}
-			book.setIsbn(request.getParameter("isbn"));
-			book.setOriginalTitle(request.getParameter("originalTitle"));
-			book.setSerie(request.getParameter("serie"));
-			book.setNrPagini(NumberUtils.toInt(request.getParameter("nrPagini"), 0));
-			book.setWidth(NumberUtils.toInt(request.getParameter("width"), 0));
-			book.setHeight(NumberUtils.toInt(request.getParameter("height"), 0));
-			book.setCitita("on".equals(request.getParameter("citita")));
+			book.setIsbn(RequestUtils.getParameterValueFromRequest(request, "isbn"));
+			book.setOriginalTitle(RequestUtils.getParameterValueFromRequest(request, "originalTitle"));
+			book.setSerie(RequestUtils.getParameterValueFromRequest(request, "serie"));
+			book.setNrPagini(NumberUtils.toInt(RequestUtils.getParameterValueFromRequest(request, "nrPagini"), 0));
+			book.setWidth(NumberUtils.toInt(RequestUtils.getParameterValueFromRequest(request, "width"), 0));
+			book.setHeight(NumberUtils.toInt(RequestUtils.getParameterValueFromRequest(request, "height"), 0));
+			book.setCitita("on".equals(RequestUtils.getParameterValueFromRequest(request, "citita")));
 
 			book.store(conn);
 			conn.getTransaction().commit();
