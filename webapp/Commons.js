@@ -34,6 +34,8 @@ function clearInfoAreaFields() {
     edituraField.setValue("");
     var genField = bookInfo.getGenField();
     genField.setValue("");
+    var frontCoverField = bookInfo.getFrontCoverField();
+    frontCoverField.setValue("");
 
     autorField.setVisible(false);
     titleField.setVisible(false);
@@ -46,6 +48,7 @@ function clearInfoAreaFields() {
     dimensiuniField.setVisible(false);
     edituraField.setVisible(false);
     genField.setVisible(false);
+    frontCoverField.setVisible(false);
 }
 
 function enablebuttonsAutor(enable) {

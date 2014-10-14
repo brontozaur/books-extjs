@@ -42,6 +42,9 @@ Ext.define('BM.view.book.BookInfo', {
             },
             getGenField: function() {
                 return Ext.ComponentQuery.query('bookinfo displayfield[itemId=numeCategorie]')[0];
+            },
+             getFrontCoverField: function() {
+                return Ext.ComponentQuery.query('bookinfo displayfield[itemId=frontCoverPath]')[0];
             }
         });
 
@@ -90,6 +93,10 @@ function buildItems() {
         {
             fieldLabel: 'Gen',
             itemId: 'numeCategorie'
+        },
+        {
+            fieldLabel: 'Cover',
+            itemId: 'frontCoverPath'
         }
     ];
 }

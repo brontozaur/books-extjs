@@ -9,29 +9,32 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.log4j.Logger;
 
 import com.google.gson.JsonObject;
+import com.popa.books.servlet.PropertyKeys;
 import com.popa.books.servlet.util.RequestUtils;
 
 public class UploadFrontCoverEventHandler extends EventHandler {
 
-    private static final Logger logger = Logger.getLogger(UploadFrontCoverEventHandler.class);
+	private static final Logger logger = Logger.getLogger(UploadFrontCoverEventHandler.class);
 
-    @Override
-    public String handleEvent(final HttpServletRequest request) throws ServletException {
-        try {
-            byte[] frontCover = RequestUtils.getByteArray(request, "frontCoverUpload");
-            File serverOut = new File("c:\\tmp\\test.png");
-            FileOutputStream fso = new FileOutputStream(serverOut);
-            fso.write(frontCover);
-            fso.close();
+	@Override
+	public String handleEvent(final HttpServletRequest request) throws ServletException {
+		try {
+			String extjsFilePath = RequestUtils.getString(request, "fileName"); //usually c:\fakepath/filename.extension
+			String fileName = extjsFilePath.substring(extjsFilePath.lastIndexOf(File.separator)+1);
+			byte[] frontCover = RequestUtils.getByteArray(request, "frontCoverUpload");
+			File serverOut = new File(System.getProperty(PropertyKeys.COVERS_DIR)+fileName);
+			FileOutputStream fso = new FileOutputStream(serverOut);
+			fso.write(frontCover);
+			fso.close();
 
-            JsonObject obj = new JsonObject();
-            obj.addProperty("success", true);
-            obj.addProperty("filePath", serverOut.getAbsolutePath());
+			JsonObject obj = new JsonObject();
+			obj.addProperty("success", true);
+			obj.addProperty("fileName", serverOut.getName());
 
-            return obj.toString();
-        } catch (Exception exc) {
-            logger.error(exc, exc);
-            throw new ServletException(exc);
-        }
-    }
+			return obj.toString();
+		} catch (Exception exc) {
+			logger.error(exc, exc);
+			throw new ServletException(exc);
+		}
+	}
 }

@@ -125,6 +125,11 @@ Ext.define('BM.view.book.BooksGrid', {
                         header: 'Citita',
                         dataIndex: 'citita',
                         flex: 1
+                    },
+                    {
+                        header: 'Cover',
+                        dataIndex: 'frontCoverPath',
+                        flex: 1
                     }
                 ];
             }

@@ -92,6 +92,9 @@ Ext.define('BM.controller.BooksGridController', {
                 var genField = bookInfo.getGenField();
                 genField.setValue(record.get('numeCategorie'));
                 genField.setVisible(true);
+                var frontCoverField = bookInfo.getFrontCoverField();
+                frontCoverField.setValue(record.get('frontCoverPath'));
+                frontCoverField.setVisible(true);
             },
 
             addBook: function(button, clickEvent, options) {
@@ -117,6 +120,8 @@ Ext.define('BM.controller.BooksGridController', {
                 var selectedBook = selectionModel.getSelection()[0];
                 var bookForm = window.down('form[itemId=bookform]');
                 bookForm.loadRecord(selectedBook);
+                var uploadForm = window.down('form[itemId=uploadform]');
+                uploadForm.down('image[itemId=frontCoverPreview]').src = selectedBook.get('frontCoverPath');
                 window.show();
             },
 
