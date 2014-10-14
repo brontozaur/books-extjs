@@ -1,5 +1,6 @@
 package com.popa.books.servlet.handler;
 
+import java.io.File;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 
@@ -68,7 +69,11 @@ public class SaveBookEventHandler extends EventHandler {
 			book.setWidth(NumberUtils.toInt(request.getParameter("width"), 0));
 			book.setHeight(NumberUtils.toInt(request.getParameter("height"), 0));
 			book.setCitita("on".equals(request.getParameter("citita")));
-			book.setFrontCoverPath(request.getParameter("frontCoverImage"));
+			String coverPath = request.getParameter("frontCoverImage");
+			if (coverPath.indexOf(File.separator) != -1){
+				coverPath = coverPath.substring(coverPath.lastIndexOf(File.separator)+1);
+			}
+			book.setFrontCoverPath(coverPath);
 
 			book.store(conn);
 			conn.getTransaction().commit();
