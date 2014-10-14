@@ -186,8 +186,10 @@ Ext.define('BM.view.book.BookWindow', {
                                     ]
                                 },
                                 {
-                                    xtype: 'container',
                                     layout: 'vbox',
+                                    xtype: 'form',
+                                    border: false,
+                                    itemId: 'uploadform',
                                     padding: '0 0 0 60',
                                     items: [
                                         {
