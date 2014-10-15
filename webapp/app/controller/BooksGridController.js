@@ -55,46 +55,75 @@ Ext.define('BM.controller.BooksGridController', {
 
             fillInfoArea: function(record) {
                 var bookInfo = Ext.ComponentQuery.query('bookinfo')[0];
-                var autorField = bookInfo.getAutorField();
+                var fieldContainer = bookInfo.down('container[itemId=bookInfoFields]');
+
+                var autorField = fieldContainer.down('displayfield[itemId=autor]');
                 autorField.setValue(record.get('author').nume);
-                autorField.setVisible(true);
-                var titleField = bookInfo.getTitleField();
+                autorField.setVisible(!Ext.isEmpty(autorField.getValue()));
+
+                var titleField = fieldContainer.down('displayfield[itemId=title]');
                 titleField.setValue(record.get('title'));
-                titleField.setVisible(true);
-                var dateField = bookInfo.getDataAparitieField();
+                titleField.setVisible(!Ext.isEmpty(titleField.getValue()));
+
+                var dateField = fieldContainer.down('displayfield[itemId=data]');
                 dateField.setValue(Ext.util.Format.date(record.get('dataAparitie')));
-                dateField.setVisible(true);
-                var originalTitleField = bookInfo.getOriginalTitleField();
+                dateField.setVisible(!Ext.isEmpty(dateField.getValue()));
+
+                var originalTitleField = fieldContainer.down('displayfield[itemId=originalTitle]');
                 originalTitleField.setValue(record.get('originalTitle'));
-                originalTitleField.setVisible(true);
-                var isbnField = bookInfo.getIsbnField();
+                originalTitleField.setVisible(!Ext.isEmpty(originalTitleField.getValue()));
+
+                var isbnField = fieldContainer.down('displayfield[itemId=isbn]');
                 isbnField.setValue(record.get('isbn'));
-                isbnField.setVisible(true);
-                var cititaField = bookInfo.getCititaField();
-                cititaField.setValue(record.get('citita'));
+                isbnField.setVisible(!Ext.isEmpty(isbnField.getValue()));
+
+                var cititaField = fieldContainer.down('displayfield[itemId=citita]');
+                cititaField.setValue(record.get('citita') ? "Da" : "Nu");
                 cititaField.setVisible(true);
-                var serieField = bookInfo.getSerieField();
+
+                var serieField = fieldContainer.down('displayfield[itemId=serie]');
                 serieField.setValue(record.get('serie'));
-                serieField.setVisible(true);
-                var nrPaginiField = bookInfo.getNrPaginiField();
+                serieField.setVisible(!Ext.isEmpty(serieField.getValue()));
+
+                var nrPaginiField = fieldContainer.down('displayfield[itemId=nrPagini]');
                 nrPaginiField.setValue(record.get('nrPagini'));
-                nrPaginiField.setVisible(true);
-                var dimensiuniField = bookInfo.getDimensiuniField();
+                nrPaginiField.setVisible(nrPaginiField.getValue() > 0);
+
+                var dimensiuniField = fieldContainer.down('displayfield[itemId=dimensiuni]');
                 if (record.get('width') > 0 || record.get('height') > 0) {
                     dimensiuniField.setValue(record.get('width') + ' x ' + record.get('height'));
                 } else {
                     dimensiuniField.setValue('');
                 }
-                dimensiuniField.setVisible(true);
-                var edituraField = bookInfo.getEdituraField();
+                dimensiuniField.setVisible(!Ext.isEmpty(dimensiuniField.getValue()));
+
+                var edituraField = fieldContainer.down('displayfield[itemId=numeEditura]');
                 edituraField.setValue(record.get('numeEditura'));
-                edituraField.setVisible(true);
-                var genField = bookInfo.getGenField();
+                edituraField.setVisible(!Ext.isEmpty(edituraField.getValue()));
+
+                var genField = fieldContainer.down('displayfield[itemId=numeCategorie]');
                 genField.setValue(record.get('numeCategorie'));
-                genField.setVisible(true);
-                var frontCoverField = bookInfo.getFrontCoverField();
-                frontCoverField.setValue(record.get('frontCoverPath'));
-                frontCoverField.setVisible(true);
+                genField.setVisible(!Ext.isEmpty(genField.getValue()));
+
+                var frontImageContainer = bookInfo.down('image[itemId=frontCoverPreview]');
+                var frontCover = record.get('frontCoverPath');
+                var hasFrontCover = !Ext.isEmpty(frontCover);
+                var label = bookInfo.down('label[itemId=frontCoverLabel]');
+                label.setVisible(hasFrontCover);
+                frontImageContainer.setVisible(hasFrontCover);
+                if (hasFrontCover) {
+                    frontImageContainer.setSrc('covers/' + frontCover);
+                }
+
+                var backImageContainer = bookInfo.down('image[itemId=backCoverPreview]');
+                var backCover = record.get('backCoverPath');
+                var hasbackCover = !Ext.isEmpty(backCover);
+                var label = bookInfo.down('label[itemId=backCoverLabel]');
+                label.setVisible(hasbackCover);
+                backImageContainer.setVisible(hasbackCover);
+                if (hasbackCover) {
+                    backImageContainer.setSrc('covers/' + backCover);
+                }
             },
 
             addBook: function(button, clickEvent, options) {
