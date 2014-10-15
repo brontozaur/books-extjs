@@ -127,8 +127,13 @@ Ext.define('BM.view.book.BooksGrid', {
                         flex: 1
                     },
                     {
-                        header: 'Cover',
+                        header: 'Front cover',
                         dataIndex: 'frontCoverPath',
+                        flex: 1
+                    },
+                    {
+                        header: 'Back cover',
+                        dataIndex: 'backCoverPath',
                         flex: 1
                     }
                 ];

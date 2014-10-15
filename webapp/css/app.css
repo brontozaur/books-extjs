@@ -52,3 +52,11 @@
 .icon-upload {
 	    background-image: url(images/upload.png) !important;
 }
+
+.icon-back {
+    background-image: url(images/back.png) !important;
+}
+
+.icon-forward {
+    background-image: url(images/forward.png) !important;
+}
