@@ -22,6 +22,12 @@ public class UploadFrontCoverEventHandler extends EventHandler {
 			String extjsFilePath = RequestUtils.getString(request, "fileName"); //usually c:\fakepath/filename.extension
 			String fileName = extjsFilePath.substring(extjsFilePath.lastIndexOf(File.separator)+1);
 			byte[] frontCover = RequestUtils.getByteArray(request, "frontCoverUpload");
+			File dir = new File(System.getProperty(PropertyKeys.COVERS_DIR));
+			if (!dir.exists() || !dir.isDirectory()){
+			    if (!dir.mkdirs()){
+			        throw new ServletException("Cannot create dir: "+System.getProperty(PropertyKeys.COVERS_DIR));
+			    }
+			}
 			File serverOut = new File(System.getProperty(PropertyKeys.COVERS_DIR)+fileName);
 			FileOutputStream fso = new FileOutputStream(serverOut);
 			fso.write(frontCover);
