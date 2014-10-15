@@ -20,7 +20,7 @@ public class RequestUtils {
         String contentType = request.getContentType();
         String eventValue = null;
         try {
-            if (contentType == null) {
+            if (contentType == null || contentType.indexOf(FormKeys.APPLICATION_FORM_URLENCODED) != -1) {
                 eventValue = request.getParameter(parameterName);
             } else if (contentType.indexOf(FormKeys.MULTI_PART_FORM_CONTENT_TYPE) != -1 || contentType.indexOf(FormKeys.MULTI_PART_MIXED_STREAM) != -1) {
                 Part part = request.getPart(parameterName);
