@@ -186,29 +186,94 @@ Ext.define('BM.view.book.BookWindow', {
                                     ]
                                 },
                                 {
-                                    layout: 'vbox',
-                                    xtype: 'form',
+                                    xtype: 'panel',
+                                    layout: 'card',
+                                    itemId: 'cardLayoutPanel',
+                                    activeItem: 'frontUploadform',
                                     border: false,
-                                    itemId: 'uploadform',
-                                    padding: '0 0 0 60',
+                                    padding: '0 0 0 20',
+                                    dockedItems: [
+                                        {
+                                            xtype: 'toolbar',
+                                            itemId: 'coversToolbar',
+                                            dock: 'top',
+                                            style: {
+                                                background: 'transparent'
+                                            },
+                                            items: [
+                                                {
+                                                	xtype:'button',
+                                                	itemId:'frontCoverButton',
+                                                    text: 'Front cover',
+                                                    iconCls: 'icon-back'
+                                                },
+                                                '->',
+                                                {
+                                                	xtype:'button',
+                                                    text: 'Back cover',
+                                                    itemId:'backCoverButton',
+                                                    iconCls: 'icon-forward',
+                                                    iconAlign:'right'
+                                                }
+                                            ]
+                                        }
+                                    ],
                                     items: [
                                         {
-                                            xtype: 'image',
-                                            height: 164,
-                                            width: 128,
-                                            itemId: 'frontCoverPreview',
-                                            name:'frontCoverPath'
+                                            layout: 'vbox',
+                                            xtype: 'form',
+                                            border: false,
+                                            itemId: 'frontUploadform',
+                                            padding: '10 0 0 40',
+                                            header: false,
+                                            items: [
+                                                {
+                                                    xtype: 'image',
+                                                    height: 164,
+                                                    width: 128,
+                                                    itemId: 'frontCoverPreview',
+                                                    name: 'frontCoverPath'
+                                                },
+                                                {
+                                                    xtype: 'filefield',
+                                                    labelAlign: 'top',
+                                                    labelStyle: 'font-weight:bold;',
+                                                    fieldLabel: 'Front cover',
+                                                    width: 164,
+                                                    buttonText: "Upload",
+                                                    buttonOnly:true,
+                                                    name: 'frontCoverUpload',
+                                                    iconCls: 'icon-upload'
+                                                }
+                                            ]
                                         },
                                         {
-                                            xtype: 'filefield',
-                                            buttonOnly: true,
-                                            labelAlign: 'top',
-                                            labelStyle: 'font-weight:bold;',
-                                            fieldLabel: 'Front cover',
-                                            width: 164,
-                                            buttonText: "Upload",
-                                            name: 'frontCoverUpload',
-                                            iconCls: 'icon-upload'
+                                            layout: 'vbox',
+                                            xtype: 'form',
+                                            border: false,
+                                            itemId: 'backUploadform',
+                                            padding: '10 0 0 40',
+                                            header: false,
+                                            items: [
+                                                {
+                                                    xtype: 'image',
+                                                    height: 164,
+                                                    width: 128,
+                                                    itemId: 'backCoverPreview',
+                                                    name: 'backCoverPath'
+                                                },
+                                                {
+                                                    xtype: 'filefield',
+                                                    labelAlign: 'top',
+                                                    labelStyle: 'font-weight:bold;',
+                                                    fieldLabel: 'Back cover',
+                                                    width: 164,
+                                                    buttonText: "Upload",
+                                                    buttonOnly:true,
+                                                    name: 'backCoverUpload',
+                                                    iconCls: 'icon-upload'
+                                                }
+                                            ]
                                         }
                                     ]
                                 }

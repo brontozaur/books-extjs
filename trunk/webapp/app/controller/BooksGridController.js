@@ -120,8 +120,14 @@ Ext.define('BM.controller.BooksGridController', {
                 var selectedBook = selectionModel.getSelection()[0];
                 var bookForm = window.down('form[itemId=bookform]');
                 bookForm.loadRecord(selectedBook);
-                var uploadForm = window.down('form[itemId=uploadform]');
-                uploadForm.down('image[itemId=frontCoverPreview]').src = 'covers/'+ selectedBook.get('frontCoverPath');
+                var coversComponent = window.down('component[itemId=cardLayoutPanel]');
+
+                var frontCoverUploadForm = coversComponent.down('form[itemId=frontUploadform]');
+                frontCoverUploadForm.down('image[itemId=frontCoverPreview]').src = 'covers/' + selectedBook.get('frontCoverPath');
+
+                var backCoverUploadForm = coversComponent.down('form[itemId=backUploadform]');
+                backCoverUploadForm.down('image[itemId=backCoverPreview]').src = 'covers/' + selectedBook.get('backCoverPath');
+
                 window.show();
             },
 

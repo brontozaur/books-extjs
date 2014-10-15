@@ -19,4 +19,5 @@ public interface Events {
     String SAVE_CATEGORIE = "save-categorie";
 
     String UPLOAD_FRONT_COVER = "upload-front-cover";
+    String UPLOAD_BACK_COVER = "upload-back-cover";
 }

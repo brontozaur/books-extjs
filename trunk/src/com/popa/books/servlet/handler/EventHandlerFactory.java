@@ -38,6 +38,8 @@ public class EventHandlerFactory {
             handler = new GetCategoriiEventHandler();
         } else if (Events.UPLOAD_FRONT_COVER.equals(eventName)) {
             handler = new UploadFrontCoverEventHandler();
+        } else if (Events.UPLOAD_BACK_COVER.equals(eventName)) {
+            handler = new UploadBackCoverEventHandler();
         }
         if (handler == null) {
             throw new NullPointerException("no handler was found for event: " + eventName);

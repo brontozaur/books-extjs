@@ -46,7 +46,16 @@ Ext.define('BM.controller.BookWindowController', {
                                 }
                             },
                             'bookwindow filefield[name=frontCoverUpload]': {
-                                change: this.uploadFile
+                                change: this.uploadFrontCover
+                            },
+                            'bookwindow filefield[name=backCoverUpload]': {
+                                change: this.uploadBackCover
+                            },                            
+                            'bookwindow button[itemId=frontCoverButton]': {
+                                click: this.front
+                            },
+                            'bookwindow button[itemId=backCoverButton]': {
+                                click: this.back
                             }
                         });
             },
@@ -63,7 +72,8 @@ Ext.define('BM.controller.BookWindowController', {
                                     bookId: form.down('hidden[name=bookId]').getValue(),
                                     autorId: form.down('autorCombo[name=authorId]').getValue(),
                                     idEditura: form.down('edituraCombo[name=idEditura]').getValue(),
-                                    frontCoverImage: Ext.ComponentQuery.query('image[itemId=frontCoverPreview]')[0].src
+                                    frontCoverImage: Ext.ComponentQuery.query('image[itemId=frontCoverPreview]')[0].src,
+                                    backCoverImage: Ext.ComponentQuery.query('image[itemId=backCoverPreview]')[0].src
                                 },
                                 success: function(form, action) {
                                     me.closeWindow(button);
@@ -85,8 +95,8 @@ Ext.define('BM.controller.BookWindowController', {
                 window.close();
             },
 
-            uploadFile: function(fileUploadField, value, eOpts) {
-                var form = fileUploadField.up('bookwindow').down('form[itemId=uploadform]');
+            uploadFrontCover: function(fileUploadField, value, eOpts) {
+                var form = fileUploadField.up('bookwindow').down('form[itemId=frontUploadform]');
                 if (form.isValid()) {
                     form.submit({
                                 url: 'books',
@@ -98,8 +108,7 @@ Ext.define('BM.controller.BookWindowController', {
                                 success: function(form, action) {
                                     var response = Ext.JSON.decode(action.response.responseText);
                                     var imageCanvas = Ext.ComponentQuery.query('image[itemId=frontCoverPreview]')[0];
-                                    // todo sa folosesc image de la sencha
-                                    imageCanvas.setSrc('covers/'+response.fileName);
+                                    imageCanvas.setSrc('covers/' + response.fileName);
                                 },
 
                                 failure: function(form, action) {
@@ -107,5 +116,38 @@ Ext.define('BM.controller.BookWindowController', {
                                 }
                             });
                 }
+            },
+            
+            uploadBackCover: function(fileUploadField, value, eOpts) {
+                var form = fileUploadField.up('bookwindow').down('form[itemId=backUploadform]');
+                if (form.isValid()) {
+                    form.submit({
+                                url: 'books',
+                                method: 'POST',
+                                params: {
+                                    event: 'upload-back-cover',
+                                    fileName: value
+                                },
+                                success: function(form, action) {
+                                    var response = Ext.JSON.decode(action.response.responseText);
+                                    var imageCanvas = Ext.ComponentQuery.query('image[itemId=backCoverPreview]')[0];
+                                    imageCanvas.setSrc('covers/' + response.fileName);
+                                },
+
+                                failure: function(form, action) {
+                                    createFormErrorWindow(action);
+                                }
+                            });
+                }
+            },            
+
+            back: function(button, e, eOpts) {
+                var panel = button.up('toolbar[itemId=coversToolbar]').up('panel[itemId=cardLayoutPanel]');
+                panel.getLayout().setActiveItem('backUploadform');
+            },
+
+            front: function(button, e, eOpts) {
+                var panel = button.up('toolbar[itemId=coversToolbar]').up('panel[itemId=cardLayoutPanel]');
+                panel.getLayout().setActiveItem('frontUploadform');
             }
         });
