@@ -30,7 +30,10 @@ Ext.define('BM.controller.BooksGridController', {
                                 click: this.delBook
                             },
                             'booksgrid textfield[name=searchField]': {
-                                change: this.searchBooks
+                                keydown: this.handleKeyDown
+                            },
+                            'booksgrid button[action=search]': {
+                                click: this.handleClick
                             }
                         });
             },
@@ -206,19 +209,33 @@ Ext.define('BM.controller.BooksGridController', {
                 }
             },
 
-            searchBooks: function(textfield, newValue, oldValue) {
+            handleKeyDown: function(textfield, event, opts) {
+                if (event.keyCode == Ext.EventObject.RETURN) {
+                    var grid = Ext.widget('booksgrid');
+                    var store = grid.getStore();
+                    this.searchBooks(store, textfield.getValue());
+                }
+            },
+
+            handleClick: function(button, event, opts) {
+                var parent = button.up('toolbar');
+                var searchField = parent.down('textfield[name=searchField]');
                 var grid = Ext.widget('booksgrid');
                 var store = grid.getStore();
+                this.searchBooks(store, searchField.getValue());
+            },
+
+            searchBooks: function(store, filteredValue) {
                 store.clearFilter(true);
                 store.filter([
                     {
                         filterFn: function(record) {
-                            if (Ext.isEmpty(newValue)) {
+                            if (Ext.isEmpty(filteredValue)) {
                                 return true;
                             }
                             var numeAutor = record.get('authorName');
                             var title = record.get('title');
-                            return numeAutor.indexOf(newValue) > -1 || title.indexOf(newValue) > -1;
+                            return numeAutor.indexOf(filteredValue) > -1 || title.indexOf(filteredValue) > -1;
                         }
                     }
                 ]);

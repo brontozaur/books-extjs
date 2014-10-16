@@ -16,30 +16,37 @@ Ext.define('BM.view.book.BooksGrid', {
                     xtype: 'toolbar',
                     items: [
                         {
+                        	xtype: 'button',
                             iconCls: 'icon-add',
                             text: 'Adaugare',
-                            action: 'add-book',
-                            scope: this
+                            action: 'add-book'
+                            
                         },
                         {
+                        	xtype: 'button',
                             iconCls: 'icon-mod',
                             text: 'Modificare',
                             disabled: true,
-                            action: 'mod-book',
-                            scope: this
+                            action: 'mod-book'
                         },
                         {
+                        	xtype: 'button',
                             iconCls: 'icon-delete',
                             text: 'Stergere',
                             disabled: true,
-                            action: 'del-book',
-                            scope: this
+                            action: 'del-book'
                         },
                         '->',
                         {
                             xtype: 'textfield',
                             name: 'searchField',
-                            emptyText: 'enter search term'
+                            emptyText: 'enter search term',
+                            enableKeyEvents: true
+                        },
+                        {
+                        	xtype:'button',
+                        	iconCls: 'icon-search',
+                        	action:'search'
                         }
                     ],
                     dock: 'top'
