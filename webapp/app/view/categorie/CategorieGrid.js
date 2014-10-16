@@ -1,7 +1,6 @@
 Ext.define('BM.view.categorie.CategorieGrid', {
             extend: 'Ext.grid.Panel',
             alias: 'widget.categoriegrid',
-            title: 'Categorii',
             selType: 'rowmodel',
             columnLines: true,
             store: 'CategorieStore',

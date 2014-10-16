@@ -1,7 +1,6 @@
 Ext.define('BM.view.book.BooksGrid', {
             extend: 'Ext.grid.Panel',
             alias: 'widget.booksgrid',
-            title: 'Lista carti',
             selType: 'rowmodel',
             columnLines: true,
             store: 'BookStore',
@@ -46,7 +45,8 @@ Ext.define('BM.view.book.BooksGrid', {
                         {
                         	xtype:'button',
                         	iconCls: 'icon-search',
-                        	action:'search'
+                        	action:'search',
+                        	text:'Cautare'
                         }
                     ],
                     dock: 'top'
