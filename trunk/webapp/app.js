@@ -8,7 +8,9 @@ Ext.application({
 
             controllers: [
                 'BooksGridController',
-                'EastRegionController',
+                'CategorieGridController',
+                'EdituraGridController',
+                'AutorGridController',
                 'BookWindowController',
                 'ErrorWindowController'
             ],

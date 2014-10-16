@@ -2,8 +2,10 @@ Ext.define('BM.view.Viewport', {
             extend: 'Ext.container.Viewport',
             requires: [
                 'Ext.layout.container.Border',
-                'BM.view.EastRegion',
-                'BM.view.book.BookZone'
+                'BM.view.book.BookZone',
+                'BM.view.editura.EdituraGrid',
+                'BM.view.autor.AutorGrid',
+                'BM.view.categorie.CategorieGrid'
             ],
             layout: 'border',
             items: [
@@ -16,20 +18,38 @@ Ext.define('BM.view.Viewport', {
                     html: 'Books Manager'
                 },
                 {
-                    xtype: 'bookzone',
-                    region: 'center'
-                },
-                {
-                    xtype: 'panel',
-                    region: 'east',
-                    width: '30%',
-                    collapseDirection: 'right',
-                    collapsible: true,
-                    split: true,
-                    title: 'Liste',
+                    xtype: 'tabpanel',
+                    region: 'center',
+                    plain: true,
+                    activeTab: 0,
                     items: [
                         {
-                            xtype: 'eastregion'
+                            title: 'Carti',
+                            layout:'fit',
+                            items: {
+                                xtype: 'bookzone'
+                            }
+                        },
+                        {
+                            title: 'Edituri',
+                            layout:'fit',
+                            items: {
+                                xtype: 'edituragrid'
+                            }
+                        },
+                         {
+                            title: 'Autori',
+                            layout:'fit',
+                            items: {
+                                xtype: 'autorgrid'
+                            }
+                        },
+                        {
+                            title: 'Categorii',
+                            layout:'fit',
+                            items: {
+                                xtype: 'categoriegrid'
+                            }
                         }
                     ]
                 },
