@@ -61,7 +61,7 @@ Ext.define('BM.controller.AutorGridController', {
                 var delButton = Ext.ComponentQuery.query('autorgrid button[action=del-autor]')[0];
                 delButton.disable();
                 var window = Ext.widget('autorwindow');
-                var selectionModel = button.up('eastregion').down('autorgrid').getSelectionModel();
+                var selectionModel = button.up('autorgrid').getSelectionModel();
                 if (!selectionModel.hasSelection) {
                     Ext.Msg.show({
                                 title: 'Autor neselectat',
@@ -146,6 +146,6 @@ Ext.define('BM.controller.AutorGridController', {
             },
 
             refreshAutorGrid: function(button, clickEvent, options) {
-                button.up('eastregion').down('autorgrid').getStore().reload();
+                button.up('autorgrid').getStore().reload();
             }
         });
