@@ -134,7 +134,7 @@
 <setting id="com.spket.js.formatter.brace_position_for_block" value="end_of_line"/>
 <setting id="com.spket.js.formatter.comment.format_header" value="false"/>
 <setting id="com.spket.js.formatter.insert_space_after_colon_in_field" value="insert"/>
-<setting id="com.spket.js.formatter.insert_space_before_colon_in_labeled_statement" value="insert"/>
+<setting id="com.spket.js.formatter.insert_space_before_colon_in_labeled_statement" value="do not insert"/>
 <setting id="com.spket.js.formatter.comment.line_length" value="160"/>
 <setting id="com.spket.js.formatter.indent_switchstatements_compare_to_switch" value="true"/>
 <setting id="com.spket.js.formatter.brace_position_for_enum_constant" value="end_of_line"/>
