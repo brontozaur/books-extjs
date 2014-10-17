@@ -61,7 +61,7 @@ Ext.define('BM.controller.EdituraGridController', {
                 var delButton = Ext.ComponentQuery.query('edituragrid button[action=del-editura]')[0];
                 delButton.disable();
                 var window = Ext.widget('editurawindow');
-                var selectionModel = button.up('eastregion').down('edituragrid').getSelectionModel();
+                var selectionModel = button.up('edituragrid').getSelectionModel();
                 if (!selectionModel.hasSelection) {
                     Ext.Msg.show({
                                 title: 'Editura neselectata',
@@ -146,6 +146,6 @@ Ext.define('BM.controller.EdituraGridController', {
             },
 
             refreshEdituraGrid: function(button, clickEvent, options) {
-                button.up('eastregion').down('edituragrid').getStore().reload();
+                button.up('edituragrid').getStore().reload();
             }
         });

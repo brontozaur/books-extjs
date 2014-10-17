@@ -61,7 +61,7 @@ Ext.define('BM.controller.CategorieGridController', {
                 var delButton = Ext.ComponentQuery.query('categoriegrid button[action=del-categorie]')[0];
                 delButton.disable();
                 var window = Ext.widget('categoriewindow');
-                var selectionModel = button.up('eastregion').down('categoriegrid').getSelectionModel();
+                var selectionModel = button.up('categoriegrid').getSelectionModel();
                 if (!selectionModel.hasSelection) {
                     Ext.Msg.show({
                                 title: 'Categorie neselectata',
@@ -146,6 +146,6 @@ Ext.define('BM.controller.CategorieGridController', {
             },
 
             refreshCategorieGrid: function(button, clickEvent, options) {
-                button.up('eastregion').down('categoriegrid').getStore().reload();
+                button.up('categoriegrid').getStore().reload();
             }
         });
