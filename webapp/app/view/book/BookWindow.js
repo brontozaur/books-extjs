@@ -202,18 +202,18 @@ Ext.define('BM.view.book.BookWindow', {
                                             },
                                             items: [
                                                 {
-                                                	xtype:'button',
-                                                	itemId:'frontCoverButton',
+                                                    xtype: 'button',
+                                                    itemId: 'frontCoverButton',
                                                     text: 'Front cover',
                                                     iconCls: 'icon-back'
                                                 },
                                                 '->',
                                                 {
-                                                	xtype:'button',
+                                                    xtype: 'button',
                                                     text: 'Back cover',
-                                                    itemId:'backCoverButton',
+                                                    itemId: 'backCoverButton',
                                                     iconCls: 'icon-forward',
-                                                    iconAlign:'right'
+                                                    iconAlign: 'right'
                                                 }
                                             ]
                                         }
@@ -241,7 +241,7 @@ Ext.define('BM.view.book.BookWindow', {
                                                     fieldLabel: 'Front cover',
                                                     width: 164,
                                                     buttonText: "Upload",
-                                                    buttonOnly:true,
+                                                    buttonOnly: true,
                                                     name: 'frontCoverUpload',
                                                     iconCls: 'icon-upload'
                                                 }
@@ -269,7 +269,7 @@ Ext.define('BM.view.book.BookWindow', {
                                                     fieldLabel: 'Back cover',
                                                     width: 164,
                                                     buttonText: "Upload",
-                                                    buttonOnly:true,
+                                                    buttonOnly: true,
                                                     name: 'backCoverUpload',
                                                     iconCls: 'icon-upload'
                                                 }
