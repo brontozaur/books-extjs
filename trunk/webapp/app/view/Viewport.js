@@ -22,8 +22,10 @@ Ext.define('BM.view.Viewport', {
                     region: 'center',
                     plain: true,
                     activeTab: 0,
+                    bodyStyle: 'border-top-style : none',
                     items: [
                         {
+                            xtype: 'panel',
                             title: 'Carti',
                             layout: 'border',
                             items: [
@@ -39,6 +41,7 @@ Ext.define('BM.view.Viewport', {
                             ]
                         },
                         {
+                            xtype: 'panel',
                             title: 'Edituri',
                             layout: 'fit',
                             items: {
@@ -46,6 +49,7 @@ Ext.define('BM.view.Viewport', {
                             }
                         },
                         {
+                            xtype: 'panel',
                             title: 'Autori',
                             layout: 'fit',
                             items: {
@@ -53,6 +57,7 @@ Ext.define('BM.view.Viewport', {
                             }
                         },
                         {
+                            xtype: 'panel',
                             title: 'Categorii',
                             layout: 'fit',
                             items: {
