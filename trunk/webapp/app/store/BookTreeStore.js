@@ -9,11 +9,5 @@ Ext.define('BM.store.BookTreeStore', {
                 api: {
                     read: 'books?event=get-books'
                 }
-            },
-
-            root: {
-                text: 'Root',
-                id: 'NULL',
-                expanded: true
             }
         });
