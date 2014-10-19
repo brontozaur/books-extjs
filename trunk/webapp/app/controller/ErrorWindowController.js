@@ -18,10 +18,10 @@ Ext.define('BM.controller.ErrorWindowController', {
             showDetails: function(button, clickEvent, options) {
                 var errorStackTraceField = Ext.ComponentQuery.query('errorwindow textarea[itemId=errorStackTrace]')[0];
                 var parent = errorStackTraceField.up('panel');
-                if (!parent.getCollapsed()){
-                	parent.collapse();
+                if (!parent.getCollapsed()) {
+                    parent.collapse();
                 } else {
-                	parent.expand();
+                    parent.expand();
                 }
             },
 

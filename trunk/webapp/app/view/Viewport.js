@@ -25,28 +25,28 @@ Ext.define('BM.view.Viewport', {
                     items: [
                         {
                             title: 'Carti',
-                            layout:'fit',
+                            layout: 'fit',
                             items: {
                                 xtype: 'bookzone'
                             }
                         },
                         {
                             title: 'Edituri',
-                            layout:'fit',
+                            layout: 'fit',
                             items: {
                                 xtype: 'edituragrid'
                             }
                         },
-                         {
+                        {
                             title: 'Autori',
-                            layout:'fit',
+                            layout: 'fit',
                             items: {
                                 xtype: 'autorgrid'
                             }
                         },
                         {
                             title: 'Categorii',
-                            layout:'fit',
+                            layout: 'fit',
                             items: {
                                 xtype: 'categoriegrid'
                             }

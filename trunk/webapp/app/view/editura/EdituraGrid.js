@@ -4,7 +4,7 @@ Ext.define('BM.view.editura.EdituraGrid', {
             selType: 'rowmodel',
             columnLines: true,
             store: 'EdituraStore',
-            flex:1,
+            flex: 1,
             dockedItems: [
                 {
                     xtype: 'toolbar',

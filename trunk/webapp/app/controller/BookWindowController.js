@@ -50,7 +50,7 @@ Ext.define('BM.controller.BookWindowController', {
                             },
                             'bookwindow filefield[name=backCoverUpload]': {
                                 change: this.uploadBackCover
-                            },                            
+                            },
                             'bookwindow button[itemId=frontCoverButton]': {
                                 click: this.front
                             },
@@ -117,7 +117,7 @@ Ext.define('BM.controller.BookWindowController', {
                             });
                 }
             },
-            
+
             uploadBackCover: function(fileUploadField, value, eOpts) {
                 var form = fileUploadField.up('bookwindow').down('form[itemId=backUploadform]');
                 if (form.isValid()) {
@@ -139,7 +139,7 @@ Ext.define('BM.controller.BookWindowController', {
                                 }
                             });
                 }
-            },            
+            },
 
             back: function(button, e, eOpts) {
                 var panel = button.up('toolbar[itemId=coversToolbar]').up('panel[itemId=cardLayoutPanel]');
