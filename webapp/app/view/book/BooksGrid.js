@@ -13,6 +13,7 @@ Ext.define('BM.view.book.BooksGrid', {
                 },
                 {
                     xtype: 'toolbar',
+                    border: false,
                     items: [
                         {
                             xtype: 'button',
