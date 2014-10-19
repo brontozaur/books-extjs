@@ -25,10 +25,18 @@ Ext.define('BM.view.Viewport', {
                     items: [
                         {
                             title: 'Carti',
-                            layout: 'fit',
-                            items: {
-                                xtype: 'bookzone'
-                            }
+                            layout: 'border',
+                            items: [
+                                {
+                                    xtype: 'container',
+                                    region: 'west',
+                                    width: '15%'
+                                },
+                                {
+                                    region: 'center',
+                                    xtype: 'bookzone'
+                                }
+                            ]
                         },
                         {
                             title: 'Edituri',
@@ -57,6 +65,7 @@ Ext.define('BM.view.Viewport', {
                     xtype: 'panel',
                     region: 'south',
                     html: 'Status for all books',
+                    border: false,
                     height: 30
                 }
             ]
