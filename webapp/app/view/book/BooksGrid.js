@@ -10,12 +10,12 @@ Ext.define('BM.view.book.BooksGrid', {
                     store: 'BookStore',
                     dock: 'bottom',
                     displayInfo: true,
-                    border: true
+                    border: false
                 },
                 {
                     xtype: 'toolbar',
-                    border: false,
                     dock: 'top',
+                    border: false,
                     items: [
                         {
                             xtype: 'button',

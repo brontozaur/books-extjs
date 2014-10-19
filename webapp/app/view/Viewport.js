@@ -23,19 +23,23 @@ Ext.define('BM.view.Viewport', {
                     region: 'center',
                     plain: true,
                     activeTab: 0,
-                    bodyStyle: 'border-top-style : none',
+                    bodyStyle: 'border-top-style : none;',
                     padding: '5 5 5 5',
                     items: [
                         {
                             xtype: 'panel',
                             title: 'Carti',
                             layout: 'border',
-                            padding: '0 1 1 1',
+                            padding: '0 2 2 2',
                             items: [
                                 {
                                     xtype: 'bookstree',
                                     region: 'west',
-                                    width: '15%'
+                                    width: '15%',
+                                    split: true,
+                                    collapsible: true,
+                                    headerPosition: 'top',
+                                    title: 'Autori'
                                 },
                                 {
                                     region: 'center',
@@ -45,7 +49,7 @@ Ext.define('BM.view.Viewport', {
                         },
                         {
                             xtype: 'panel',
-                            padding: '0 1 1 1',
+                            padding: '0 2 2 2',
                             title: 'Edituri',
                             layout: 'fit',
                             items: {
@@ -54,7 +58,7 @@ Ext.define('BM.view.Viewport', {
                         },
                         {
                             xtype: 'panel',
-                            padding: '0 1 1 1',
+                            padding: '0 2 2 2',
                             title: 'Autori',
                             layout: 'fit',
                             items: {
@@ -63,7 +67,7 @@ Ext.define('BM.view.Viewport', {
                         },
                         {
                             xtype: 'panel',
-                            padding: '0 1 1 1',
+                            padding: '0 2 2 2',
                             title: 'Categorii',
                             layout: 'fit',
                             items: {
