@@ -71,13 +71,6 @@ Ext.define('BM.view.Viewport', {
                             }
                         }
                     ]
-                },
-                {
-                    xtype: 'panel',
-                    region: 'south',
-                    html: 'Status for all books',
-                    border: false,
-                    height: 30
                 }
             ]
         });
