@@ -4,7 +4,6 @@ Ext.define('BM.view.categorie.CategorieGrid', {
             selType: 'rowmodel',
             columnLines: true,
             store: 'CategorieStore',
-            border: false,
             dockedItems: [
                 {
                     xtype: 'toolbar',

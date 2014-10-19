@@ -9,11 +9,13 @@ Ext.define('BM.view.book.BooksGrid', {
                     xtype: 'pagingtoolbar',
                     store: 'BookStore',
                     dock: 'bottom',
-                    displayInfo: true
+                    displayInfo: true,
+                    border: true
                 },
                 {
                     xtype: 'toolbar',
                     border: false,
+                    dock: 'top',
                     items: [
                         {
                             xtype: 'button',
@@ -49,8 +51,7 @@ Ext.define('BM.view.book.BooksGrid', {
                             action: 'search',
                             text: 'Cautare'
                         }
-                    ],
-                    dock: 'top'
+                    ]
                 }
             ],
 

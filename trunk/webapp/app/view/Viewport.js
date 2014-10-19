@@ -3,6 +3,7 @@ Ext.define('BM.view.Viewport', {
             requires: [
                 'Ext.layout.container.Border',
                 'BM.view.book.BookZone',
+                'BM.view.book.BooksTree',
                 'BM.view.editura.EdituraGrid',
                 'BM.view.autor.AutorGrid',
                 'BM.view.categorie.CategorieGrid'
@@ -23,14 +24,16 @@ Ext.define('BM.view.Viewport', {
                     plain: true,
                     activeTab: 0,
                     bodyStyle: 'border-top-style : none',
+                    padding: '5 5 5 5',
                     items: [
                         {
                             xtype: 'panel',
                             title: 'Carti',
                             layout: 'border',
+                            padding: '0 1 1 1',
                             items: [
                                 {
-                                    xtype: 'container',
+                                    xtype: 'bookstree',
                                     region: 'west',
                                     width: '15%'
                                 },
@@ -42,6 +45,7 @@ Ext.define('BM.view.Viewport', {
                         },
                         {
                             xtype: 'panel',
+                            padding: '0 1 1 1',
                             title: 'Edituri',
                             layout: 'fit',
                             items: {
@@ -50,6 +54,7 @@ Ext.define('BM.view.Viewport', {
                         },
                         {
                             xtype: 'panel',
+                            padding: '0 1 1 1',
                             title: 'Autori',
                             layout: 'fit',
                             items: {
@@ -58,6 +63,7 @@ Ext.define('BM.view.Viewport', {
                         },
                         {
                             xtype: 'panel',
+                            padding: '0 1 1 1',
                             title: 'Categorii',
                             layout: 'fit',
                             items: {
