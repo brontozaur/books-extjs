@@ -22,13 +22,6 @@
 	text-shadow: 0 1px 0 #fff;
 }
 
-.border-on-top-only {
-	border-bottom: 0px;
-	border-left: 0px;
-	border-right: 0px;
-	border-top-style: solid;
-}
-
 .icon-add {
 	background-image: url(images/add.png) !important;
 }

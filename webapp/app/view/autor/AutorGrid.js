@@ -4,7 +4,6 @@ Ext.define('BM.view.autor.AutorGrid', {
             selType: 'rowmodel',
             columnLines: true,
             store: 'AutorStore',
-            border: false,
 
             // plugins: [
             // Ext.create('Ext.grid.plugin.RowEditing', {

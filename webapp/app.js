@@ -8,6 +8,7 @@ Ext.application({
 
             controllers: [
                 'BooksGridController',
+                'BooksTreeController',
                 'CategorieGridController',
                 'EdituraGridController',
                 'AutorGridController',
