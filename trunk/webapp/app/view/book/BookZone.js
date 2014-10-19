@@ -6,6 +6,7 @@ Ext.define('BM.view.book.BookZone', {
                 'BM.view.book.BookInfo'
             ],
             layout: 'border',
+            border: false,
             items: [
                 {
                     xtype: 'booksgrid',
