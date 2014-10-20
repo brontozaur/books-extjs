@@ -3,5 +3,13 @@ Ext.define('BM.view.book.BooksTree', {
             alias: 'widget.bookstree',
             store: 'BooksTreeStore',
             displayField: 'treeItemName',
-            rootVisible: false
+            rootVisible: false,
+            tools: [
+                {
+                    type: 'refresh'
+                },
+                {
+                    type: 'search'
+                }
+            ]
         });

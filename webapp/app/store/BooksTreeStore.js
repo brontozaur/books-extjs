@@ -1,6 +1,8 @@
 Ext.define('BM.store.BooksTreeStore', {
             extend: 'Ext.data.TreeStore',
             model: 'BM.model.BooksTreeModel',
+            autoLoad: true,
+            autoSync: true,
             proxy: {
                 type: 'ajax',
                 url: 'books?event=get-tree&viewmode=byAutor',

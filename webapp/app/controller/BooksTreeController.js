@@ -34,7 +34,7 @@ Ext.define('BM.controller.BooksTreeController', {
                                 return true;
                             }
                             var numeAutor = record.get('authorName');
-                            return numeAutor.indexOf(treeItemValue) > -1;
+                            return numeAutor.indexOf(treeItemValue) === 0; //starts with this letter
                         }
                     }
                 ]);

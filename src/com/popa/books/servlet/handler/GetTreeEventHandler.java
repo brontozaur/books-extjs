@@ -31,11 +31,11 @@ public class GetTreeEventHandler extends EventHandler {
 							+ "(SELECT COUNT(1) FROM Book b WHERE b.idAutor = a.autorId) AS booksNumber "
 							+ "FROM Autor a GROUP BY firstLetter";
 					List<Object[]> lettersList = Database.getDataObject(sql);
-					for (Object data : lettersList) {
+					for (Object[] data : lettersList) {
 						LetterBean bean = new LetterBean();
 						String letter = String.valueOf(((Object[]) data)[0]);
-						final int howManyAutors = Integer.valueOf(String.valueOf(((Object[]) data)[1]));
-						final int howManyBooks = Integer.valueOf(String.valueOf(((Object[]) data)[2]));
+						final int howManyAutors = Integer.valueOf(String.valueOf(data[1]));
+						final int howManyBooks = Integer.valueOf(String.valueOf(data[2]));
 						bean.setHowManyAutors(howManyAutors);
 						bean.setHowManyBooks(howManyBooks);
 						bean.setLeaf(false);
@@ -47,13 +47,15 @@ public class GetTreeEventHandler extends EventHandler {
 						nodeList.add(bean);
 					}
 				} else {
-					String sql = "SELECT a.nume FROM Autor a where a.nume LIKE '" + nodeId + "%'";
+					String sql = "SELECT a.nume, (SELECT COUNT(1) FROM Book b WHERE b.idAutor = a.autorId) AS bookCount FROM Autor a where a.nume LIKE '" + nodeId + "%'";
 					List<Object[]> lettersList = Database.getDataObject(sql);
-					for (Object data : lettersList) {
+					for (Object[] data : lettersList) {
 						LetterBean bean = new LetterBean();
-						String numeAutor = String.valueOf(data);
+						String numeAutor = String.valueOf(data[0]);
+						final int howManyBooks = Integer.valueOf(String.valueOf(data[1]));
 						bean.setLeaf(true);
 						bean.setLoaded(true);
+						bean.setHowManyBooks(howManyBooks);
 						if (StringUtils.isEmpty(numeAutor)) {
 							numeAutor = Node.ALL;
 						}
