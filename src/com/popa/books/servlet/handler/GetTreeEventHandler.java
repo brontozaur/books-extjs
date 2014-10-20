@@ -26,13 +26,18 @@ public class GetTreeEventHandler extends EventHandler {
 			List<Node> nodeList = new ArrayList<Node>();
 			if ("byAutor".equals(request.getParameter("viewmode"))) {
 				if (StringUtils.isEmpty(nodeId)) {
-					String sql = "SELECT SUBSTRING(a.nume,1,1), COUNT(DISTINCT SUBSTRING(a.nume,1,1)) FROM Autor a GROUP BY SUBSTRING(a.nume,1,1)";
+					String sql = "SELECT SUBSTRING(a.nume,1,1) AS firstLetter, "
+							+ "(SELECT COUNT(1) FROM Autor a1 WHERE SUBSTRING(a1.nume,1,1) LIKE firstLetter) AS autorsNumber,"
+							+ "(SELECT COUNT(1) FROM Book b WHERE b.idAutor = a.autorId) AS booksNumber "
+							+ "FROM Autor a GROUP BY firstLetter";
 					List<Object[]> lettersList = Database.getDataObject(sql);
 					for (Object data : lettersList) {
 						LetterBean bean = new LetterBean();
 						String letter = String.valueOf(((Object[]) data)[0]);
-						final int size = Integer.valueOf(String.valueOf(((Object[]) data)[1]));
-						bean.setSize(size);
+						final int howManyAutors = Integer.valueOf(String.valueOf(((Object[]) data)[1]));
+						final int howManyBooks = Integer.valueOf(String.valueOf(((Object[]) data)[2]));
+						bean.setHowManyAutors(howManyAutors);
+						bean.setHowManyBooks(howManyBooks);
 						bean.setLeaf(false);
 						bean.setLoaded(false);
 						if (StringUtils.isEmpty(letter)) {
@@ -47,7 +52,6 @@ public class GetTreeEventHandler extends EventHandler {
 					for (Object data : lettersList) {
 						LetterBean bean = new LetterBean();
 						String numeAutor = String.valueOf(data);
-						bean.setSize(1);
 						bean.setLeaf(true);
 						bean.setLoaded(true);
 						if (StringUtils.isEmpty(numeAutor)) {
