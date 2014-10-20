@@ -5,6 +5,6 @@ Ext.define('BM.controller.BooksTreeController', {
             ],
 
             model: [
-                'BookModel'
+                'TreeModel'
             ]
         });

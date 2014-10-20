@@ -40,6 +40,8 @@ public class EventHandlerFactory {
             handler = new UploadFrontCoverEventHandler();
         } else if (Events.UPLOAD_BACK_COVER.equals(eventName)) {
             handler = new UploadBackCoverEventHandler();
+        } else if (Events.GET_TREE.equals(eventName)) {
+            handler = new GetTreeEventHandler();
         }
         if (handler == null) {
             throw new NullPointerException("no handler was found for event: " + eventName);
