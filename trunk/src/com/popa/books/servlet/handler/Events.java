@@ -20,4 +20,6 @@ public interface Events {
 
     String UPLOAD_FRONT_COVER = "upload-front-cover";
     String UPLOAD_BACK_COVER = "upload-back-cover";
+
+    String GET_TREE = "get-tree";
 }
