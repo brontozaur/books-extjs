@@ -17,12 +17,5 @@ Ext.define('BM.store.BooksTreeStore', {
                     property: 'name',
                     direction: 'ASC'
                 }
-            ],
-
-            listeners: {
-                beforeload: function(store, operation, eOpts) {
-                    var node = operation.node;
-                    operation.params.nodeId = node.get('name');
-                }
-            }
+            ]
         });
