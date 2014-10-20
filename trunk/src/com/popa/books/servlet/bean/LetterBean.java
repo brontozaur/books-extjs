@@ -5,7 +5,8 @@ public class LetterBean implements Node {
     private String name;
     private boolean leaf;
     private boolean loaded;
-    private int size;
+    private int howManyAutors;
+    private int howManyBooks;
 
     @Override
     public boolean isLeaf() {
@@ -25,19 +26,27 @@ public class LetterBean implements Node {
         this.name = name;
     }
 
-	public int getSize() {
-		return size;
-	}
-
-	public void setSize(int size) {
-		this.size = size;
-	}
-
 	public boolean isLoaded() {
 		return loaded;
 	}
 
 	public void setLoaded(boolean loaded) {
 		this.loaded = loaded;
+	}
+
+	public int getHowManyAutors() {
+		return howManyAutors;
+	}
+
+	public void setHowManyAutors(int howManyAutors) {
+		this.howManyAutors = howManyAutors;
+	}
+
+	public int getHowManyBooks() {
+		return howManyBooks;
+	}
+
+	public void setHowManyBooks(int howManyBooks) {
+		this.howManyBooks = howManyBooks;
 	}
 }
