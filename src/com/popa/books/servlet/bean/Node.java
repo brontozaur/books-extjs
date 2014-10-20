@@ -5,6 +5,8 @@ public interface Node {
     boolean isLeaf();
 
     String getName();
-
+    
+    boolean isLoaded();
+    
     String ALL = "#";
 }
