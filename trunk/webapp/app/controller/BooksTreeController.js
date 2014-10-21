@@ -13,6 +13,9 @@ Ext.define('BM.controller.BooksTreeController', {
                             'bookstree': {
                                 beforeload: this.loadParamsToRequest,
                                 itemclick: this.itemClick
+                            },
+                            'bookstree tool[itemId=refreshTool]': {
+                                click: this.refreshTree
                             }
                         });
             },
@@ -34,11 +37,15 @@ Ext.define('BM.controller.BooksTreeController', {
                                 return true;
                             }
                             var numeAutor = record.get('authorName');
-                            return numeAutor.indexOf(treeItemValue) === 0; //starts with this letter
+                            return numeAutor.indexOf(treeItemValue) === 0; // starts with this letter
                         }
                     }
                 ]);
                 clearInfoAreaFields();
                 enablebuttons(false);
+            },
+            
+            refreshTree: function(toolItem, event, eOpts) {
+                Ext.widget('bookstree').getStore().reload(); //TODO reload of the main letter tree + reload of the current node
             }
         });
