@@ -200,7 +200,7 @@ Ext.define('BM.controller.BooksGridController', {
                                 success: function(result, request) {
                                     clearInfoAreaFields();
                                     enablebuttons(false);
-                                    Ext.widget('booksgrid').getStore().load();
+                                    Ext.ComponentQuery.query('booksgrid')[0].getStore().load();
                                 },
                                 failure: function(result, request) {
                                     createErrorWindow(result);
@@ -211,7 +211,7 @@ Ext.define('BM.controller.BooksGridController', {
 
             handleKeyDown: function(textfield, event, opts) {
                 if (event.keyCode == Ext.EventObject.RETURN) {
-                    var grid = Ext.widget('booksgrid');
+                    var grid = Ext.ComponentQuery.query('booksgrid')[0];
                     var store = grid.getStore();
                     this.searchBooks(store, textfield.getValue());
                 }
@@ -220,7 +220,7 @@ Ext.define('BM.controller.BooksGridController', {
             handleClick: function(button, event, opts) {
                 var parent = button.up('toolbar');
                 var searchField = parent.down('textfield[name=searchField]');
-                var grid = Ext.widget('booksgrid');
+                var grid = Ext.ComponentQuery.query('booksgrid')[0];
                 var store = grid.getStore();
                 this.searchBooks(store, searchField.getValue());
             },

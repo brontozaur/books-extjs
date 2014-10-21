@@ -29,12 +29,12 @@ Ext.define('BM.controller.BooksTreeController', {
             loadParamsToRequest: function(store, operation, eOpts) {
                 var node = operation.node;
                 operation.params.nodeId = node.get('name');
-                operation.params.displayMode = Ext.widget('bookstree').displayMode;
+                operation.params.displayMode = Ext.ComponentQuery.query('bookstree')[0].displayMode;
             },
 
             itemClick: function(tree, recordItem, item, index, e, eOpts) {
                 var treeItemValue = recordItem.get('name');
-                var grid = Ext.widget('booksgrid');
+                var grid = Ext.ComponentQuery.query('booksgrid')[0];
                 var store = grid.getStore();
                 store.clearFilter(true);
                 store.filter([
@@ -62,7 +62,7 @@ Ext.define('BM.controller.BooksTreeController', {
             },
 
             changeView: function(toolItem, event, eOpts) {
-   				var tree = Ext.widget('bookstree');
+   				var tree = Ext.ComponentQuery.query('bookstree')[0];
    				if ('default' === tree.displayMode){
    					tree.displayMode = 'flat';
    				} else if ('flat' === tree.displayMode){
