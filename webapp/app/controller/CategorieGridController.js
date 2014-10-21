@@ -107,7 +107,7 @@ Ext.define('BM.controller.CategorieGridController', {
                                 scope: this,
                                 success: function(result, request) {
                                     enablebuttons(false);
-                                    Ext.widget('categoriegrid').getStore().load();
+                                    Ext.ComponentQuery.query('categoriegrid')[0].getStore().load();
                                 },
                                 failure: function(result, request) {
                                     createErrorWindow(result);
@@ -135,7 +135,7 @@ Ext.define('BM.controller.CategorieGridController', {
                                 success: function(form, action) {
                                     button.up('categoriewindow').close();
                                     enablebuttons(false);
-                                    Ext.widget('categoriegrid').getStore().load();
+                                    Ext.ComponentQuery.query('categoriegrid')[0].getStore().load();
                                 },
 
                                 failure: function(form, action) {

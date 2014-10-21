@@ -145,12 +145,13 @@ function getFirstExpandedNode(root) {
 }
 
 function refreshAutorTree() {
-    var tree = Ext.widget('bookstree');
+    var tree = Ext.ComponentQuery.query('bookstree')[0];
     if (!tree) {
     	return;
     }
     var store = tree.getStore();
     var expandedNode = getFirstExpandedNode(tree.getRootNode());
+//    tree.setRootNode(null);
     store.getRootNode().removeAll(); //TODO needs to be changed since multiple requests are executed!!!
     store.load();
     if (expandedNode) {
