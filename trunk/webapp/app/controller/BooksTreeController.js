@@ -19,6 +19,9 @@ Ext.define('BM.controller.BooksTreeController', {
                             },
                             'bookstree tool[itemId=addTool]': {
                                 click: this.addAuthor
+                            },
+                            'bookstree tool[itemId=toggleTool]': {
+                                click: this.changeView
                             }
                         });
             },
@@ -26,6 +29,7 @@ Ext.define('BM.controller.BooksTreeController', {
             loadParamsToRequest: function(store, operation, eOpts) {
                 var node = operation.node;
                 operation.params.nodeId = node.get('name');
+                operation.params.displayMode = Ext.widget('bookstree').displayMode;
             },
 
             itemClick: function(tree, recordItem, item, index, e, eOpts) {
@@ -49,11 +53,21 @@ Ext.define('BM.controller.BooksTreeController', {
             },
 
             refreshTree: function(toolItem, event, eOpts) {
-				refreshAutorTree();
+                refreshAutorTree();
             },
 
             addAuthor: function(toolItem, event, eOpts) {
                 var window = Ext.widget('autorwindow');
                 window.show();
+            },
+
+            changeView: function(toolItem, event, eOpts) {
+   				var tree = Ext.widget('bookstree');
+   				if ('default' === tree.displayMode){
+   					tree.displayMode = 'flat';
+   				} else if ('flat' === tree.displayMode){
+   					tree.displayMode = 'default';
+   				}
+   				refreshAutorTree();
             }
         });

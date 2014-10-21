@@ -4,14 +4,22 @@ Ext.define('BM.view.book.BooksTree', {
             store: 'BooksTreeStore',
             displayField: 'treeItemName',
             rootVisible: true,
+            displayMode: 'default', //possible modes: default and flat
             tools: [
-             {
+                {
                     type: 'plus',
-                    itemId: 'addTool'
+                    itemId: 'addTool',
+                    tooltip: 'Adauga autor'
                 },
                 {
                     type: 'refresh',
-                    itemId: 'refreshTool'
+                    itemId: 'refreshTool',
+                    tooltip: 'Refresh'
+                },
+                {
+                    type: 'toggle',
+                    itemId: 'toggleTool',
+                    tooltip: 'Schimba mod vizualizare'
                 }
             ]
         });

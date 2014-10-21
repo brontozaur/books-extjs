@@ -26,38 +26,55 @@ public class GetTreeEventHandler extends EventHandler {
             List<Node> nodeList = new ArrayList<Node>();
             LetterBean nonLetterBean = null;
             if ("byAutor".equals(request.getParameter("viewmode"))) {
+                final boolean isFlatMode = "flat".equals(request.getParameter("displayMode"));
                 if (StringUtils.isEmpty(nodeId)) {
-                    String sql = "SELECT SUBSTRING(a.nume,1,1) AS firstLetter, " + "(SELECT COUNT(1) FROM Autor a1 WHERE SUBSTRING(a1.nume,1,1) LIKE firstLetter) AS autorsNumber,"
-                            + "(SELECT COUNT(1) FROM Book b WHERE b.idAutor = a.autorId) AS booksNumber " + "FROM Autor a GROUP BY firstLetter";
-                    List<Object[]> lettersList = Database.getDataObject(sql);
-                    for (Object[] data : lettersList) {
-                        LetterBean bean = new LetterBean();
-                        String letter = String.valueOf(data[0]);
-                        final int howManyAutors = Integer.valueOf(String.valueOf(data[1]));
-                        final int howManyBooks = Integer.valueOf(String.valueOf(data[2]));
-                        bean.setHowManyAutors(howManyAutors);
-                        bean.setHowManyBooks(howManyBooks);
-                        bean.setLeaf(false);
-                        bean.setLoaded(false);
-                        if (StringUtils.isEmpty(letter) || !Character.isLetter(letter.charAt(0))) {
-                            letter = Node.ALL;
-                            if (nonLetterBean == null) {
-                                nonLetterBean = new LetterBean();
-                                nonLetterBean.setLeaf(false);
-                                nonLetterBean.setLoaded(false);
-                                nonLetterBean.setName(letter);
-                                nonLetterBean.setId(letter);
+                    if (!isFlatMode) {
+                        String sql = "SELECT SUBSTRING(a.nume,1,1) AS firstLetter, " + "(SELECT COUNT(1) FROM Autor a1 WHERE SUBSTRING(a1.nume,1,1) LIKE firstLetter) AS autorsNumber,"
+                                + "(SELECT COUNT(1) FROM Book b WHERE b.idAutor = a.autorId) AS booksNumber " + "FROM Autor a GROUP BY firstLetter";
+                        List<Object[]> lettersList = Database.getDataObject(sql);
+                        for (Object[] data : lettersList) {
+                            LetterBean bean = new LetterBean();
+                            String letter = String.valueOf(data[0]);
+                            final int howManyAutors = Integer.valueOf(String.valueOf(data[1]));
+                            final int howManyBooks = Integer.valueOf(String.valueOf(data[2]));
+                            bean.setHowManyAutors(howManyAutors);
+                            bean.setHowManyBooks(howManyBooks);
+                            bean.setLeaf(false);
+                            bean.setLoaded(false);
+                            if (StringUtils.isEmpty(letter) || !Character.isLetter(letter.charAt(0))) {
+                                letter = Node.ALL;
+                                if (nonLetterBean == null) {
+                                    nonLetterBean = new LetterBean();
+                                    nonLetterBean.setLeaf(false);
+                                    nonLetterBean.setLoaded(false);
+                                    nonLetterBean.setName(letter);
+                                    nonLetterBean.setId(letter);
+                                }
+                                nonLetterBean.setHowManyAutors(nonLetterBean.getHowManyAutors() + howManyAutors);
+                                nonLetterBean.setHowManyBooks(nonLetterBean.getHowManyBooks() + howManyBooks);
+                                continue;
                             }
-                            nonLetterBean.setHowManyAutors(nonLetterBean.getHowManyAutors() + howManyAutors);
-                            nonLetterBean.setHowManyBooks(nonLetterBean.getHowManyBooks() + howManyBooks);
-                            continue;
+                            bean.setName(letter.toUpperCase());
+                            bean.setId(letter);
+                            nodeList.add(bean);
                         }
-                        bean.setName(letter.toUpperCase());
-                        bean.setId(letter);
-                        nodeList.add(bean);
-                    }
-                    if (nonLetterBean != null) {
-                        nodeList.add(nonLetterBean);
+                        if (nonLetterBean != null) {
+                            nodeList.add(nonLetterBean);
+                        }
+                    } else {
+                        String sql = "SELECT a.nume, (SELECT COUNT(1) FROM Book b WHERE b.idAutor = a.autorId) AS bookCount FROM Autor a";
+                        List<Object[]> lettersList = Database.getDataObject(sql);
+                        for (Object[] data : lettersList) {
+                            LetterBean bean = new LetterBean();
+                            String numeAutor = String.valueOf(data[0]);
+                            final int howManyBooks = Integer.valueOf(String.valueOf(data[1]));
+                            bean.setLeaf(true);
+                            bean.setLoaded(true);
+                            bean.setHowManyBooks(howManyBooks);
+                            bean.setName(numeAutor);
+                            bean.setId(numeAutor);
+                            nodeList.add(bean);
+                        }
                     }
                 } else {
                     String where = "a.nume LIKE '" + nodeId + "%'";
