@@ -4,6 +4,10 @@ Ext.define('BM.view.book.BooksTree', {
             store: 'BooksTreeStore',
             displayField: 'treeItemName',
             rootVisible: false,
+//            loader: {
+//                autoLoad: true,
+//                url: 'books?event=get-tree&viewmode=byAutor'
+//            },
             tools: [
              {
                     type: 'plus',

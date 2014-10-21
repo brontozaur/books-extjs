@@ -21,8 +21,13 @@ Ext.define('BM.controller.BooksTreeController', {
             },
 
             loadParamsToRequest: function(store, operation, eOpts) {
-                var node = operation.node;
-                operation.params.nodeId = node.get('name');
+                if (!store.isRefreshTool) {
+                    var node = operation.node;
+                    operation.params.nodeId = node.get('name');
+                } else {
+                    var tree = Ext.widget('bookstree');
+//                    tree.getLoader().load(operation.node); //TODO
+                }
             },
 
             itemClick: function(tree, recordItem, item, index, e, eOpts) {
@@ -44,8 +49,11 @@ Ext.define('BM.controller.BooksTreeController', {
                 clearInfoAreaFields();
                 enablebuttons(false);
             },
-            
+
             refreshTree: function(toolItem, event, eOpts) {
-                Ext.widget('bookstree').getStore().reload(); //TODO reload of the main letter tree + reload of the current node
+                var store = Ext.widget('bookstree').getStore();
+                store.isRefreshTool = true;
+                store.reload(); // TODO reload of the main letter tree + reload of the current node
+                store.isRefreshTool = false;
             }
         });
