@@ -5,11 +5,17 @@ Ext.define('BM.view.book.BooksTree', {
             displayField: 'treeItemName',
             rootVisible: false,
             tools: [
-                {
-                    type: 'refresh'
+             {
+                    type: 'plus',
+                    itemId: 'expandTool'
+                },
+                 {
+                    type: 'minus',
+                    itemId: 'collapseTool'
                 },
                 {
-                    type: 'search'
+                    type: 'refresh',
+                    itemId: 'refreshTool'
                 }
             ]
         });
