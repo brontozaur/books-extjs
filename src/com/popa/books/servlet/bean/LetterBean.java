@@ -7,6 +7,7 @@ public class LetterBean implements Node {
     private boolean loaded;
     private int howManyAutors;
     private int howManyBooks;
+    private String id;
 
     @Override
     public boolean isLeaf() {
@@ -49,4 +50,12 @@ public class LetterBean implements Node {
 	public void setHowManyBooks(int howManyBooks) {
 		this.howManyBooks = howManyBooks;
 	}
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 }
