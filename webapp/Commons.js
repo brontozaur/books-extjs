@@ -151,7 +151,7 @@ function refreshAutorTree() {
     }
     var store = tree.getStore();
     var expandedNode = getFirstExpandedNode(tree.getRootNode());
-    store.getRootNode().removeAll();
+    store.getRootNode().removeAll(); //TODO needs to be changed since multiple requests are executed!!!
     store.load();
     if (expandedNode) {
         tree.expandPath('/root' + expandedNode.getPath());
