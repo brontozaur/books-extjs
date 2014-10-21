@@ -130,3 +130,30 @@ function createErrorWindow(response) {
     window.setStackTace('Cauza:\n-----------------\n' + errorRootCasue + '\n\nDetalii:\n-----------------\n' + errorStackTrace);
     window.show();
 }
+
+function getFirstExpandedNode(root) {
+    for (index in root.childNodes) {
+        var child = root.childNodes[index];
+        if (child.isExpanded()) {
+            var expandedChild = getFirstExpandedNode(child);
+            if (expandedChild) {
+                return expandedChild;
+            }
+            return child;
+        }
+    }
+}
+
+function refreshAutorTree() {
+    var tree = Ext.widget('bookstree');
+    if (!tree) {
+    	return;
+    }
+    var store = tree.getStore();
+    var expandedNode = getFirstExpandedNode(tree.getRootNode());
+    store.getRootNode().removeAll();
+    store.load();
+    if (expandedNode) {
+        tree.expandPath('/root' + expandedNode.getPath());
+    }
+}

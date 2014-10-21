@@ -108,6 +108,7 @@ Ext.define('BM.controller.AutorGridController', {
                                 success: function(result, request) {
                                     enablebuttons(false);
                                     Ext.widget('autorgrid').getStore().load();
+                                    refreshAutorTree();
                                 },
                                 failure: function(result, request) {
                                     createErrorWindow(result);
@@ -136,6 +137,7 @@ Ext.define('BM.controller.AutorGridController', {
                                     button.up('autorwindow').close();
                                     enablebuttons(false);
                                     Ext.widget('autorgrid').getStore().load();
+                                    refreshAutorTree();
                                 },
 
                                 failure: function(form, action) {
