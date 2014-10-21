@@ -5,7 +5,7 @@ Ext.define('BM.store.BooksTreeStore', {
             autoSync: true,
             proxy: {
                 type: 'ajax',
-                url: 'books?event=get-tree&viewmode=byAutor&displayMode=default',
+                url: 'books?event=get-tree&viewmode=byAutor&displayMode=flat',
                 reader: {
                     type: 'json',
                     method: 'POST'

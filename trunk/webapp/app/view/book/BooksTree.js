@@ -4,7 +4,7 @@ Ext.define('BM.view.book.BooksTree', {
             store: 'BooksTreeStore',
             displayField: 'treeItemName',
             rootVisible: true,
-            displayMode: 'default', //possible modes: default and flat
+            displayMode: 'flat', //possible modes: default and flat
             tools: [
                 {
                     type: 'plus',
