@@ -150,9 +150,11 @@ function refreshAutorTree() {
     	return;
     }
     var store = tree.getStore();
-    var expandedNode = getFirstExpandedNode(tree.getRootNode());
-//    tree.setRootNode(null);
-    store.getRootNode().removeAll(); //TODO needs to be changed since multiple requests are executed!!!
+    var expandedNode = null;
+    if (tree.displayMode === 'default') {
+        expandedNode = getFirstExpandedNode(tree.getRootNode());
+    }
+    store.getRootNode().removeAll();
     store.load();
     if (expandedNode) {
         tree.expandPath('/root' + expandedNode.getPath());
