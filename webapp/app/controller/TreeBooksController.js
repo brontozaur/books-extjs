@@ -1,27 +1,18 @@
-Ext.define('BM.controller.BooksTreeController', {
+Ext.define('BM.controller.TreeBooksController', {
             extend: 'Ext.app.Controller',
             stores: [
-                'BooksTreeStore'
+                'TreeBooksStore'
             ],
 
             model: [
-                'BooksTreeModel'
+                'TreeBooksModel'
             ],
 
             init: function() {
                 this.control({
-                            'bookstree': {
+                            'treebooks': {
                                 beforeload: this.loadParamsToRequest,
                                 itemclick: this.itemClick
-                            },
-                            'bookstree tool[itemId=refreshTool]': {
-                                click: this.refreshTree
-                            },
-                            'bookstree tool[itemId=addTool]': {
-                                click: this.addAuthor
-                            },
-                            'bookstree tool[itemId=toggleTool]': {
-                                click: this.changeView
                             }
                         });
             },
@@ -29,7 +20,7 @@ Ext.define('BM.controller.BooksTreeController', {
             loadParamsToRequest: function(store, operation, eOpts) {
                 var node = operation.node;
                 operation.params.nodeId = node.get('name');
-                operation.params.displayMode = Ext.ComponentQuery.query('bookstree')[0].displayMode;
+                operation.params.displayMode = Ext.ComponentQuery.query('treebooks')[0].displayMode;
             },
 
             itemClick: function(tree, recordItem, item, index, e, eOpts) {
@@ -50,24 +41,5 @@ Ext.define('BM.controller.BooksTreeController', {
                 ]);
                 clearInfoAreaFields();
                 enablebuttons(false);
-            },
-
-            refreshTree: function(toolItem, event, eOpts) {
-                refreshAutorTree();
-            },
-
-            addAuthor: function(toolItem, event, eOpts) {
-                var window = Ext.widget('autorwindow');
-                window.show();
-            },
-
-            changeView: function(toolItem, event, eOpts) {
-   				var tree = Ext.ComponentQuery.query('bookstree')[0];
-   				if ('default' === tree.displayMode){
-   					tree.displayMode = 'flat';
-   				} else if ('flat' === tree.displayMode){
-   					tree.displayMode = 'default';
-   				}
-   				refreshAutorTree();
             }
         });

@@ -3,10 +3,12 @@ Ext.define('BM.view.Viewport', {
             requires: [
                 'Ext.layout.container.Border',
                 'BM.view.book.BookZone',
-                'BM.view.book.BooksTree',
+                'BM.view.tree.TreeAutori',
+                'BM.view.tree.TreeBooks',
                 'BM.view.editura.EdituraGrid',
                 'BM.view.autor.AutorGrid',
-                'BM.view.categorie.CategorieGrid'
+                'BM.view.categorie.CategorieGrid',
+                'BM.view.tree.LeftTreeArea'
             ],
             layout: 'border',
             items: [
@@ -33,13 +35,9 @@ Ext.define('BM.view.Viewport', {
                             padding: '0 2 2 2',
                             items: [
                                 {
-                                    xtype: 'bookstree',
+                                    xtype: 'lefttree',
                                     region: 'west',
-                                    width: '15%',
-                                    split: true,
-                                    collapsible: true,
-                                    headerPosition: 'top',
-                                    title: 'Autori'
+                                    width: '15%'
                                 },
                                 {
                                     region: 'center',

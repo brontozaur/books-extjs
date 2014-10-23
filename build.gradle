@@ -3,3 +3,7 @@
 task calc(type:Exec) {
     executable 'calc'
 }
+
+task note(type:Exec) {
+    executable 'C:/Program Files (x86)/Notepad++/notepad++'
+}
