@@ -1,0 +1,7 @@
+apply plugin: 'eclipse'
+ 
+task hello(type:Exec) {
+//    workingDir 'src/main/webapp'
+    executable 'calc'
+    println "xxxx"
+}
