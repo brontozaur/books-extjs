@@ -1,6 +1,6 @@
-Ext.define('BM.store.BooksTreeStore', {
+Ext.define('BM.store.TreeAutoriStore', {
             extend: 'Ext.data.TreeStore',
-            model: 'BM.model.BooksTreeModel',
+            model: 'BM.model.TreeAutoriModel',
             autoLoad: true,
             proxy: {
                 type: 'ajax',

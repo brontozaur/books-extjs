@@ -60,6 +60,7 @@ public class BooksServlet extends HttpServlet {
 			response.addHeader(ResponseKey.ERROR_ROOT_CAUSE, handler.getErrorRootCause());
 			response.addHeader(ResponseKey.ERROR_STACKTRACE, handler.getErrorStackTrace());
 			response.sendError(HttpServletResponse.SC_NOT_ACCEPTABLE);
+			throw new ServletException(e);
 		}
 	}
 }

@@ -144,8 +144,8 @@ function getFirstExpandedNode(root) {
     }
 }
 
-function refreshAutorTree() {
-    var tree = Ext.ComponentQuery.query('bookstree')[0];
+function refreshLeftTree(widgetAlias) {
+    var tree = Ext.ComponentQuery.query(widgetAlias)[0];
     if (!tree) {
     	return;
     }

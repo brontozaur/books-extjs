@@ -1,6 +1,6 @@
 package com.popa.books.servlet.bean;
 
-public class LetterBean implements Node {
+public class AutorBean implements Node {
 
     private String name;
     private boolean leaf;

@@ -1,4 +1,4 @@
-Ext.define('BM.model.BooksTreeModel', {
+Ext.define('BM.model.TreeAutoriModel', {
             extend: 'Ext.data.Model',
             fields: [
                 'leaf',

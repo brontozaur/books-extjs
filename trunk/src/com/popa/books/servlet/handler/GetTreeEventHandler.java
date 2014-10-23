@@ -12,7 +12,8 @@ import org.apache.log4j.Logger;
 import com.google.gson.Gson;
 import com.popa.books.dao.Database;
 import com.popa.books.dao.DatabaseException;
-import com.popa.books.servlet.bean.LetterBean;
+import com.popa.books.servlet.bean.AutorBean;
+import com.popa.books.servlet.bean.BookBean;
 import com.popa.books.servlet.bean.Node;
 
 public class GetTreeEventHandler extends EventHandler {
@@ -24,8 +25,8 @@ public class GetTreeEventHandler extends EventHandler {
         try {
             final String nodeId = request.getParameter("nodeId");
             List<Node> nodeList = new ArrayList<Node>();
-            LetterBean nonLetterBean = null;
             if ("byAutor".equals(request.getParameter("viewmode"))) {
+                AutorBean nonLetterBean = null;
                 final boolean isFlatMode = "flat".equals(request.getParameter("displayMode"));
                 if (StringUtils.isEmpty(nodeId)) {
                     if (!isFlatMode) {
@@ -33,7 +34,7 @@ public class GetTreeEventHandler extends EventHandler {
                                 + "(SELECT COUNT(1) FROM Book b WHERE b.idAutor = a.autorId) AS booksNumber " + "FROM Autor a GROUP BY firstLetter";
                         List<Object[]> lettersList = Database.getDataObject(sql);
                         for (Object[] data : lettersList) {
-                            LetterBean bean = new LetterBean();
+                            AutorBean bean = new AutorBean();
                             String letter = String.valueOf(data[0]);
                             final int howManyAutors = Integer.valueOf(String.valueOf(data[1]));
                             final int howManyBooks = Integer.valueOf(String.valueOf(data[2]));
@@ -44,7 +45,7 @@ public class GetTreeEventHandler extends EventHandler {
                             if (StringUtils.isEmpty(letter) || !Character.isLetter(letter.charAt(0))) {
                                 letter = Node.ALL;
                                 if (nonLetterBean == null) {
-                                    nonLetterBean = new LetterBean();
+                                    nonLetterBean = new AutorBean();
                                     nonLetterBean.setLeaf(false);
                                     nonLetterBean.setLoaded(false);
                                     nonLetterBean.setName(letter);
@@ -65,7 +66,7 @@ public class GetTreeEventHandler extends EventHandler {
                         String sql = "SELECT a.nume, (SELECT COUNT(1) FROM Book b WHERE b.idAutor = a.autorId) AS bookCount FROM Autor a";
                         List<Object[]> lettersList = Database.getDataObject(sql);
                         for (Object[] data : lettersList) {
-                            LetterBean bean = new LetterBean();
+                            AutorBean bean = new AutorBean();
                             String numeAutor = String.valueOf(data[0]);
                             final int howManyBooks = Integer.valueOf(String.valueOf(data[1]));
                             bean.setLeaf(true);
@@ -88,12 +89,83 @@ public class GetTreeEventHandler extends EventHandler {
                     String sql = "SELECT a.nume, (SELECT COUNT(1) FROM Book b WHERE b.idAutor = a.autorId) AS bookCount FROM Autor a where " + where;
                     List<Object[]> lettersList = Database.getDataObject(sql);
                     for (Object[] data : lettersList) {
-                        LetterBean bean = new LetterBean();
+                        AutorBean bean = new AutorBean();
                         String numeAutor = String.valueOf(data[0]);
                         final int howManyBooks = Integer.valueOf(String.valueOf(data[1]));
                         bean.setLeaf(true);
                         bean.setLoaded(true);
                         bean.setHowManyBooks(howManyBooks);
+                        if (StringUtils.isEmpty(numeAutor)) {
+                            numeAutor = Node.ALL;
+                        }
+                        bean.setName(numeAutor);
+                        bean.setId(numeAutor);
+                        nodeList.add(bean);
+                    }
+                }
+            } else if ("byBooks".equals(request.getParameter("viewmode"))) {
+                BookBean nonLetterBean = null;
+                final boolean isFlatMode = "flat".equals(request.getParameter("displayMode"));
+                if (StringUtils.isEmpty(nodeId)) {
+                    if (!isFlatMode) {
+                        String sql = "SELECT SUBSTRING(b.title,1,1) AS firstLetter, (SELECT COUNT(1) FROM Book b1 WHERE SUBSTRING(b1.title,1,1) LIKE firstLetter) AS booksNumber"
+                                + " FROM Book b GROUP BY firstLetter";
+                        List<Object[]> lettersList = Database.getDataObject(sql);
+                        for (Object[] data : lettersList) {
+                            BookBean bean = new BookBean();
+                            String letter = String.valueOf(data[0]);
+                            final int howManyBooks = Integer.valueOf(String.valueOf(data[1]));
+                            bean.setHowManyBooks(howManyBooks);
+                            bean.setLeaf(false);
+                            bean.setLoaded(false);
+                            if (StringUtils.isEmpty(letter) || !Character.isLetter(letter.charAt(0))) {
+                                letter = Node.ALL;
+                                if (nonLetterBean == null) {
+                                    nonLetterBean = new BookBean();
+                                    nonLetterBean.setLeaf(false);
+                                    nonLetterBean.setLoaded(false);
+                                    nonLetterBean.setName(letter);
+                                    nonLetterBean.setId(letter);
+                                }
+                                nonLetterBean.setHowManyBooks(nonLetterBean.getHowManyBooks() + howManyBooks);
+                                continue;
+                            }
+                            bean.setName(letter.toUpperCase());
+                            bean.setId(letter);
+                            nodeList.add(bean);
+                        }
+                        if (nonLetterBean != null) {
+                            nodeList.add(nonLetterBean);
+                        }
+                    } else {
+                        String sql = "SELECT b.title FROM Book b";
+                        List<Object[]> lettersList = Database.getDataObject(sql);
+                        for (Object data : lettersList) {
+                            AutorBean bean = new AutorBean();
+                            String numeAutor = String.valueOf(data);
+                            bean.setLeaf(true);
+                            bean.setLoaded(true);
+                            bean.setName(numeAutor);
+                            bean.setId(numeAutor);
+                            nodeList.add(bean);
+                        }
+                    }
+                } else {
+                    String where = "b.title LIKE '" + nodeId + "%'";
+                    if (Node.ALL.equals(nodeId)) {
+                        where = "b.title NOT LIKE 'A%' AND b.title NOT LIKE 'B%' AND b.title NOT LIKE 'C%' AND b.title NOT LIKE 'D%' AND b.title NOT LIKE 'E%' AND b.title NOT LIKE 'F%' AND "
+                                + "b.title NOT LIKE 'G%' AND b.title NOT LIKE 'H%' AND b.title NOT LIKE 'I%' AND b.title NOT LIKE 'J%' AND b.title NOT LIKE 'K%' AND b.title NOT LIKE 'L%' AND "
+                                + "b.title NOT LIKE 'M%' AND b.title NOT LIKE 'N%' AND b.title NOT LIKE 'O%' AND b.title NOT LIKE 'P%' AND b.title NOT LIKE 'R%' AND b.title NOT LIKE 'S%' AND "
+                                + "b.title NOT LIKE 'T%' AND b.title NOT LIKE 'U%' AND b.title NOT LIKE 'W%' AND b.title NOT LIKE 'X%' AND b.title NOT LIKE 'W%' AND b.title NOT LIKE 'Y%' "
+                                + "AND b.title NOT LIKE 'Z%'";
+                    }
+                    String sql = "SELECT b.title FROM Book b where " + where;
+                    List<Object[]> lettersList = Database.getDataObject(sql);
+                    for (Object data : lettersList) {
+                        AutorBean bean = new AutorBean();
+                        String numeAutor = String.valueOf(data);
+                        bean.setLeaf(true);
+                        bean.setLoaded(true);
                         if (StringUtils.isEmpty(numeAutor)) {
                             numeAutor = Node.ALL;
                         }
