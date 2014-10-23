@@ -34,7 +34,7 @@ Ext.define('BM.controller.TreeBooksController', {
                             if (Ext.isEmpty(treeItemValue)) {
                                 return true;
                             }
-                            var numeAutor = record.get('authorName');
+                            var numeAutor = record.get('title');
                             return numeAutor.indexOf(treeItemValue) === 0; // starts with this letter
                         }
                     }
