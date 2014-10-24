@@ -1,5 +1,6 @@
 package com.popa.books.init;
 
+import java.io.InputStream;
 import java.util.Properties;
 
 import javax.servlet.ServletContext;
@@ -13,29 +14,31 @@ import com.popa.books.servlet.PropertyKeys;
 
 public class ApplicationInit {
 
-	public static Logger logger = Logger.getLogger(ApplicationInit.class);
+    public static Logger logger = Logger.getLogger(ApplicationInit.class);
 
-	private ApplicationInit() {
-	};
+    private ApplicationInit() {
+    };
 
-	public static void initialize(ServletContext appContext) throws ServletException {
-		LoggerMyWay.configure(LoggerMyWay.LOG_TXT, "admin", true);
-		BorgPersistence.getEntityManager();
-		loadPropertiesFile("config.properties");
-	}
+    public static void initialize(final ServletContext appContext) throws ServletException {
+        LoggerMyWay.configure(LoggerMyWay.LOG_TXT, "admin", true);
+        BorgPersistence.getEntityManager();
+        loadPropertiesFile("config.properties");
+    }
 
-	public static void shutdown() {
-		LoggerMyWay.shutDown();
-	}
+    public static void shutdown() {
+        LoggerMyWay.shutDown();
+    }
 
-	private static void loadPropertiesFile(String propFileName) {
-		Properties prop = new Properties();
-		try {
-			prop.load(Thread.currentThread().getContextClassLoader().getResourceAsStream("config.properties"));
-			System.setProperty(PropertyKeys.COVERS_DIR, prop.getProperty(PropertyKeys.COVERS_DIR));
-		} catch (Exception e) {
-			logger.error(e, e);
-		}
+    private static void loadPropertiesFile(final String propFileName) {
+        Properties prop = new Properties();
+        try {
+            InputStream is = Thread.currentThread().getContextClassLoader().getResourceAsStream("config.properties");
+            prop.load(is);
+            is.close();
+            System.setProperty(PropertyKeys.COVERS_DIR, prop.getProperty(PropertyKeys.COVERS_DIR));
+        } catch (Exception e) {
+            logger.error(e, e);
+        }
 
-	}
+    }
 }
