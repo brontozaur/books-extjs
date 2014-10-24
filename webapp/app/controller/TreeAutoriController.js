@@ -12,7 +12,9 @@ Ext.define('BM.controller.TreeAutoriController', {
                 this.control({
                             'treeautori': {
                                 beforeload: this.loadParamsToRequest,
-                                itemclick: this.itemClick
+                                itemclick: this.itemClick,
+                                itemcontextmenu: this.itemContextMenu,
+                                containercontextmenu: this.showMenu
                             }
                         });
             },
@@ -41,5 +43,53 @@ Ext.define('BM.controller.TreeAutoriController', {
                 ]);
                 clearInfoAreaFields();
                 enablebuttons(false);
+            },
+
+            showMenu: function(panel, event, options) {
+                event.stopEvent();
+                contextMenu.showAt(event.getXY());
+            },
+
+            itemContextMenu: function(xx, record, item, index, e, eOpts) {
+                e.stopEvent();
+                contextMenu.showAt(e.getXY());
             }
+        });
+
+var addAction = Ext.create('Ext.Action', {
+            iconCls: 'icon-add',
+            text: 'Adauga autor',
+            handler: function(widget, event) {
+                var window = Ext.widget('autorwindow');
+                window.show();
+            }
+        });
+
+var contextMenu = Ext.create('Ext.menu.Menu', {
+            items: [
+                addAction,
+                {
+                    text: 'Vizualizare...',
+                    menu: {
+                        items: [
+                            {
+                                text: 'Autori',
+                                checked: true,
+                                group: 'vizualizare',
+                                handler: function(widget, event) {
+                                    setActiveView();
+                                }
+                            },
+                            {
+                                text: 'Carti',
+                                checked: false,
+                                group: 'vizualizare',
+                                handler: function(widget, event) {
+                                    setActiveView();
+                                }
+                            }
+                        ]
+                    }
+                }
+            ]
         });
