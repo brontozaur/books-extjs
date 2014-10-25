@@ -6,11 +6,6 @@ Ext.define('BM.controller.BookWindowController', {
                 'EdituraStore'
             ],
 
-            model: [
-                'BookModel',
-                'EdituraModel'
-            ],
-
             views: [
                 'book.BookWindow',
                 'editura.EdituraWindow',

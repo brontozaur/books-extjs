@@ -7,10 +7,6 @@ Ext.define('BM.controller.AutorGridController', {
                 'AutorStore'
             ],
 
-            model: [
-                'AutorModel'
-            ],
-
             views: [
                 'autor.AutorWindow',
                 'ErrorWindow'
@@ -106,9 +102,8 @@ Ext.define('BM.controller.AutorGridController', {
                                 },
                                 scope: this,
                                 success: function(result, request) {
-                                    enablebuttons(false);
+                                    enablebuttonsAutor(false);
                                     Ext.ComponentQuery.query('autorgrid')[0].getStore().load();
-                                    refreshLeftTree('treeautori');
                                 },
                                 failure: function(result, request) {
                                     createErrorWindow(result);
@@ -135,9 +130,8 @@ Ext.define('BM.controller.AutorGridController', {
                                 },
                                 success: function(form, action) {
                                     button.up('autorwindow').close();
-                                    enablebuttons(false);
+                                    enablebuttonsAutor(false);
                                     Ext.ComponentQuery.query('autorgrid')[0].getStore().load();
-                                    refreshLeftTree('treeautori');
                                 },
 
                                 failure: function(form, action) {

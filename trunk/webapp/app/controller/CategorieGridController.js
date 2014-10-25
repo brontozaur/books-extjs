@@ -7,10 +7,6 @@ Ext.define('BM.controller.CategorieGridController', {
                 'CategorieStore'
             ],
 
-            model: [
-                'CategorieModel'
-            ],
-
             views: [
                 'categorie.CategorieWindow',
                 'ErrorWindow'
@@ -106,7 +102,7 @@ Ext.define('BM.controller.CategorieGridController', {
                                 },
                                 scope: this,
                                 success: function(result, request) {
-                                    enablebuttons(false);
+                                    enablebuttonsCategorie(false);
                                     Ext.ComponentQuery.query('categoriegrid')[0].getStore().load();
                                 },
                                 failure: function(result, request) {
@@ -134,7 +130,7 @@ Ext.define('BM.controller.CategorieGridController', {
                                 },
                                 success: function(form, action) {
                                     button.up('categoriewindow').close();
-                                    enablebuttons(false);
+                                    enablebuttonsCategorie(false);
                                     Ext.ComponentQuery.query('categoriegrid')[0].getStore().load();
                                 },
 

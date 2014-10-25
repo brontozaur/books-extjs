@@ -1,26 +1,37 @@
 Ext.define('BM.controller.TreeBooksController', {
-            extend: 'Ext.app.Controller',
+            extend: 'BM.controller.AbstractLeftTreeAreaController',
             stores: [
                 'TreeBooksStore'
             ],
 
-            model: [
-                'TreeBooksModel'
+            refs: [
+                {
+                    ref: 'tree',
+                    selector: 'treebooks'
+                },
+                {
+                    ref: 'leftTreeArea',
+                    selector: 'lefttree'
+                }
             ],
 
             init: function() {
+                var me = this;
                 this.control({
                             'treebooks': {
                                 beforeload: this.loadParamsToRequest,
-                                itemclick: this.itemClick
+                                itemclick: this.itemClick,
+                                itemcontextmenu: this.itemContextMenu,
+                                containercontextmenu: this.showMenu
                             }
                         });
+                me.callParent(arguments);
             },
 
             loadParamsToRequest: function(store, operation, eOpts) {
                 var node = operation.node;
                 operation.params.nodeId = node.get('name');
-                operation.params.displayMode = Ext.ComponentQuery.query('treebooks')[0].displayMode;
+                operation.params.displayMode = this.getTree().displayMode;
             },
 
             itemClick: function(tree, recordItem, item, index, e, eOpts) {
@@ -41,5 +52,37 @@ Ext.define('BM.controller.TreeBooksController', {
                 ]);
                 clearInfoAreaFields();
                 enablebuttons(false);
+            },
+            
+            add: function() {
+                var me = this;
+                if (me.getTree() === me.getActiveItem()) {
+                    var window = Ext.widget('bookwindow');
+                    window.show();
+                }
+            },
+
+            refreshTree: function() {
+                var me = this;
+                if (me.getTree() === me.getActiveItem()) {
+                    me.refreshTreeInternal();
+                }
+            },
+
+            changeView: function(toolItem, event, eOpts) {
+                var me = this;
+                if (me.getTree() === me.getActiveItem()) {
+                    me.changeViewInternal();
+                }
+            },
+
+            setActiveView: function(toolItem, event, eOpts) {
+                var me = this;
+                if (me.getTree() === me.getActiveItem()) {
+                    var treeArea = me.getLeftTreeArea();
+                    var cardLayout = treeArea.getLayout();
+                    cardLayout.setActiveItem('treeAutori');
+                    treeArea.setTitle('Grupare dupa autor');
+                }
             }
         });

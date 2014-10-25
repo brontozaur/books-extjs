@@ -4,12 +4,11 @@ Ext.define('BM.view.tree.LeftTreeArea', {
             layout: 'card',
             padding: '0 2 2 2',
             activeItem: 'treeAutori',
-            title: 'Autori',
+            title: 'Grupare dupa autori',
             split: true,
             collapsible: true,
             border: false,
             items: this.buildItems(),
-            dockedItems: this.buildDockedItems(),
             tools: [
                 {
                     type: 'plus',
@@ -38,34 +37,6 @@ function buildItems() {
         {
             xtype: 'treebooks',
             itemId: 'treeBooks'
-        }
-    ];
-}
-
-function buildDockedItems() {
-    return [
-        {
-            xtype: 'toolbar',
-            dock: 'bottom',
-            style: {
-                background: 'transparent'
-            },
-            items: [
-                {
-                    xtype: 'button',
-                    itemId: 'autoriButton',
-                    text: 'Autori',
-                    iconCls: 'icon-back'
-                },
-                '->',
-                {
-                    xtype: 'button',
-                    text: 'Carti',
-                    itemId: 'booksButton',
-                    iconCls: 'icon-forward',
-                    iconAlign: 'right'
-                }
-            ]
         }
     ];
 }
