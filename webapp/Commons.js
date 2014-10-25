@@ -71,42 +71,6 @@ function clearInfoAreaFields() {
     backLabel.setVisible(false);
 }
 
-function enablebuttonsAutor(enable) {
-    var modButton = Ext.ComponentQuery.query('autorgrid button[action=mod-autor]')[0];
-    var delButton = Ext.ComponentQuery.query('autorgrid button[action=del-autor]')[0];
-    if (enable) {
-        modButton.enable();
-        delButton.enable();
-    } else {
-        modButton.disable();
-        delButton.disable();
-    }
-}
-
-function enablebuttonsEditura(enable) {
-    var modButton = Ext.ComponentQuery.query('edituragrid button[action=mod-editura]')[0];
-    var delButton = Ext.ComponentQuery.query('edituragrid button[action=del-editura]')[0];
-    if (enable) {
-        modButton.enable();
-        delButton.enable();
-    } else {
-        modButton.disable();
-        delButton.disable();
-    }
-}
-
-function enablebuttonsCategorie(enable) {
-    var modButton = Ext.ComponentQuery.query('categoriegrid button[action=mod-categorie]')[0];
-    var delButton = Ext.ComponentQuery.query('categoriegrid button[action=del-categorie]')[0];
-    if (enable) {
-        modButton.enable();
-        delButton.enable();
-    } else {
-        modButton.disable();
-        delButton.disable();
-    }
-}
-
 function createFormErrorWindow(formAction) {
     var window = Ext.widget('errorwindow');
     var errorStackTrace = formAction.response.responseText;
@@ -144,69 +108,38 @@ function getFirstExpandedNode(root) {
     }
 }
 
-function refreshLeftTree(widgetAlias) {
-    var tree = Ext.ComponentQuery.query(widgetAlias)[0];
-    if (!tree) {
-        return;
-    }
-    var store = tree.getStore();
-    var expandedNode = null;
-    if (tree.displayMode === 'default') {
-        expandedNode = getFirstExpandedNode(tree.getRootNode());
-    }
-    store.getRootNode().removeAll();
-    store.load();
-    if (expandedNode) {
-        tree.expandPath('/root' + expandedNode.getPath());
-    }
-}
-
-function getActiveItemId() {
-    var treeArea = Ext.ComponentQuery.query('lefttree')[0];
-    return treeArea.getLayout().getActiveItem().itemId;
-}
-
-function changeView(toolItem, event, eOpts) {
-    var treeArea = Ext.ComponentQuery.query('lefttree')[0];
-    if (getActiveItemId() === 'treeAutori') {
-        var tree = Ext.ComponentQuery.query('treeautori')[0];
-        if ('default' === tree.displayMode) {
-            tree.displayMode = 'flat';
-        } else if ('flat' === tree.displayMode) {
-            tree.displayMode = 'default';
-        }
-        treeArea.setTitle('Autori');
-        refreshLeftTree('treeautori');
+function enablebuttonsAutor(enable) {
+    var modButton = Ext.ComponentQuery.query('autorgrid button[action=mod-autor]')[0];
+    var delButton = Ext.ComponentQuery.query('autorgrid button[action=del-autor]')[0];
+    if (enable) {
+        modButton.enable();
+        delButton.enable();
     } else {
-        var tree = Ext.ComponentQuery.query('treebooks')[0];
-        if ('default' === tree.displayMode) {
-            tree.displayMode = 'flat';
-        } else if ('flat' === tree.displayMode) {
-            tree.displayMode = 'default';
-        }
-        treeArea.setTitle('Carti');
-        refreshLeftTree('treebooks');
+        modButton.disable();
+        delButton.disable();
     }
 }
 
-function add(toolItem, event, eOpts) {
-    var window;
-    if (getActiveItemId() === 'treeAutori') {
-        window = Ext.widget('autorwindow');
+function enablebuttonsEditura(enable) {
+    var modButton = Ext.ComponentQuery.query('edituragrid button[action=mod-editura]')[0];
+    var delButton = Ext.ComponentQuery.query('edituragrid button[action=del-editura]')[0];
+    if (enable) {
+        modButton.enable();
+        delButton.enable();
     } else {
-        window = Ext.widget('bookwindow');
+        modButton.disable();
+        delButton.disable();
     }
-    window.show();
 }
 
-function setActiveView(toolItem, event, eOpts) {
-    var treeArea = Ext.ComponentQuery.query('lefttree')[0];
-    var cardLayout = treeArea.getLayout();
-    if (getActiveItemId() === 'treeAutori') {
-        cardLayout.setActiveItem('treeBooks');
-        treeArea.setTitle('Carti');
+function enablebuttonsCategorie(enable) {
+    var modButton = Ext.ComponentQuery.query('categoriegrid button[action=mod-categorie]')[0];
+    var delButton = Ext.ComponentQuery.query('categoriegrid button[action=del-categorie]')[0];
+    if (enable) {
+        modButton.enable();
+        delButton.enable();
     } else {
-        cardLayout.setActiveItem('treeAutori');
-        treeArea.setTitle('Autori');
+        modButton.disable();
+        delButton.disable();
     }
 }

@@ -1,15 +1,27 @@
 Ext.define('BM.controller.TreeAutoriController', {
-            extend: 'Ext.app.Controller',
+            extend: 'BM.controller.AbstractLeftTreeAreaController',
             stores: [
                 'TreeAutoriStore'
             ],
 
-            model: [
-                'TreeAutoriModel'
+            views: [
+                'tree.TreeAutori'
+            ],
+
+            refs: [
+                {
+                    ref: 'tree',
+                    selector: 'treeautori'
+                },
+                {
+                    ref: 'leftTreeArea',
+                    selector: 'lefttree'
+                }
             ],
 
             init: function() {
-                this.control({
+                var me = this;
+                me.control({
                             'treeautori': {
                                 beforeload: this.loadParamsToRequest,
                                 itemclick: this.itemClick,
@@ -17,12 +29,13 @@ Ext.define('BM.controller.TreeAutoriController', {
                                 containercontextmenu: this.showMenu
                             }
                         });
+                me.callParent(arguments);
             },
 
             loadParamsToRequest: function(store, operation, eOpts) {
                 var node = operation.node;
                 operation.params.nodeId = node.get('name');
-                operation.params.displayMode = Ext.ComponentQuery.query('treeautori')[0].displayMode;
+                operation.params.displayMode = this.getTree().displayMode;
             },
 
             itemClick: function(tree, recordItem, item, index, e, eOpts) {
@@ -42,54 +55,42 @@ Ext.define('BM.controller.TreeAutoriController', {
                     }
                 ]);
                 clearInfoAreaFields();
-                enablebuttons(false);
+                enablebuttonsAutor(false);
             },
 
-            showMenu: function(panel, event, options) {
-                event.stopEvent();
-                contextMenu.showAt(event.getXY());
-            },
-
-            itemContextMenu: function(xx, record, item, index, e, eOpts) {
-                e.stopEvent();
-                contextMenu.showAt(e.getXY());
-            }
-        });
-
-var addAction = Ext.create('Ext.Action', {
-            iconCls: 'icon-add',
-            text: 'Adauga autor',
-            handler: function(widget, event) {
-                var window = Ext.widget('autorwindow');
-                window.show();
-            }
-        });
-
-var contextMenu = Ext.create('Ext.menu.Menu', {
-            items: [
-                addAction,
-                {
-                    text: 'Vizualizare...',
-                    menu: {
-                        items: [
-                            {
-                                text: 'Autori',
-                                checked: true,
-                                group: 'vizualizare',
-                                handler: function(widget, event) {
-                                    setActiveView();
-                                }
-                            },
-                            {
-                                text: 'Carti',
-                                checked: false,
-                                group: 'vizualizare',
-                                handler: function(widget, event) {
-                                    setActiveView();
-                                }
-                            }
-                        ]
-                    }
+            add: function() {
+                var me = this;
+                if (me.getTree() === me.getActiveItem()) {
+                    var window = Ext.widget('autorwindow');
+                    window.show();
                 }
-            ]
+            },
+
+            refreshTree: function() {
+                var me = this;
+                if (me.getTree() === me.getActiveItem()) {
+                    me.refreshTreeInternal();
+                }
+            },
+
+            changeView: function(toolItem, event, eOpts) {
+                var me = this;
+                if (me.getTree() === me.getActiveItem()) {
+                    me.changeViewInternal();
+                }
+            },
+
+            setActiveView: function() {
+                alert(this.getActiveView().id);
+            },
+
+            setActiveView: function(toolItem, event, eOpts) {
+                var me = this;
+                if (me.getTree() === me.getActiveItem()) {
+                    var treeArea = me.getLeftTreeArea();
+                    var cardLayout = treeArea.getLayout();
+                    cardLayout.setActiveItem('treeBooks');
+                    treeArea.setTitle('Grupare dupa carte');
+                }
+            }
         });

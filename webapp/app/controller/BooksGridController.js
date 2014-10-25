@@ -4,10 +4,6 @@ Ext.define('BM.controller.BooksGridController', {
                 'BookStore'
             ],
 
-            model: [
-                'BookModel'
-            ],
-
             views: [
                 'book.BooksGrid',
                 'book.BookWindow'

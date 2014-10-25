@@ -7,10 +7,6 @@ Ext.define('BM.controller.EdituraGridController', {
                 'EdituraStore'
             ],
 
-            model: [
-                'EdituraModel'
-            ],
-
             views: [
                 'editura.EdituraWindow',
                 'ErrorWindow'
@@ -106,7 +102,7 @@ Ext.define('BM.controller.EdituraGridController', {
                                 },
                                 scope: this,
                                 success: function(result, request) {
-                                    enablebuttons(false);
+                                    enablebuttonsEditura(false);
                                     Ext.ComponentQuery.query('edituragrid')[0].getStore().load();
                                 },
                                 failure: function(result, request) {
@@ -134,7 +130,7 @@ Ext.define('BM.controller.EdituraGridController', {
                                 },
                                 success: function(form, action) {
                                     button.up('editurawindow').close();
-                                    enablebuttons(false);
+                                    enablebuttonsEditura(false);
                                     Ext.ComponentQuery.query('edituragrid')[0].getStore().load();
                                 },
 
