@@ -20,15 +20,15 @@ public class UploadBackCoverEventHandler extends EventHandler {
 	public String handleEvent(final HttpServletRequest request) throws ServletException {
 		try {
 			String extjsFilePath = RequestUtils.getString(request, "fileName"); //usually c:\fakepath/filename.extension
-			String fileName = extjsFilePath.substring(extjsFilePath.lastIndexOf(File.separator)+1);
+            String fileName = extjsFilePath.substring(extjsFilePath.lastIndexOf("\\") + 1);
 			byte[] frontCover = RequestUtils.getByteArray(request, "backCoverUpload");
-			File dir = new File(System.getProperty(PropertyKeys.COVERS_DIR));
+            File dir = new File(File.listRoots()[0] + System.getProperty(PropertyKeys.COVERS_DIR));
 			if (!dir.exists() || !dir.isDirectory()){
 			    if (!dir.mkdirs()){
 			        throw new ServletException("Cannot create dir: "+System.getProperty(PropertyKeys.COVERS_DIR));
 			    }
 			}
-			File serverOut = new File(System.getProperty(PropertyKeys.COVERS_DIR)+fileName);
+            File serverOut = new File(dir.getAbsolutePath() + File.separator + fileName);
 			FileOutputStream fso = new FileOutputStream(serverOut);
 			fso.write(frontCover);
 			fso.close();
