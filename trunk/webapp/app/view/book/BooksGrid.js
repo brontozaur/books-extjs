@@ -85,7 +85,8 @@ Ext.define('BM.view.book.BooksGrid', {
                         dataIndex: 'dataAparitie',
                         flex: 1,
                         editor: 'datefield',
-                        renderer: Ext.util.Format.dateRenderer('m/d/Y')
+                        renderer: Ext.util.Format.dateRenderer('m/d/Y'),
+                        hidden: true
                     },
                     {
                         header: 'Titlu original',
@@ -100,7 +101,8 @@ Ext.define('BM.view.book.BooksGrid', {
                     {
                         header: 'Serie',
                         dataIndex: 'serie',
-                        flex: 1
+                        flex: 1,
+                        hidden: true
                     },
                     {
                         header: 'Nr pagini',
@@ -120,12 +122,14 @@ Ext.define('BM.view.book.BooksGrid', {
                     {
                         header: 'Latime (mm)',
                         dataIndex: 'width',
-                        flex: 1
+                        flex: 1,
+                        hidden: true
                     },
                     {
                         header: 'Inaltime (mm)',
                         dataIndex: 'height',
-                        flex: 1
+                        flex: 1,
+                        hidden: true
                     },
                     {
                         xtype: 'booleancolumn',
@@ -138,12 +142,14 @@ Ext.define('BM.view.book.BooksGrid', {
                     {
                         header: 'Front cover',
                         dataIndex: 'frontCoverPath',
-                        flex: 1
+                        flex: 1,
+                         hidden: true
                     },
                     {
                         header: 'Back cover',
                         dataIndex: 'backCoverPath',
-                        flex: 1
+                        flex: 1,
+                        hidden: true
                     }
                 ];
             }

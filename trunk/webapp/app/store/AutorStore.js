@@ -8,5 +8,11 @@ Ext.define('BM.store.AutorStore', {
                 api: {
                     read: 'books?event=get-autors'
                 }
-            }
+            },
+            sorters: [
+                {
+                    property: 'nume',
+                    direction: 'ASC'
+                }
+            ]
         });

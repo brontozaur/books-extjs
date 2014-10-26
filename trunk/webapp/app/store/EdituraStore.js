@@ -8,5 +8,11 @@ Ext.define('BM.store.EdituraStore', {
                 api: {
                     read: 'books?event=get-edituri'
                 }
-            }
+            },
+            sorters: [
+                {
+                    property: 'numeEditura',
+                    direction: 'ASC'
+                }
+            ]
         });
