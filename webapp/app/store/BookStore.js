@@ -1,4 +1,4 @@
-var itemsPerPage = 50;
+var itemsPerPage = 1;
 Ext.define('BM.store.BookStore', {
             extend: 'Ext.data.Store',
             model: 'BM.model.BookModel',
@@ -8,7 +8,6 @@ Ext.define('BM.store.BookStore', {
                     limit: itemsPerPage
                 }
             },
-            autoSync: true, // this can cause performance issues!
             pageSize: itemsPerPage,
 
             proxy: {
@@ -16,6 +15,18 @@ Ext.define('BM.store.BookStore', {
                 url: 'books',
                 api: {
                     read: 'books?event=get-books'
+                }
+            },
+            sorters: [
+                {
+                    property: 'title',
+                    direction: 'ASC'
+                }
+            ],
+
+            listeners: {
+                load: function(store, records, success, operation, options) {
+//                    debugger;
                 }
             }
         });

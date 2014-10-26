@@ -2,6 +2,9 @@ Ext.define('BM.model.EdituraModel', {
             extend: 'Ext.data.Model',
             fields: [
                 'idEditura',
-                'numeEditura'
+                {
+                    name: 'numeEditura',
+                    type: 'string'
+                }
             ]
         });

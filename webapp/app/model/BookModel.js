@@ -3,7 +3,10 @@ Ext.define('BM.model.BookModel', {
             fields: [
                 'bookId',
                 'author',
-                'title',
+                {
+                    name: 'title',
+                    type: 'string'
+                },
                 'originalTitle',
                 'frontCoverPath',
                 'backCoverPath',

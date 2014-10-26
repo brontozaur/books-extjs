@@ -1,12 +1,13 @@
+Ext.require([
+                'BM.view.autor.AutorCombo',
+                'BM.view.editura.EdituraCombo',
+                'BM.view.categorie.CategorieCombo'
+]);
+
 Ext.define('BM.view.book.BookWindow', {
             extend: 'Ext.window.Window',
             alias: 'widget.bookwindow',
             title: 'Editare detalii carte',
-            requires: [
-                'BM.view.autor.AutorCombo',
-                'BM.view.editura.EdituraCombo',
-                'BM.view.categorie.CategorieCombo'
-            ],
             minWidth: 600,
             layout: 'fit',
             items: [

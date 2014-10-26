@@ -15,7 +15,7 @@ Ext.define('BM.store.TreeAutoriStore', {
             },
             sorters: [
                 {
-                    property: 'name',
+                    property: 'treeItemName',
                     direction: 'ASC'
                 }
             ]
