@@ -16,6 +16,10 @@ Ext.define('BM.controller.TreeAutoriController', {
                 {
                     ref: 'leftTreeArea',
                     selector: 'lefttree'
+                },
+                {
+                    ref: 'changeViewButton',
+                    selector: 'lefttree tool[itemId=toggleTool]'
                 }
             ],
 
@@ -91,6 +95,7 @@ Ext.define('BM.controller.TreeAutoriController', {
                     var cardLayout = treeArea.getLayout();
                     cardLayout.setActiveItem('treeBooks');
                     treeArea.setTitle('Grupare dupa carte');
+                     this.getChangeViewButton().setVisible(false);
                 }
             }
         });
