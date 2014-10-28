@@ -4,5 +4,11 @@ Ext.define('BM.view.autor.AutorCombo', {
             model: 'BM.model.AutorModel',
             displayField: 'nume',
             valueField: 'autorId',
-            store: 'AutorStore'
+            store: 'AutorStore',
+            queryMode: 'local',
+            listeners: {
+                render: function(combo, options) {
+                    combo.getStore().load();
+                }
+            }
         });

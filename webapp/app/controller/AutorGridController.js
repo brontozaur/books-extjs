@@ -16,7 +16,8 @@ Ext.define('BM.controller.AutorGridController', {
                 this.control({
                             'autorgrid': {
                                 selectionchange: this.changeselectionAutor,
-                                celldblclick: this.celldblclickAutor
+                                celldblclick: this.celldblclickAutor,
+                                render: this.refreshAutorGrid
                             },
                             'autorgrid button[action=add-autor]': {
                                 click: this.addAutor

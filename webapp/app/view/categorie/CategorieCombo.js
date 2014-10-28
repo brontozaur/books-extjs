@@ -4,5 +4,11 @@ Ext.define('BM.view.categorie.CategorieCombo', {
             model: 'BM.model.CategorieModel',
             displayField: 'numeCategorie',
             valueField: 'idCategorie',
-            store: 'CategorieStore'
+            queryMode: 'local',
+            store: 'CategorieStore',
+            listeners: {
+                render: function(combo, options) {
+                    combo.getStore().load();
+                }
+            }
         });

@@ -143,3 +143,8 @@ function enablebuttonsCategorie(enable) {
         delButton.disable();
     }
 }
+
+//this is how you can construct a singleton store, if required
+function getCategorieStoreSingleton(){
+    return Ext.StoreMgr.lookup('categorieStore') || Ext.create('BM.store.CategorieStore');
+}
