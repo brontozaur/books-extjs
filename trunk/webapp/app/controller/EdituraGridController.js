@@ -16,7 +16,8 @@ Ext.define('BM.controller.EdituraGridController', {
                 this.control({
                             'edituragrid': {
                                 selectionchange: this.changeselectionEditura,
-                                celldblclick: this.celldblclickEditura
+                                celldblclick: this.celldblclickEditura,
+                                render: this.refreshEdituraGrid
                             },
                             'edituragrid button[action=add-editura]': {
                                 click: this.addEditura
@@ -142,6 +143,6 @@ Ext.define('BM.controller.EdituraGridController', {
             },
 
             refreshEdituraGrid: function(button, clickEvent, options) {
-                button.up('edituragrid').getStore().reload();
+                this.getEdituraStoreStore().reload();
             }
         });

@@ -1,8 +1,6 @@
 Ext.define('BM.store.EdituraStore', {
             extend: 'Ext.data.Store',
             model: 'BM.model.EdituraModel',
-            autoLoad: true,
-            autoSync: true,
             proxy: {
                 type: 'ajax',
                 api: {
@@ -14,5 +12,10 @@ Ext.define('BM.store.EdituraStore', {
                     property: 'numeEditura',
                     direction: 'ASC'
                 }
-            ]
+            ],
+            listeners: {
+                load: function(store, records, success, operation, options) {
+                    console.log('store <<' + store.storeId + '>> was fully reloaded');
+                }
+            }
         });

@@ -16,7 +16,8 @@ Ext.define('BM.controller.CategorieGridController', {
                 this.control({
                             'categoriegrid': {
                                 selectionchange: this.changeselectionCategorie,
-                                celldblclick: this.celldblclickCategorie
+                                celldblclick: this.celldblclickCategorie,
+                                render: this.refreshCategorieGrid
                             },
                             'categoriegrid button[action=add-categorie]': {
                                 click: this.addCategorie
@@ -142,6 +143,6 @@ Ext.define('BM.controller.CategorieGridController', {
             },
 
             refreshCategorieGrid: function(button, clickEvent, options) {
-                button.up('categoriegrid').getStore().reload();
+                this.getCategorieStoreStore().load();
             }
         });

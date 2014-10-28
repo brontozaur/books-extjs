@@ -1,8 +1,6 @@
 Ext.define('BM.store.AutorStore', {
             extend: 'Ext.data.Store',
             model: 'BM.model.AutorModel',
-            autoLoad: true,
-            autoSync: true,
             proxy: {
                 type: 'ajax',
                 api: {
@@ -14,5 +12,10 @@ Ext.define('BM.store.AutorStore', {
                     property: 'nume',
                     direction: 'ASC'
                 }
-            ]
+            ],
+            listeners: {
+                load: function(store, records, success, operation, options) {
+                    console.log('store <<' + store.storeId + '>> was fully reloaded');
+                }
+            }
         });
