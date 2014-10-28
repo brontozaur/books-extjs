@@ -143,6 +143,6 @@ Ext.define('BM.controller.AutorGridController', {
             },
 
             refreshAutorGrid: function(button, clickEvent, options) {
-                button.up('autorgrid').getStore().reload();
+                this.getAutorStoreStore().reload();
             }
         });
