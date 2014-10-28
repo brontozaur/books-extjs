@@ -9,13 +9,10 @@ Ext.define('BM.model.TreeBooksModel', {
                     type: 'string',
                     convert: function(newValue, record) {
                         var howManyBooks = record.get('howManyBooks');
-                        if (Ext.isEmpty(record.get('leaf')) || record.get('leaf') === false) {
-                            var letter = record.get('name');
-                            var carte = howManyBooks === 1 ? 'carte' : 'carti';
+                        var letter = record.get('name');
+                        var carte = howManyBooks === 1 ? 'carte' : 'carti';
 
-                            return letter + ' (' + howManyBooks + ' ' + carte + ')';
-                        }
-                        return record.get('name');
+                        return letter + ' (' + howManyBooks + ' ' + carte + ')';
                     }
                 }
             ]
