@@ -12,7 +12,7 @@ import org.apache.log4j.Logger;
 import com.google.gson.Gson;
 import com.popa.books.dao.Database;
 import com.popa.books.dao.DatabaseException;
-import com.popa.books.servlet.bean.AutorBean;
+import com.popa.books.servlet.bean.AutorNode;
 import com.popa.books.servlet.bean.Node;
 
 public class GetTreeAutoriEventHandler extends EventHandler {
@@ -24,7 +24,7 @@ public class GetTreeAutoriEventHandler extends EventHandler {
         try {
             final String nodeId = request.getParameter("nodeId");
             List<Node> nodeList = new ArrayList<Node>();
-            AutorBean nonLetterBean = null;
+            AutorNode nonLetterBean = null;
             final boolean isFlatMode = "flat".equals(request.getParameter("displayMode"));
             if (StringUtils.isEmpty(nodeId)) {
                 if (!isFlatMode) {
@@ -33,7 +33,7 @@ public class GetTreeAutoriEventHandler extends EventHandler {
                             + "(SELECT COUNT(1) FROM Book b WHERE b.idAutor = a.autorId) AS booksNumber " + "FROM Autor a GROUP BY firstLetter";
                     List<Object[]> lettersList = Database.getDataObject(sql);
                     for (Object[] data : lettersList) {
-                        AutorBean bean = new AutorBean();
+                        AutorNode bean = new AutorNode();
                         String letter = String.valueOf(data[0]);
                         final int howManyAutors = Integer.valueOf(String.valueOf(data[1]));
                         final int howManyBooks = Integer.valueOf(String.valueOf(data[2]));
@@ -44,7 +44,7 @@ public class GetTreeAutoriEventHandler extends EventHandler {
                         if (StringUtils.isEmpty(letter) || !Character.isLetter(letter.charAt(0))) {
                             letter = Node.ALL;
                             if (nonLetterBean == null) {
-                                nonLetterBean = new AutorBean();
+                                nonLetterBean = new AutorNode();
                                 nonLetterBean.setLeaf(false);
                                 nonLetterBean.setLoaded(false);
                                 nonLetterBean.setName(letter);
@@ -65,7 +65,7 @@ public class GetTreeAutoriEventHandler extends EventHandler {
                     String sql = "SELECT a.nume, (SELECT COUNT(1) FROM Book b WHERE b.idAutor = a.autorId) AS bookCount FROM Autor a";
                     List<Object[]> lettersList = Database.getDataObject(sql);
                     for (Object[] data : lettersList) {
-                        AutorBean bean = new AutorBean();
+                        AutorNode bean = new AutorNode();
                         String numeAutor = String.valueOf(data[0]);
                         final int howManyBooks = Integer.valueOf(String.valueOf(data[1]));
                         bean.setLeaf(true);
@@ -88,7 +88,7 @@ public class GetTreeAutoriEventHandler extends EventHandler {
                 String sql = "SELECT a.nume, (SELECT COUNT(1) FROM Book b WHERE b.idAutor = a.autorId) AS bookCount FROM Autor a where " + where;
                 List<Object[]> lettersList = Database.getDataObject(sql);
                 for (Object[] data : lettersList) {
-                    AutorBean bean = new AutorBean();
+                    AutorNode bean = new AutorNode();
                     String numeAutor = String.valueOf(data[0]);
                     final int howManyBooks = Integer.valueOf(String.valueOf(data[1]));
                     bean.setLeaf(true);

@@ -68,9 +68,6 @@ Ext.define('BM.controller.AbstractLeftTreeAreaController', {
                 me.getLeftTreeArea().setTitle(title);
             },
 
-            setActiveView: function(toolItem, event, eOpts) {
-            },
-
             showMenu: function(panel, event, options) {
                 event.stopEvent();
                 contextMenu.showAt(event.getXY());
@@ -81,6 +78,26 @@ Ext.define('BM.controller.AbstractLeftTreeAreaController', {
                 e.stopEvent();
                 contextMenu.controller = this;
                 contextMenu.showAt(e.getXY());
+            },
+
+            getAreaTitle: function(tree) {
+                var title = 'Grupare dupa ';
+                if (tree === 'treeAutori') {
+                    title += 'autor';
+                } else if (tree === 'treeBooks') {
+                    title += 'carte';
+                } else if (tree === 'treeEditura') {
+                    title += 'editura';
+                }
+                return title;
+            },
+
+            setActiveViewInternal: function(tree) {
+                var me = this;
+                var cardLayout = me.getLeftTreeArea().getLayout();
+                cardLayout.setActiveItem(tree);
+                me.getLeftTreeArea().setTitle(me.getAreaTitle(tree));
+                this.getChangeViewButton().setVisible(tree != 'treeBooks');
             }
         });
 
@@ -104,7 +121,7 @@ var contextMenu = Ext.create('Ext.menu.Menu', {
                                 checked: true,
                                 group: 'vizualizare',
                                 handler: function(widget, event) {
-                                    contextMenu.controller.setActiveView();
+                                    contextMenu.controller.setActiveView('treeAutori');
                                 }
                             },
                             {
@@ -112,7 +129,15 @@ var contextMenu = Ext.create('Ext.menu.Menu', {
                                 checked: false,
                                 group: 'vizualizare',
                                 handler: function(widget, event) {
-                                    contextMenu.controller.setActiveView();
+                                    contextMenu.controller.setActiveView('treeBooks');
+                                }
+                            },
+                            {
+                                text: 'Edituri',
+                                checked: false,
+                                group: 'vizualizare',
+                                handler: function(widget, event) {
+                                    contextMenu.controller.setActiveView('treeEditura');
                                 }
                             }
                         ]

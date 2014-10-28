@@ -11,6 +11,7 @@ Ext.application({
                 'AbstractLeftTreeAreaController',
                 'TreeAutoriController',
                 'TreeBooksController',
+                'TreeEdituraController',
                 'CategorieGridController',
                 'EdituraGridController',
                 'AutorGridController',

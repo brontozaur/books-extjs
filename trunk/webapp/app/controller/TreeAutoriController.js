@@ -84,18 +84,10 @@ Ext.define('BM.controller.TreeAutoriController', {
                 }
             },
 
-            setActiveView: function() {
-                alert(this.getActiveView().id);
-            },
-
-            setActiveView: function(toolItem, event, eOpts) {
+            setActiveView: function(tree) {
                 var me = this;
                 if (me.getTree() === me.getActiveItem()) {
-                    var treeArea = me.getLeftTreeArea();
-                    var cardLayout = treeArea.getLayout();
-                    cardLayout.setActiveItem('treeBooks');
-                    treeArea.setTitle('Grupare dupa carte');
-                     this.getChangeViewButton().setVisible(false);
+                   me.setActiveViewInternal(tree);
                 }
             }
         });
