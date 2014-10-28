@@ -13,7 +13,7 @@ Ext.define('BM.controller.TreeBooksController', {
                     ref: 'leftTreeArea',
                     selector: 'lefttree'
                 },
-                 {
+                {
                     ref: 'changeViewButton',
                     selector: 'lefttree tool[itemId=toggleTool]'
                 }
@@ -30,6 +30,12 @@ Ext.define('BM.controller.TreeBooksController', {
                             }
                         });
                 me.callParent(arguments);
+            },
+
+            loadParamsToRequest: function(store, operation, eOpts) {
+                var node = operation.node;
+                operation.params.nodeId = node.get('name');
+                operation.params.displayMode = this.getTree().displayMode;
             },
 
             itemClick: function(tree, recordItem, item, index, e, eOpts) {
@@ -51,7 +57,7 @@ Ext.define('BM.controller.TreeBooksController', {
                 clearInfoAreaFields();
                 enablebuttons(false);
             },
-            
+
             add: function() {
                 var me = this;
                 if (me.getTree() === me.getActiveItem()) {
@@ -67,14 +73,10 @@ Ext.define('BM.controller.TreeBooksController', {
                 }
             },
 
-            setActiveView: function(toolItem, event, eOpts) {
+            setActiveView: function(tree) {
                 var me = this;
                 if (me.getTree() === me.getActiveItem()) {
-                    var treeArea = me.getLeftTreeArea();
-                    var cardLayout = treeArea.getLayout();
-                    cardLayout.setActiveItem('treeAutori');
-                    treeArea.setTitle('Grupare dupa autor');
-                    this.getChangeViewButton().setVisible(true);
+                    me.setActiveViewInternal(tree);
                 }
             }
         });

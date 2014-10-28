@@ -2,6 +2,7 @@ package com.popa.books.servlet.handler;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+
 import com.popa.books.servlet.util.RequestUtils;
 
 public class EventHandlerFactory {
@@ -44,6 +45,8 @@ public class EventHandlerFactory {
             handler = new GetTreeAutoriEventHandler();
         } else if (Events.GET_TREE_BOOKS.equals(eventName)) {
             handler = new GetTreeBooksEventHandler();
+        } else if (Events.GET_TREE_EDITURI.equals(eventName)) {
+            handler = new GetTreeEdituriEventHandler();
         }
         if (handler == null) {
             throw new NullPointerException("no handler was found for event: " + eventName);

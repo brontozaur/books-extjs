@@ -5,6 +5,7 @@ Ext.define('BM.view.Viewport', {
                 'BM.view.book.BookZone',
                 'BM.view.tree.TreeAutori',
                 'BM.view.tree.TreeBooks',
+                'BM.view.tree.TreeEditura',
                 'BM.view.editura.EdituraGrid',
                 'BM.view.autor.AutorGrid',
                 'BM.view.categorie.CategorieGrid',

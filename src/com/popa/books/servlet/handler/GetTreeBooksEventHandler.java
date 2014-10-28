@@ -12,7 +12,7 @@ import org.apache.log4j.Logger;
 import com.google.gson.Gson;
 import com.popa.books.dao.Database;
 import com.popa.books.dao.DatabaseException;
-import com.popa.books.servlet.bean.BookBean;
+import com.popa.books.servlet.bean.BookNode;
 import com.popa.books.servlet.bean.Node;
 
 public class GetTreeBooksEventHandler extends EventHandler {
@@ -23,12 +23,12 @@ public class GetTreeBooksEventHandler extends EventHandler {
     public String handleEvent(final HttpServletRequest request) throws ServletException {
         try {
             List<Node> nodeList = new ArrayList<Node>();
-            BookBean nonLetterBean = null;
+            BookNode nonLetterBean = null;
             String sql = "SELECT SUBSTRING(b.title,1,1) AS firstLetter, (SELECT COUNT(1) FROM Book b1 WHERE SUBSTRING(b1.title,1,1) LIKE firstLetter) AS booksNumber"
                     + " FROM Book b GROUP BY firstLetter";
             List<Object[]> lettersList = Database.getDataObject(sql);
             for (Object[] data : lettersList) {
-                BookBean bean = new BookBean();
+                BookNode bean = new BookNode();
                 String letter = String.valueOf(data[0]);
                 final int howManyBooks = Integer.valueOf(String.valueOf(data[1]));
                 bean.setHowManyBooks(howManyBooks);
@@ -37,7 +37,7 @@ public class GetTreeBooksEventHandler extends EventHandler {
                 if (StringUtils.isEmpty(letter) || !Character.isLetter(letter.charAt(0))) {
                     letter = Node.ALL;
                     if (nonLetterBean == null) {
-                        nonLetterBean = new BookBean();
+                        nonLetterBean = new BookNode();
                         nonLetterBean.setLeaf(true);
                         nonLetterBean.setLoaded(true);
                         nonLetterBean.setName(letter);

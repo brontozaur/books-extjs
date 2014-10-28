@@ -37,6 +37,10 @@ function buildItems() {
         {
             xtype: 'treebooks',
             itemId: 'treeBooks'
+        },
+        {
+            xtype: 'treeeditura',
+            itemId: 'treeEditura'
         }
     ];
 }
