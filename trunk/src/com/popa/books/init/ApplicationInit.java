@@ -1,5 +1,6 @@
 package com.popa.books.init;
 
+import java.io.File;
 import java.io.InputStream;
 import java.util.Properties;
 
@@ -35,6 +36,10 @@ public class ApplicationInit {
             InputStream is = Thread.currentThread().getContextClassLoader().getResourceAsStream("config.properties");
             prop.load(is);
             is.close();
+            String coverDir = prop.getProperty(PropertyKeys.COVERS_DIR);
+            if (!coverDir.endsWith("/") && !coverDir.endsWith("\\")){
+                coverDir += File.separator;
+            }
             System.setProperty(PropertyKeys.COVERS_DIR, prop.getProperty(PropertyKeys.COVERS_DIR));
         } catch (Exception e) {
             logger.error(e, e);
