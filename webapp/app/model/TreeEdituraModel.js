@@ -10,15 +10,15 @@ Ext.define('BM.model.TreeEdituraModel', {
                     type: 'string',
                     convert: function(newValue, record) {
                         var howManyEdituri = record.get('howManyEdituri');
+                        var howManyBooks = record.get('howManyBooks');
                         if (Ext.isEmpty(record.get('leaf')) || record.get('leaf') === false) {
                             var letter = record.get('name');
-                            var howManyBooks = record.get('howManyBooks');
                             var editura = howManyEdituri === 1 ? 'editura' : 'edituri';
                             var carte = howManyBooks === 1 ? 'carte' : 'carti';
 
                             return letter + ' (' + howManyEdituri + ' ' + editura + ', ' + howManyBooks + ' ' + carte + ')';
                         }
-                        return record.get('name') + ' (' + howManyEdituri + ')';
+                        return record.get('name') + ' (' + howManyBooks + ')';
                     }
                 }
             ]
