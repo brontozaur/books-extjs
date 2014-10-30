@@ -80,16 +80,8 @@ Ext.define('BM.controller.AbstractLeftTreeAreaController', {
                 contextMenu.showAt(e.getXY());
             },
 
-            getAreaTitle: function(tree) {
-                var title = 'Grupare dupa ';
-                if (tree === 'treeAutori') {
-                    title += 'autor';
-                } else if (tree === 'treeBooks') {
-                    title += 'carte';
-                } else if (tree === 'treeEditura') {
-                    title += 'editura';
-                }
-                return title;
+            getAreaTitle: function(treeTitle) {
+                return 'Grupare dupa ' + treeTitle;
             },
 
             setActiveViewInternal: function(tree) {
