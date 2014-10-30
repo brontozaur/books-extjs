@@ -53,8 +53,8 @@ Ext.define('BM.controller.TreeAutoriController', {
                             if (Ext.isEmpty(treeItemValue)) {
                                 return true;
                             }
-                            var numeAutor = record.get('authorName');
-                            return numeAutor.indexOf(treeItemValue) === 0; // starts with this letter
+                            var numeAutor = record.get('authorName').toLowerCase();
+                            return numeAutor.indexOf(treeItemValue.toLowerCase()) === 0; // starts with this letter
                         }
                     }
                 ]);

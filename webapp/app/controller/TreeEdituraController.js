@@ -49,8 +49,8 @@ Ext.define('BM.controller.TreeEdituraController', {
                             if (Ext.isEmpty(treeItemValue)) {
                                 return true;
                             }
-                            var numeEditura = record.get('numeEditura');
-                            return numeEditura.indexOf(treeItemValue) === 0; // starts with this letter
+                            var numeEditura = record.get('numeEditura').toLowerCase();
+                            return numeEditura.indexOf(treeItemValue.toLowerCase()) === 0; // starts with this letter
                         }
                     }
                 ]);
