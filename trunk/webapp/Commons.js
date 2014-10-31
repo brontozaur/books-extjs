@@ -148,3 +148,12 @@ function enablebuttonsCategorie(enable) {
 function getCategorieStoreSingleton(){
     return Ext.StoreMgr.lookup('categorieStore') || Ext.create('BM.store.CategorieStore');
 }
+
+var themes = ['aria', 'classic', 'neptune', 'crisp', 'gray'];
+function setCurrentTheme(themeName){
+    console.log('active theme is: ' + themeName);
+    for (var idx in themes){
+        var theme = themes[idx];
+        document.getElementById(theme).disabled = (themeName != theme);
+    }
+}

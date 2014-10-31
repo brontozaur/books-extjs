@@ -22,6 +22,7 @@ Ext.application({
             autoCreateViewport: true,
 
             launch: function() {
-                // nothing to do for now ;-)
+                console.log("Powered by ExtJS: " + Ext.getVersion());
+                setCurrentTheme('crisp');
             }
         });
