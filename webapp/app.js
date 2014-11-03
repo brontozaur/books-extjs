@@ -23,6 +23,6 @@ Ext.application({
 
             launch: function() {
                 console.log("Powered by ExtJS: " + Ext.getVersion());
-                setCurrentTheme('crisp');
+                setCurrentTheme('classic');
             }
         });

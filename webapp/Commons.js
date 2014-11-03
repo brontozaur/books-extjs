@@ -154,6 +154,7 @@ function setCurrentTheme(themeName){
     console.log('active theme is: ' + themeName);
     for (var idx in themes){
         var theme = themes[idx];
-        document.getElementById(theme).disabled = (themeName != theme);
+        document.getElementById(theme).disabled = true;;
     }
+    document.getElementById(themeName).disabled = false;
 }

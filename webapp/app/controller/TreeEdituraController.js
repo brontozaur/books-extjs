@@ -33,9 +33,9 @@ Ext.define('BM.controller.TreeEdituraController', {
             },
 
             loadParamsToRequest: function(store, operation, eOpts) {
-                var node = operation.node;
-                operation.params.nodeId = node.get('name');
-                operation.params.displayMode = this.getTree().displayMode;
+//                var node = operation.config.node;
+//                store.proxy.extraParams.nodeId = node.get('name');
+//                store.proxy.extraParams.displayMode = this.getTree().displayMode;                
             },
 
             itemClick: function(tree, recordItem, item, index, e, eOpts) {
