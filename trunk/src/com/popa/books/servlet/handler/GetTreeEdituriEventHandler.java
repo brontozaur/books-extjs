@@ -22,11 +22,11 @@ public class GetTreeEdituriEventHandler extends EventHandler {
     @Override
     public String handleEvent(final HttpServletRequest request) throws ServletException {
         try {
-            final String nodeId = request.getParameter("nodeId");
             List<Node> nodeList = new ArrayList<Node>();
             EdituraNode nonLetterBean = null;
-            final boolean isFlatMode = "flat".equals(request.getParameter("displayMode"));
-            if (StringUtils.isEmpty(nodeId)) {
+            final boolean isRoot = Boolean.valueOf(request.getParameter("root"));
+            if (isRoot || StringUtils.isEmpty(request.getParameter("nodeId"))) {
+                final boolean isFlatMode = "flat".equals(request.getParameter("displayMode"));
                 if (!isFlatMode) {
                     String sql = "SELECT SUBSTRING(e.numeEditura,1,1) AS firstLetter, " + "(SELECT COUNT(1) FROM Editura a1 WHERE SUBSTRING(a1.numeEditura,1,1) LIKE firstLetter) AS nrEdituri,"
                             + "(SELECT COUNT(1) FROM Book b WHERE b.idEditura = e.idEditura) AS booksNumber " + "FROM Editura e GROUP BY firstLetter";
@@ -76,6 +76,7 @@ public class GetTreeEdituriEventHandler extends EventHandler {
                     }
                 }
             } else {
+                final String nodeId = request.getParameter("nodeId");
                 String where = "a.numeEditura LIKE '" + nodeId.toLowerCase() + "%' OR a.numeEditura LIKE '" + nodeId.toUpperCase() + "%'";
                 if (Node.ALL.equals(nodeId)) {
                     where = "a.numeEditura NOT LIKE 'A%' AND a.numeEditura NOT LIKE 'B%' AND a.numeEditura NOT LIKE 'C%' AND a.numeEditura NOT LIKE 'D%' AND a.numeEditura NOT LIKE 'E%' AND a.numeEditura NOT LIKE 'F%' AND "

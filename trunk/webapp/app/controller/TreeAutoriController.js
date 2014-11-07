@@ -37,23 +37,29 @@ Ext.define('BM.controller.TreeAutoriController', {
             },
 
             loadParamsToRequest: function(store, operation, eOpts) {
-//                var node = operation.config.node;
-//                store.proxy.extraParams.nodeId = node.get('name');
-//                store.proxy.extraParams.displayMode = this.getTree().displayMode;
+                var node = operation.config.node;
+                store.proxy.extraParams.nodeId = node.get('name');
+                store.proxy.extraParams.root = node.isRoot();
+                store.proxy.extraParams.displayMode = this.getTree().displayMode;
             },
 
             itemClick: function(tree, recordItem, item, index, e, eOpts) {
                 var treeItemValue = recordItem.get('name');
+                var isRoot = recordItem.isRoot();
                 var grid = Ext.ComponentQuery.query('booksgrid')[0];
                 var store = grid.getStore();
                 store.clearFilter(true);
                 store.filter([
                     {
                         filterFn: function(record) {
-                            if (Ext.isEmpty(treeItemValue)) {
+                            if (isRoot || Ext.isEmpty(treeItemValue)) {
                                 return true;
                             }
-                            var numeAutor = record.get('authorName').toLowerCase();
+                            var numeAutor = record.get('authorName');
+                            if (!numeAutor){
+                            	numeAutor = '';
+                            }
+                            numeAutor = numeAutor.toLowerCase();                              
                             return numeAutor.indexOf(treeItemValue.toLowerCase()) === 0; // starts with this letter
                         }
                     }

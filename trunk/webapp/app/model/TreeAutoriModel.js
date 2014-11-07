@@ -9,6 +9,9 @@ Ext.define('BM.model.TreeAutoriModel', {
                     name: 'treeItemName',
                     type: 'string',
                     convert: function(newValue, record) {
+                    	if (record.get('id') === 'root'){
+                    		return record.get('name');
+                    	}
                         var howManyBooks = record.get('howManyBooks');
                         if (Ext.isEmpty(record.get('leaf')) || record.get('leaf') === false) {
                             var letter = record.get('name');

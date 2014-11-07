@@ -11,7 +11,8 @@ Ext.define('BM.store.TreeEdituraStore', {
                 }
             },
             root: {
-                expanded: true
+                expanded: true,
+                name: 'EDITURI'
             },
             sorters: [
                 {

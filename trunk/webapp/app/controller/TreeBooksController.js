@@ -4,6 +4,10 @@ Ext.define('BM.controller.TreeBooksController', {
                 'TreeBooksStore'
             ],
 
+            views: [
+                'tree.TreeBooks'
+            ],
+
             refs: [
                 {
                     ref: 'tree',
@@ -21,7 +25,7 @@ Ext.define('BM.controller.TreeBooksController', {
 
             init: function() {
                 var me = this;
-                this.control({
+                me.control({
                             'treebooks': {
                                 beforeload: this.loadParamsToRequest,
                                 itemclick: this.itemClick,
@@ -33,29 +37,36 @@ Ext.define('BM.controller.TreeBooksController', {
             },
 
             loadParamsToRequest: function(store, operation, eOpts) {
-//                var node = operation.config.node;
-//                store.proxy.extraParams.nodeId = node.get('name');
-//                store.proxy.extraParams.displayMode = this.getTree().displayMode;
+                var node = operation.config.node;
+                store.proxy.extraParams.nodeId = node.get('name');
+                store.proxy.extraParams.root = node.isRoot();
+                store.proxy.extraParams.displayMode = this.getTree().displayMode;
             },
 
             itemClick: function(tree, recordItem, item, index, e, eOpts) {
-                var treeItemValue = recordItem.get('name');
+            	debugger;
+     /*           var treeItemValue = recordItem.get('name');
+                var isRoot = recordItem.isRoot();
                 var grid = Ext.ComponentQuery.query('booksgrid')[0];
                 var store = grid.getStore();
                 store.clearFilter(true);
                 store.filter([
                     {
                         filterFn: function(record) {
-                            if (Ext.isEmpty(treeItemValue)) {
+                            if (isRoot || Ext.isEmpty(treeItemValue)) {
                                 return true;
                             }
-                            var numeCarte = record.get('title').toLowerCase();
+                            var numeCarte = record.get('title');
+                            if (!numeCarte){
+                            	numeCarte = '';
+                            }
+                            numeCarte = numeCarte.toLowerCase();                            
                             return numeCarte.indexOf(treeItemValue.toLowerCase()) === 0; // starts with this letter
                         }
                     }
                 ]);
                 clearInfoAreaFields();
-                enablebuttons(false);
+                enablebuttons(false);*/
             },
 
             add: function() {
