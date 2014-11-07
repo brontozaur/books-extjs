@@ -1,8 +1,6 @@
-Ext.require([
-                'BM.view.autor.AutorCombo',
-                'BM.view.editura.EdituraCombo',
-                'BM.view.categorie.CategorieCombo'
-]);
+Ext.require('BM.view.autor.AutorCombo');
+Ext.require('BM.view.editura.EdituraCombo');
+Ext.require('BM.view.categorie.CategorieCombo');
 
 Ext.define('BM.view.book.BookWindow', {
             extend: 'Ext.window.Window',
