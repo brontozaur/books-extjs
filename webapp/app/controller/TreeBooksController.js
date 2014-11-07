@@ -44,8 +44,7 @@ Ext.define('BM.controller.TreeBooksController', {
             },
 
             itemClick: function(tree, recordItem, item, index, e, eOpts) {
-            	debugger;
-     /*           var treeItemValue = recordItem.get('name');
+                var treeItemValue = recordItem.get('name');
                 var isRoot = recordItem.isRoot();
                 var grid = Ext.ComponentQuery.query('booksgrid')[0];
                 var store = grid.getStore();
@@ -66,7 +65,7 @@ Ext.define('BM.controller.TreeBooksController', {
                     }
                 ]);
                 clearInfoAreaFields();
-                enablebuttons(false);*/
+                enablebuttons(false);
             },
 
             add: function() {
