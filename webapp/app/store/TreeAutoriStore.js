@@ -11,7 +11,8 @@ Ext.define('BM.store.TreeAutoriStore', {
                 }
             },
             root: {
-                expanded: true
+                expanded: true,
+                name: 'AUTORI'
             },
             sorters: [
                 {

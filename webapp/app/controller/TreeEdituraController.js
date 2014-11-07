@@ -4,6 +4,10 @@ Ext.define('BM.controller.TreeEdituraController', {
                 'TreeEdituraStore'
             ],
 
+            views: [
+                'tree.TreeEditura'
+            ],
+
             refs: [
                 {
                     ref: 'tree',
@@ -21,7 +25,7 @@ Ext.define('BM.controller.TreeEdituraController', {
 
             init: function() {
                 var me = this;
-                this.control({
+                me.control({
                             'treeeditura': {
                                 beforeload: this.loadParamsToRequest,
                                 itemclick: this.itemClick,
@@ -33,29 +37,35 @@ Ext.define('BM.controller.TreeEdituraController', {
             },
 
             loadParamsToRequest: function(store, operation, eOpts) {
-//                var node = operation.config.node;
-//                store.proxy.extraParams.nodeId = node.get('name');
-//                store.proxy.extraParams.displayMode = this.getTree().displayMode;                
+                var node = operation.config.node;
+                store.proxy.extraParams.nodeId = node.get('name');
+                store.proxy.extraParams.root = node.isRoot();
+                store.proxy.extraParams.displayMode = this.getTree().displayMode;                
             },
 
             itemClick: function(tree, recordItem, item, index, e, eOpts) {
                 var treeItemValue = recordItem.get('name');
+                var isRoot = recordItem.isRoot();
                 var grid = Ext.ComponentQuery.query('booksgrid')[0];
                 var store = grid.getStore();
                 store.clearFilter(true);
                 store.filter([
                     {
                         filterFn: function(record) {
-                            if (Ext.isEmpty(treeItemValue)) {
+                            if (isRoot || Ext.isEmpty(treeItemValue)) {
                                 return true;
                             }
-                            var numeEditura = record.get('numeEditura').toLowerCase();
+                            var numeEditura = record.get('numeEditura');
+                            if (!numeEditura){
+                            	numeEditura = '';
+                            }
+                            numeEditura = numeEditura.toLowerCase();
                             return numeEditura.indexOf(treeItemValue.toLowerCase()) === 0; // starts with this letter
                         }
                     }
                 ]);
                 clearInfoAreaFields();
-                enablebuttons(false);
+                enablebuttonsEditura(false);
             },
 
             add: function() {

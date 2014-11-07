@@ -9,10 +9,13 @@ Ext.define('BM.model.TreeEdituraModel', {
                     name: 'treeItemName',
                     type: 'string',
                     convert: function(newValue, record) {
-                        var howManyEdituri = record.get('howManyEdituri');
+                        if (record.get('id') === 'root') {
+                            return record.get('name');
+                        }
                         var howManyBooks = record.get('howManyBooks');
                         if (Ext.isEmpty(record.get('leaf')) || record.get('leaf') === false) {
                             var letter = record.get('name');
+                            var howManyEdituri = record.get('howManyEdituri');
                             var editura = howManyEdituri === 1 ? 'editura' : 'edituri';
                             var carte = howManyBooks === 1 ? 'carte' : 'carti';
 

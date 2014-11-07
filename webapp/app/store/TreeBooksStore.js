@@ -11,7 +11,8 @@ Ext.define('BM.store.TreeBooksStore', {
                 }
             },
             root: {
-                expanded: true
+                expanded: true,
+                name: 'CARTI'
             },
             sorters: [
                 {

@@ -22,11 +22,11 @@ public class GetTreeAutoriEventHandler extends EventHandler {
     @Override
     public String handleEvent(final HttpServletRequest request) throws ServletException {
         try {
-            final String nodeId = request.getParameter("nodeId");
             List<Node> nodeList = new ArrayList<Node>();
             AutorNode nonLetterBean = null;
-            final boolean isFlatMode = "flat".equals(request.getParameter("displayMode"));
-            if (StringUtils.isEmpty(nodeId)) {
+            final boolean isRoot = Boolean.valueOf(request.getParameter("root"));
+            if (isRoot || StringUtils.isEmpty(request.getParameter("nodeId"))) {
+                final boolean isFlatMode = "flat".equals(request.getParameter("displayMode"));
                 if (!isFlatMode) {
                     String sql = "SELECT SUBSTRING(a.nume,1,1) AS firstLetter, "
                             + "(SELECT COUNT(1) FROM Autor a1 WHERE SUBSTRING(a1.nume,1,1) LIKE firstLetter) AS autorsNumber,"
@@ -77,6 +77,7 @@ public class GetTreeAutoriEventHandler extends EventHandler {
                     }
                 }
             } else {
+                final String nodeId = request.getParameter("nodeId");
                 String where = "a.nume LIKE '" + nodeId.toLowerCase() + "%' OR a.nume LIKE '" + nodeId.toUpperCase() + "%'";
                 if (Node.ALL.equals(nodeId)) {
                     where = "a.nume NOT LIKE 'A%' AND a.nume NOT LIKE 'B%' AND a.nume NOT LIKE 'C%' AND a.nume NOT LIKE 'D%' AND a.nume NOT LIKE 'E%' AND a.nume NOT LIKE 'F%' AND "
