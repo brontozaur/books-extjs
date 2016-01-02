@@ -68,14 +68,14 @@ public final class LoggerMyWay {
             final int day = calendar.get(Calendar.DAY_OF_MONTH);
             File file;
             if ((userName == null) || (userName.length() == 0)) {
-                LoggerMyWay.applicationLog = System.getProperties().getProperty("user.dir") + File.separator + LoggerMyWay.LOG4J_APP_STARTUP_DIR;
+                LoggerMyWay.applicationLog = System.getProperties().getProperty("user.home") + File.separator + LoggerMyWay.LOG4J_APP_STARTUP_DIR;
                 file = new File(LoggerMyWay.applicationLog);
                 if (!file.exists() && !file.mkdir()) {
                     throw new IOException(LoggerMyWay.PROP_LOGGER_ERROR);
                 }
 
             } else {
-                LoggerMyWay.applicationLog = System.getProperties().getProperty("user.dir") + File.separator + LoggerMyWay.LOG4J_ACCOUNTS_DIR;
+                LoggerMyWay.applicationLog = System.getProperties().getProperty("user.home") + File.separator + LoggerMyWay.LOG4J_ACCOUNTS_DIR;
                 file = new File(LoggerMyWay.applicationLog);
                 if (!file.exists() && !file.mkdir()) {
                     throw new IOException(LoggerMyWay.PROP_LOGGER_ERROR);
