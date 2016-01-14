@@ -18,7 +18,7 @@ import org.apache.log4j.Logger;
 public class BorgPersistence {
 
     private static Map<String, EntityManagerFactory> factories = new HashMap<String, EntityManagerFactory>();
-    public static String DEFAULT_PERSISTENCE_UNIT = getPersistenceNames(true).get(0);
+    public static String DEFAULT_PERSISTENCE_UNIT = "books_db";
     private static Logger logger = Logger.getLogger(BorgPersistence.class);
 
     public static EntityManagerFactory getEntityManagerFactory(String persistenceUnitName) {
@@ -80,65 +80,12 @@ public class BorgPersistence {
         manager.refresh(entity);
     }
 
-    public static List<String> getPersistenceNames(boolean onlyVisible) {
-        return ConfigFacade.getPersistenceUnitNames(onlyVisible);
-    }
-
     public static Timestamp getServerTimestamp() {
         return getServerTimestamp(DEFAULT_PERSISTENCE_UNIT);
     }
 
     public static Timestamp getServerTimestamp(String persistenceUnitName) {
-        String hibernateDialect = ConfigFacade.getHibernateDialect(persistenceUnitName);
-        String serverTimeQuery = null;
-        if (hibernateDialect.equals("org.hibernate.dialect.DB2Dialect")) { // DB2
-
-        } else if (hibernateDialect.equals("org.hibernate.dialect.DB2400Dialect")) { // DB2 AS/400
-
-        } else if (hibernateDialect.equals("org.hibernate.dialect.DB2390Dialect")) { // DB2 OS390
-
-        } else if (hibernateDialect.equals("org.hibernate.dialect.PostgreSQLDialect")) { // PostgreSQL
-
-        } else if (hibernateDialect.equals("org.hibernate.dialect.MySQLDialect")) { // MySQL
-            serverTimeQuery = "SELECT now()";
-        } else if (hibernateDialect.equals("org.hibernate.dialect.MySQLInnoDBDialect")) { // MySQL with InnoDB
-            serverTimeQuery = "SELECT now()";
-        } else if (hibernateDialect.equals("org.hibernate.dialect.MySQLMyISAMDialect")) { // MySQL with MyISAM
-            serverTimeQuery = "SELECT now()";
-        } else if (hibernateDialect.equals("org.hibernate.dialect.MySQL5InnoDBDialect")) { // MySQL 5 with InnoDB
-            serverTimeQuery = "SELECT now()";
-        } else if (hibernateDialect.equals("org.hibernate.dialect.OracleDialect")) { // Oracle 8
-
-        } else if (hibernateDialect.equals("org.hibernate.dialect.Oracle9Dialect")) { // Oracle 9i/10g
-
-        } else if (hibernateDialect.equals("org.hibernate.dialect.SybaseDialect")) { // Sybase
-
-        } else if (hibernateDialect.equals("org.hibernate.dialect.SybaseAnywhereDialect")) { // Sybase Anywhere
-
-        } else if (hibernateDialect.equals("org.hibernate.dialect.SQLServerDialect")) { // Microsoft SQL Server
-
-        } else if (hibernateDialect.equals("org.hibernate.dialect.SAPDBDialect")) { // SAP DB
-
-        } else if (hibernateDialect.equals("org.hibernate.dialect.InformixDialect")) { // Informix
-
-        } else if (hibernateDialect.equals("org.hibernate.dialect.HSQLDialect")) { // HypersonicSQL
-
-        } else if (hibernateDialect.equals("org.hibernate.dialect.IngresDialect")) { // Ingres
-
-        } else if (hibernateDialect.equals("org.hibernate.dialect.ProgressDialect")) { // Progress
-
-        } else if (hibernateDialect.equals("org.hibernate.dialect.MckoiDialect")) { // Mckoi SQL
-
-        } else if (hibernateDialect.equals("org.hibernate.dialect.InterbaseDialect")) { // Interbase
-
-        } else if (hibernateDialect.equals("org.hibernate.dialect.PointbaseDialect")) { // Pointbase
-
-        } else if (hibernateDialect.equals("org.hibernate.dialect.FrontbaseDialect")) { // FrontBase
-
-        } else if (hibernateDialect.equals("org.hibernate.dialect.FirebirdDialect")) { // Firebird
-
-        } else
-            throw new UnsupportedOperationException("cannot determine sql dialect for persistence unit " + persistenceUnitName);
+        String serverTimeQuery = "SELECT now()";
         EntityManager em = null;
         try {
             em = BorgPersistence.getEntityManager();

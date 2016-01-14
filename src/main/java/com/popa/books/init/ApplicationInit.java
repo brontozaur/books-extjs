@@ -21,13 +21,13 @@ public class ApplicationInit {
     };
 
     public static void initialize(final ServletContext appContext) throws ServletException {
-        LoggerMyWay.configure(LoggerMyWay.LOG_TXT, "admin", true);
+//        LoggerMyWay.configure(LoggerMyWay.LOG_TXT, "admin", true);
         BorgPersistence.getEntityManager();
         loadPropertiesFile("config.properties");
     }
 
     public static void shutdown() {
-        LoggerMyWay.shutDown();
+//        LoggerMyWay.shutDown();
     }
 
     private static void loadPropertiesFile(final String propFileName) {

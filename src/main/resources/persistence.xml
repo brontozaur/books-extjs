@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <persistence xmlns="http://java.sun.com/xml/ns/persistence"
              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-             xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
-             version="2.0">
+             xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://www.oracle.com/webfolder/technetwork/jsc/xml/ns/persistence/persistence_2_1.xsd"
+             version="1.0">
     <persistence-unit name="books_db" transaction-type="RESOURCE_LOCAL">
         <description>Testing unit#1</description>
         <provider>org.hibernate.ejb.HibernatePersistence</provider>
@@ -14,7 +14,6 @@
         <properties>
             <!-- <property name="javax.persistence.cache.retrieveMode" value="CacheRetrieveMode.USE"/> -->
             <!-- <property name="javax.persistence.cache.storeMode" value="CacheStoreMode.REFRESH"/> -->
-            <property name="borg.visible.in.login" value="true" />
             <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver" />
             <property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/books_manager?autoReconnect=true" />
             <property name="hibernate.connection.username" value="root" />
