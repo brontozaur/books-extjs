@@ -17,11 +17,11 @@
                 </configuration>
             </plugin>
         </plugins>
-        <resources>
+      <!--  <resources>
           <resource>
             <directory>src/main/resources</directory>
           </resource>        
-        </resources>
+        </resources>-->
     </build>
   <dependencies>
     <dependency>
