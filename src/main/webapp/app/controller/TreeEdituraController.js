@@ -37,7 +37,7 @@ Ext.define('BM.controller.TreeEdituraController', {
             },
 
             loadParamsToRequest: function(store, operation, eOpts) {
-                var node = operation.config.node;
+                var node = operation.node;
                 store.proxy.extraParams.nodeId = node.get('name');
                 store.proxy.extraParams.root = node.isRoot();
                 store.proxy.extraParams.displayMode = this.getTree().displayMode;                

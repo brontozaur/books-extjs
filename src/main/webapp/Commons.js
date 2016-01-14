@@ -149,7 +149,7 @@ function getCategorieStoreSingleton(){
     return Ext.StoreMgr.lookup('categorieStore') || Ext.create('BM.store.CategorieStore');
 }
 
-var themes = ['aria', 'classic', 'neptune', 'crisp', 'gray'];
+var themes = ['classic', 'neptune', 'gray'];
 function setCurrentTheme(themeName){
     console.log('active theme is: ' + themeName);
     for (var idx in themes){
