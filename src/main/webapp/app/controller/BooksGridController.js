@@ -154,13 +154,14 @@ Ext.define('BM.controller.BooksGridController', {
 
                 if (!Ext.isEmpty(frontCover)) {
                     var frontCoverUploadForm = coversComponent.down('form[itemId=frontUploadform]');
-                    frontCoverUploadForm.down('image[itemId=frontCoverPreview]').src = selectedBook.get('frontCover');
+                    //frontCoverUploadForm.down('image[itemId=frontCoverPreview]').src = selectedBook.get('frontCover');
                 }
 
                 var backCover = selectedBook.get('backCover');
                 if (!Ext.isEmpty(backCover)) {
                     var backCoverUploadForm = coversComponent.down('form[itemId=backUploadform]');
-                    backCoverUploadForm.down('image[itemId=backCoverPreview]').src = selectedBook.get('backCover');
+                    //backCoverUploadForm.down('image[itemId=backCoverPreview]').src = "${pageContext.request.contextPath}/books/imageloader?bookId=" + selectedBook.bookId;
+                    backCoverUploadForm.down('image[itemId=backCoverPreview]').src = "loadImage.html?bookId=" + selectedBook.bookId;
                 }
 
                 window.show();
