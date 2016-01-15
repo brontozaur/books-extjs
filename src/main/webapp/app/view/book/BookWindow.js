@@ -231,7 +231,7 @@ Ext.define('BM.view.book.BookWindow', {
                                                     height: 164,
                                                     width: 128,
                                                     itemId: 'frontCoverPreview',
-                                                    name: 'frontCoverPath'
+                                                    name: 'frontCover'
                                                 },
                                                 {
                                                     xtype: 'filefield',
@@ -259,7 +259,7 @@ Ext.define('BM.view.book.BookWindow', {
                                                     height: 164,
                                                     width: 128,
                                                     itemId: 'backCoverPreview',
-                                                    name: 'backCoverPath'
+                                                    name: 'backCover'
                                                 },
                                                 {
                                                     xtype: 'filefield',

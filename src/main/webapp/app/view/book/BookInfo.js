@@ -65,7 +65,7 @@ function buildItems() {
                 },
                 {
                     fieldLabel: 'Cover',
-                    itemId: 'frontCoverPath'
+                    itemId: 'frontCover'
                 }
             ]
         },

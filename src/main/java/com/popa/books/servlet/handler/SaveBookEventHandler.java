@@ -71,9 +71,7 @@ public class SaveBookEventHandler extends EventHandler {
             book.setWidth(NumberUtils.toInt(request.getParameter("width"), 0));
             book.setHeight(NumberUtils.toInt(request.getParameter("height"), 0));
             book.setCitita("on".equals(request.getParameter("citita")));
-            String frontCoverPath = request.getParameter("frontCoverImage");
             book.setFrontCover(loadFile(System.getProperty("covers.dir") + File.separator + request.getParameter("frontCoverImage")));
-            String backCoverPath = request.getParameter("backCoverImage");
             book.setBackCover(loadFile(System.getProperty("covers.dir") + File.separator + request.getParameter("backCoverImage")));
 
             book.store(conn);

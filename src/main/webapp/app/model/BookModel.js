@@ -8,8 +8,8 @@ Ext.define('BM.model.BookModel', {
                     type: 'string'
                 },
                 'originalTitle',
-                'frontCoverPath',
-                'backCoverPath',
+                'frontCover',
+                'backCover',
                 'isbn',
                 'citita',
                 'serie',

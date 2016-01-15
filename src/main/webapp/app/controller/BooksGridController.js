@@ -105,7 +105,7 @@ Ext.define('BM.controller.BooksGridController', {
                 genField.setVisible(!Ext.isEmpty(genField.getValue()));
 
                 var frontImageContainer = bookInfo.down('image[itemId=frontCoverInfo]');
-                var frontCover = record.get('frontCoverPath');
+                var frontCover = record.get('frontCover');
                 var hasFrontCover = !Ext.isEmpty(frontCover);
                 var label = bookInfo.down('label[itemId=frontCoverLabel]');
                 label.setVisible(hasFrontCover);
@@ -115,7 +115,7 @@ Ext.define('BM.controller.BooksGridController', {
                 }
 
                 var backImageContainer = bookInfo.down('image[itemId=backCoverInfo]');
-                var backCover = record.get('backCoverPath');
+                var backCover = record.get('backCover');
                 var hasbackCover = !Ext.isEmpty(backCover);
                 var label = bookInfo.down('label[itemId=backCoverLabel]');
                 label.setVisible(hasbackCover);
@@ -150,17 +150,17 @@ Ext.define('BM.controller.BooksGridController', {
                 bookForm.loadRecord(selectedBook);
                 var coversComponent = window.down('component[itemId=cardLayoutPanel]');
 
-                var frontCover = selectedBook.get('frontCoverPath');
+                var frontCover = selectedBook.get('frontCover');
 
                 if (!Ext.isEmpty(frontCover)) {
                     var frontCoverUploadForm = coversComponent.down('form[itemId=frontUploadform]');
-                    frontCoverUploadForm.down('image[itemId=frontCoverPreview]').src = selectedBook.get('frontCoverPath');
+                    frontCoverUploadForm.down('image[itemId=frontCoverPreview]').src = selectedBook.get('frontCover');
                 }
 
-                var backCover = selectedBook.get('backCoverPath');
+                var backCover = selectedBook.get('backCover');
                 if (!Ext.isEmpty(backCover)) {
                     var backCoverUploadForm = coversComponent.down('form[itemId=backUploadform]');
-                    backCoverUploadForm.down('image[itemId=backCoverPreview]').src = selectedBook.get('backCoverPath');
+                    backCoverUploadForm.down('image[itemId=backCoverPreview]').src = selectedBook.get('backCover');
                 }
 
                 window.show();
