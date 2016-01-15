@@ -3,15 +3,7 @@ package com.popa.books.dao;
 import java.io.Serializable;
 import java.sql.Date;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "book")
@@ -39,10 +31,16 @@ public class Book extends AbstractDB implements Serializable {
     private Integer width;
     @Column(name = "height")
     private Integer height;
-    @Column(name = "frontCoverPath")
-    private String frontCoverPath;
-    @Column(name = "backCoverPath")
-    private String backCoverPath;
+
+    @Column(name = "frontCover")
+    @Lob
+    private byte[] frontCover;
+
+
+    @Column(name = "backCover")
+    @Lob
+    private byte[] backCover;
+
     @Column(name = "isbn")
     private String isbn;
     @Column(name = "citita")
@@ -130,22 +128,6 @@ public class Book extends AbstractDB implements Serializable {
         this.height = height;
     }
 
-    public String getFrontCoverPath() {
-        return frontCoverPath;
-    }
-
-    public void setFrontCoverPath(final String frontCoverPath) {
-        this.frontCoverPath = frontCoverPath;
-    }
-
-    public String getBackCoverPath() {
-        return backCoverPath;
-    }
-
-    public void setBackCoverPath(final String backCoverPath) {
-        this.backCoverPath = backCoverPath;
-    }
-
     public String getIsbn() {
         return isbn;
     }
@@ -209,4 +191,20 @@ public class Book extends AbstractDB implements Serializable {
 	public void setHeight(Integer height) {
 		this.height = height;
 	}
+
+    public byte[] getFrontCover() {
+        return frontCover;
+    }
+
+    public void setFrontCover(byte[] frontCover) {
+        this.frontCover = frontCover;
+    }
+
+    public byte[] getBackCover() {
+        return backCover;
+    }
+
+    public void setBackCover(byte[] backCover) {
+        this.backCover = backCover;
+    }
 }

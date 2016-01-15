@@ -1,6 +1,8 @@
 package com.popa.books.servlet.handler;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 
@@ -70,9 +72,9 @@ public class SaveBookEventHandler extends EventHandler {
             book.setHeight(NumberUtils.toInt(request.getParameter("height"), 0));
             book.setCitita("on".equals(request.getParameter("citita")));
             String frontCoverPath = request.getParameter("frontCoverImage");
-            book.setFrontCoverPath(request.getParameter("frontCoverImage"));
-
-            book.setBackCoverPath(request.getParameter("backCoverImage"));
+            book.setFrontCover(loadFile(System.getProperty("covers.dir") + File.separator + request.getParameter("frontCoverImage")));
+            String backCoverPath = request.getParameter("backCoverImage");
+            book.setBackCover(loadFile(System.getProperty("covers.dir") + File.separator + request.getParameter("backCoverImage")));
 
             book.store(conn);
             conn.getTransaction().commit();
@@ -88,5 +90,20 @@ public class SaveBookEventHandler extends EventHandler {
                 conn.close();
             }
         }
+    }
+
+    private byte[] loadFile(final String path) {
+        File file = new File(path);
+        byte[] bFile = new byte[(int) file.length()];
+        try {
+            FileInputStream fileInputStream = new FileInputStream(file);
+            //convert file into array of bytes
+            fileInputStream.read(bFile);
+            fileInputStream.close();
+        } catch (IOException exc) {
+            logger.error(exc, exc);
+        }
+
+        return bFile;
     }
 }

@@ -1,5 +1,6 @@
 package com.popa.books.servlet.handler;
 
+import java.io.FileOutputStream;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -21,6 +22,15 @@ public class GetBooksEventHandler extends EventHandler {
 	public String handleEvent(HttpServletRequest request) throws ServletException {
 		try {
 			List<AbstractDB> books = Database.getDbObjectsList(Book.class);
+//			Book book = (Book)books.get(0);
+//			byte[] coverData = book.getFrontCover();
+//			try{
+//				FileOutputStream fos = new FileOutputStream("/usr/local/logs/covers/poza_din_db.png");
+//				fos.write(coverData);
+//				fos.close();
+//			}catch(Exception e){
+//				logger.error(e.getMessage(), e);
+//			}
 			System.err.println(new Gson().toJson(books));
 			return new Gson().toJson(books);
 		} catch (DatabaseException e) {
