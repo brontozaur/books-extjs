@@ -5,20 +5,18 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
+import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 
+import com.popa.books.dao.*;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.math.NumberUtils;
 import org.apache.log4j.Logger;
 
-import com.popa.books.dao.Autor;
-import com.popa.books.dao.Book;
-import com.popa.books.dao.Categorie;
-import com.popa.books.dao.Database;
-import com.popa.books.dao.Editura;
 import com.popa.books.dao.persistence.BorgPersistence;
 
 public class SaveBookEventHandler extends EventHandler {
@@ -71,10 +69,31 @@ public class SaveBookEventHandler extends EventHandler {
             book.setWidth(NumberUtils.toInt(request.getParameter("width"), 0));
             book.setHeight(NumberUtils.toInt(request.getParameter("height"), 0));
             book.setCitita("on".equals(request.getParameter("citita")));
-            book.setFrontCover(loadFile(System.getProperty("covers.dir") + File.separator + request.getParameter("frontCoverImage")));
-            book.setBackCover(loadFile(System.getProperty("covers.dir") + File.separator + request.getParameter("backCoverImage")));
 
             book.store(conn);
+
+            String frontCover = request.getParameter("frontCoverImage");
+            String backCover = request.getParameter("backCoverImage");
+
+            if (StringUtils.isNotEmpty(frontCover) || StringUtils.isNotEmpty(backCover)) {
+                BookCover bookCover = null;
+                if (StringUtils.isNotEmpty(bookId)) {
+                    Query query = conn.createNamedQuery(BookCover.QUERY_GET_BY_BOOK_ID);
+                    query.setParameter("bookId", bookId);
+                    List<BookCover> coverList = query.getResultList();
+                    if (!coverList.isEmpty()){
+                        bookCover = coverList.get(0);
+                    }
+                }
+                if (bookCover == null) {
+                    bookCover = new BookCover();
+                    bookCover.setBook(book);
+                }
+                bookCover.setFront(loadFile(System.getProperty("covers.dir") + File.separator + frontCover));
+                bookCover.setBack(loadFile(System.getProperty("covers.dir") + File.separator + backCover));
+                bookCover.store(conn);
+            }
+
             conn.getTransaction().commit();
             return null;
         } catch (Exception exc) {

@@ -31,16 +31,6 @@ public class Book extends AbstractDB implements Serializable {
     private Integer width;
     @Column(name = "height")
     private Integer height;
-
-    @Column(name = "frontCover")
-    @Lob
-    private byte[] frontCover;
-
-
-    @Column(name = "backCover")
-    @Lob
-    private byte[] backCover;
-
     @Column(name = "isbn")
     private String isbn;
     @Column(name = "citita")
@@ -192,19 +182,4 @@ public class Book extends AbstractDB implements Serializable {
 		this.height = height;
 	}
 
-    public byte[] getFrontCover() {
-        return frontCover;
-    }
-
-    public void setFrontCover(byte[] frontCover) {
-        this.frontCover = frontCover;
-    }
-
-    public byte[] getBackCover() {
-        return backCover;
-    }
-
-    public void setBackCover(byte[] backCover) {
-        this.backCover = backCover;
-    }
 }
