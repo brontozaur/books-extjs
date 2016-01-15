@@ -103,7 +103,7 @@ Ext.define('BM.controller.BookWindowController', {
                                 success: function(form, action) {
                                     var response = Ext.JSON.decode(action.response.responseText);
                                     var imageCanvas = Ext.ComponentQuery.query('image[itemId=frontCoverPreview]')[0];
-                                    imageCanvas.setSrc('covers/' + response.fileName);
+                                    imageCanvas.setSrc(response.fileName);
                                 },
 
                                 failure: function(form, action) {
@@ -126,7 +126,7 @@ Ext.define('BM.controller.BookWindowController', {
                                 success: function(form, action) {
                                     var response = Ext.JSON.decode(action.response.responseText);
                                     var imageCanvas = Ext.ComponentQuery.query('image[itemId=backCoverPreview]')[0];
-                                    imageCanvas.setSrc('covers/' + response.fileName);
+                                    imageCanvas.setSrc(response.fileName);
                                 },
 
                                 failure: function(form, action) {

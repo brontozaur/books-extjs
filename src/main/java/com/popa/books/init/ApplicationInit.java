@@ -18,7 +18,7 @@ public class ApplicationInit {
     public static Logger logger = Logger.getLogger(ApplicationInit.class);
 
     private ApplicationInit() {
-    };
+    }
 
     public static void initialize(final ServletContext appContext) throws ServletException {
 //        LoggerMyWay.configure(LoggerMyWay.LOG_TXT, "admin", true);
@@ -36,11 +36,20 @@ public class ApplicationInit {
             InputStream is = Thread.currentThread().getContextClassLoader().getResourceAsStream("config.properties");
             prop.load(is);
             is.close();
-            String coverDir = prop.getProperty(PropertyKeys.COVERS_DIR);
-            if (!coverDir.endsWith("/") && !coverDir.endsWith("\\")){
-                coverDir += File.separator;
+            String coversDir;
+            if (System.getProperty("os.name").contains("Mac")) {
+                coversDir = prop.getProperty(PropertyKeys.MAC_COVERS_DIR);
+            } else if (System.getProperty("os.name").contains("Windows")) {
+                coversDir = prop.getProperty(PropertyKeys.WIN_COVERS_DIR);
+            } else if (System.getProperty("os.name").contains("nux")) {
+                coversDir = prop.getProperty(PropertyKeys.LINUX_COVERS_DIR);
+            } else {
+                throw new IllegalArgumentException("Unsupported OS: " + System.getProperty("os.name"));
             }
-            System.setProperty(PropertyKeys.COVERS_DIR, prop.getProperty(PropertyKeys.COVERS_DIR));
+            if (!coversDir.endsWith("/") && !coversDir.endsWith("\\")){
+                coversDir += File.separator;
+            }
+            System.setProperty(PropertyKeys.COVERS_DIR, coversDir);
         } catch (Exception e) {
             logger.error(e, e);
         }

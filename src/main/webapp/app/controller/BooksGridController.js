@@ -111,7 +111,7 @@ Ext.define('BM.controller.BooksGridController', {
                 label.setVisible(hasFrontCover);
                 frontImageContainer.setVisible(hasFrontCover);
                 if (hasFrontCover) {
-                    frontImageContainer.setSrc('covers/' + frontCover);
+                    frontImageContainer.setSrc(frontCover);
                 }
 
                 var backImageContainer = bookInfo.down('image[itemId=backCoverInfo]');
@@ -121,7 +121,7 @@ Ext.define('BM.controller.BooksGridController', {
                 label.setVisible(hasbackCover);
                 backImageContainer.setVisible(hasbackCover);
                 if (hasbackCover) {
-                    backImageContainer.setSrc('covers/' + backCover);
+                    backImageContainer.setSrc(backCover);
                 }
             },
 
@@ -154,13 +154,13 @@ Ext.define('BM.controller.BooksGridController', {
 
                 if (!Ext.isEmpty(frontCover)) {
                     var frontCoverUploadForm = coversComponent.down('form[itemId=frontUploadform]');
-                    frontCoverUploadForm.down('image[itemId=frontCoverPreview]').src = 'covers/' + selectedBook.get('frontCoverPath');
+                    frontCoverUploadForm.down('image[itemId=frontCoverPreview]').src = selectedBook.get('frontCoverPath');
                 }
 
                 var backCover = selectedBook.get('backCoverPath');
                 if (!Ext.isEmpty(backCover)) {
                     var backCoverUploadForm = coversComponent.down('form[itemId=backUploadform]');
-                    backCoverUploadForm.down('image[itemId=backCoverPreview]').src = 'covers/' + selectedBook.get('backCoverPath');
+                    backCoverUploadForm.down('image[itemId=backCoverPreview]').src = selectedBook.get('backCoverPath');
                 }
 
                 window.show();

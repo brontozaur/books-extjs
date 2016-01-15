@@ -28,9 +28,9 @@ public class GetTreeAutoriEventHandler extends EventHandler {
             if (isRoot || StringUtils.isEmpty(request.getParameter("nodeId"))) {
                 final boolean isFlatMode = "flat".equals(request.getParameter("displayMode"));
                 if (!isFlatMode) {
-                    String sql = "SELECT SUBSTRING(a.nume,1,1) AS firstLetter, "
-                            + "(SELECT COUNT(1) FROM Autor a1 WHERE SUBSTRING(a1.nume,1,1) LIKE firstLetter) AS autorsNumber,"
-                            + "(SELECT COUNT(1) FROM Book b WHERE b.idAutor = a.autorId) AS booksNumber " + "FROM Autor a GROUP BY firstLetter";
+                    String sql = "SELECT @firstletter as SUBSTRING(a.nume,1,1), "
+                            + "(SELECT COUNT(1) FROM Autor a1 WHERE SUBSTRING(a1.nume,1,1) LIKE @firstletter) AS autorsNumber,"
+                            + "(SELECT COUNT(1) FROM Book b WHERE b.idAutor = a.autorId) AS booksNumber " + "FROM Autor a GROUP BY @firstletter";
                     List<Object[]> lettersList = Database.getDataObject(sql);
                     for (Object[] data : lettersList) {
                         AutorNode bean = new AutorNode();

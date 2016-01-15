@@ -24,8 +24,8 @@ public class GetTreeBooksEventHandler extends EventHandler {
         try {
             List<Node> nodeList = new ArrayList<Node>();
             BookNode nonLetterBean = null;
-            String sql = "SELECT SUBSTRING(b.title,1,1) AS firstLetter, (SELECT COUNT(1) FROM Book b1 WHERE SUBSTRING(b1.title,1,1) LIKE firstLetter) AS booksNumber"
-                    + " FROM Book b GROUP BY firstLetter";
+            String sql = "SELECT @firstletter as SUBSTRING(b.title,1,1), (SELECT COUNT(1) FROM Book b1 WHERE SUBSTRING(b1.title,1,1) LIKE @firstletter) AS booksNumber"
+                    + " FROM Book b GROUP BY @firstletter";
             List<Object[]> lettersList = Database.getDataObject(sql);
             for (Object[] data : lettersList) {
                 BookNode bean = new BookNode();

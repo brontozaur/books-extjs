@@ -28,8 +28,10 @@ public class GetTreeEdituriEventHandler extends EventHandler {
             if (isRoot || StringUtils.isEmpty(request.getParameter("nodeId"))) {
                 final boolean isFlatMode = "flat".equals(request.getParameter("displayMode"));
                 if (!isFlatMode) {
-                    String sql = "SELECT SUBSTRING(e.numeEditura,1,1) AS firstLetter, " + "(SELECT COUNT(1) FROM Editura a1 WHERE SUBSTRING(a1.numeEditura,1,1) LIKE firstLetter) AS nrEdituri,"
-                            + "(SELECT COUNT(1) FROM Book b WHERE b.idEditura = e.idEditura) AS booksNumber " + "FROM Editura e GROUP BY firstLetter";
+                    String sql = "SELECT @firstletter as SUBSTRING(e.numeEditura,1,1), "
+                            + "(SELECT COUNT(1) FROM Editura a1 WHERE SUBSTRING(a1.numeEditura,1,1) LIKE @firstletter) AS nrEdituri,"
+                            + "(SELECT COUNT(1) FROM Book b WHERE b.idEditura = e.idEditura) AS booksNumber "
+                            + "FROM Editura e GROUP BY @firstletter";
                     List<Object[]> lettersList = Database.getDataObject(sql);
                     for (Object[] data : lettersList) {
                         EdituraNode bean = new EdituraNode();

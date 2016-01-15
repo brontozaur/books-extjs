@@ -70,22 +70,9 @@ public class SaveBookEventHandler extends EventHandler {
             book.setHeight(NumberUtils.toInt(request.getParameter("height"), 0));
             book.setCitita("on".equals(request.getParameter("citita")));
             String frontCoverPath = request.getParameter("frontCoverImage");
-            if (frontCoverPath.indexOf(File.separator) != -1) {
-                frontCoverPath = frontCoverPath.substring(frontCoverPath.lastIndexOf(File.separator) + 1);
-            }
-            if (frontCoverPath.indexOf('/') != -1) {
-                frontCoverPath = frontCoverPath.substring(frontCoverPath.lastIndexOf('/') + 1);
-            }
-            book.setFrontCoverPath(frontCoverPath);
-            
-            String backCoverPath = request.getParameter("backCoverImage");
-            if (backCoverPath.indexOf(File.separator) != -1) {
-                backCoverPath = backCoverPath.substring(backCoverPath.lastIndexOf(File.separator) + 1);
-            }
-            if (backCoverPath.indexOf('/') != -1) {
-                backCoverPath = backCoverPath.substring(backCoverPath.lastIndexOf('/') + 1);
-            }
-            book.setBackCoverPath(backCoverPath);
+            book.setFrontCoverPath(request.getParameter("frontCoverImage"));
+
+            book.setBackCoverPath(request.getParameter("backCoverImage"));
 
             book.store(conn);
             conn.getTransaction().commit();
