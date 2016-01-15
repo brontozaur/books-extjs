@@ -15,7 +15,7 @@ import com.popa.books.init.ApplicationInit;
 import com.popa.books.servlet.handler.EventHandler;
 import com.popa.books.servlet.handler.EventHandlerFactory;
 
-//@MultipartConfig
+@MultipartConfig
 public class BooksServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;

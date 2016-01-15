@@ -18,7 +18,7 @@ import com.popa.books.dao.BookCover;
 import com.popa.books.dao.persistence.BorgPersistence;
 import org.apache.log4j.Logger;
 
-@MultipartConfig
+//@MultipartConfig
 public class ImageLoader extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
@@ -55,6 +55,7 @@ public class ImageLoader extends HttpServlet {
                 String path = LoggerMyWay.class.getClassLoader().getResource("").getPath();
                 path += "../../data";
                 File file = new File(path + File.separator + System.currentTimeMillis()+ (isFrontCover? "front":"")+ ".jpg");
+                file.deleteOnExit();
                 FileOutputStream fos = new FileOutputStream(file.getAbsolutePath());
                 fos.write((byte[]) imageDatas.get(0));
                 fos.close();
