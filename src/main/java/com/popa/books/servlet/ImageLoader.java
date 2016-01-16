@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.popa.books.LoggerMyWay;
 import com.popa.books.dao.BookCover;
 import com.popa.books.dao.persistence.BorgPersistence;
+import com.popa.books.servlet.util.RequestUtils;
 import org.apache.log4j.Logger;
 
 //@MultipartConfig
@@ -52,11 +53,9 @@ public class ImageLoader extends HttpServlet {
             query.setParameter("bookId", Long.valueOf(request.getParameter("bookId")));
             List imageDatas = query.getResultList();
             if (!imageDatas.isEmpty()) {
-                String path = LoggerMyWay.class.getClassLoader().getResource("").getPath();
-                path += "../../data";
-                File file = new File(path + File.separator + System.currentTimeMillis()+ (isFrontCover? "front":"")+ ".jpg");
+                File file = new File(RequestUtils.getImagePath(isFrontCover));
                 file.deleteOnExit();
-                FileOutputStream fos = new FileOutputStream(file.getAbsolutePath());
+                FileOutputStream fos = new FileOutputStream(file);
                 fos.write((byte[]) imageDatas.get(0));
                 fos.close();
                 response.setContentType("text/html;charset=UTF-8");

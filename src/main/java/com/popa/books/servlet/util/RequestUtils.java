@@ -1,15 +1,12 @@
 package com.popa.books.servlet.util;
 
-import java.io.BufferedReader;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.*;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.Part;
 
+import com.popa.books.LoggerMyWay;
 import org.apache.commons.io.IOUtils;
 
 import com.popa.books.servlet.FormKeys;
@@ -85,5 +82,12 @@ public class RequestUtils {
         }
         buffer.flush();
         return buffer.toByteArray();
+    }
+
+    public static String getImagePath(final boolean isFrontCover) {
+        String path = LoggerMyWay.class.getClassLoader().getResource("").getPath();
+        path += "../../data";
+        File file = new File(path + File.separator + System.currentTimeMillis()+ (isFrontCover? "front":"")+ ".jpg");
+        return file.getAbsolutePath();
     }
 }
