@@ -43,31 +43,31 @@ public class ImageLoader extends HttpServlet {
 
     @Override
     protected void doPost(final HttpServletRequest request, final HttpServletResponse response) throws ServletException, IOException {
-            final String bookId = request.getParameter("bookId");
-            final boolean isFrontCover = Boolean.valueOf(request.getParameter("isFrontCover"));
-            if (isFrontCover) {
-                File frontCover = new File(RequestUtils.getImagePath(bookId + "front.jpg"));
-                if (frontCover.exists() && frontCover.isFile()) {
-                    response.setContentType("text/html;charset=UTF-8");
-                    response.getWriter().write(frontCover.getName());
-                } else {
-                    exportImageData(response, bookId, true);
-                }
+        final String bookId = request.getParameter("bookId");
+        final boolean isFrontCover = Boolean.valueOf(request.getParameter("isFrontCover"));
+        if (isFrontCover) {
+            File frontCover = new File(RequestUtils.getImagePath(bookId + "front.jpg"));
+            if (frontCover.exists() && frontCover.isFile()) {
+                response.setContentType("text/html;charset=UTF-8");
+                response.getWriter().write(frontCover.getName());
             } else {
-                File backCover = new File (RequestUtils.getImagePath(bookId + ".jpg"));
-                if (backCover.exists() && backCover.isFile()) {
-                    response.setContentType("text/html;charset=UTF-8");
-                    response.getWriter().write(backCover.getName());
-                } else {
-                    exportImageData(response, bookId, false);
-                }
+                exportImageData(response, bookId, true);
             }
+        } else {
+            File backCover = new File(RequestUtils.getImagePath(bookId + ".jpg"));
+            if (backCover.exists() && backCover.isFile()) {
+                response.setContentType("text/html;charset=UTF-8");
+                response.getWriter().write(backCover.getName());
+            } else {
+                exportImageData(response, bookId, false);
+            }
+        }
 
     }
 
     private void exportImageData(final HttpServletResponse response,
-                                           String bookId,
-                                           final boolean isFrontCover) throws ServletException, IOException{
+                                 String bookId,
+                                 final boolean isFrontCover) throws ServletException, IOException {
         EntityManager conn = null;
         try {
             conn = BorgPersistence.getEntityManager();
@@ -75,8 +75,8 @@ public class ImageLoader extends HttpServlet {
             query.setParameter("bookId", Long.valueOf(bookId));
             List imageData = query.getResultList();
             if (!imageData.isEmpty()) {
-                byte[] imageContent = (byte[])imageData.get(0);
-                if (imageContent != null && imageContent.length >0) {
+                byte[] imageContent = (byte[]) imageData.get(0);
+                if (imageContent != null && imageContent.length > 0) {
                     File file = new File(RequestUtils.exportImageToDisk(bookId, isFrontCover));
                     file.deleteOnExit();
                     FileOutputStream fos = new FileOutputStream(file);
