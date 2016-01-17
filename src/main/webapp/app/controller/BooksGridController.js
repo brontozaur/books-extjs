@@ -175,7 +175,9 @@ Ext.define('BM.controller.BooksGridController', {
                     data:{bookId: selectedBook.get('bookId'), isFrontCover: true},
                     success: function(response) {
                         var frontCoverUploadForm = coversComponent.down('form[itemId=frontUploadform]');
-                        frontCoverUploadForm.down('image[itemId=frontCoverPreview]').setSrc("/books/data/"+response);
+                        if (!Ext.isEmpty(response)) {
+                            frontCoverUploadForm.down('image[itemId=frontCoverPreview]').setSrc("/books/data/"+response);
+                        }
                     },
                     error: function(xhr) {
                         alert("error loading covers");
@@ -188,7 +190,9 @@ Ext.define('BM.controller.BooksGridController', {
                     data:{bookId: selectedBook.get('bookId'), isFrontCover: false},
                     success: function(response) {
                         var backCoverUploadForm = coversComponent.down('form[itemId=backUploadform]');
-                        backCoverUploadForm.down('image[itemId=backCoverPreview]').setSrc("/books/data/"+response);
+                        if (!Ext.isEmpty(response)) {
+                            backCoverUploadForm.down('image[itemId=backCoverPreview]').setSrc("/books/data/" + response);
+                        }
                     },
                     error: function(xhr) {
                         alert("error loading covers");

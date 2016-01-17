@@ -13,6 +13,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 
 import com.popa.books.dao.*;
+import com.popa.books.servlet.util.RequestUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.math.NumberUtils;
 import org.apache.log4j.Logger;
@@ -79,7 +80,7 @@ public class SaveBookEventHandler extends EventHandler {
                 BookCover bookCover = null;
                 if (StringUtils.isNotEmpty(bookId)) {
                     Query query = conn.createNamedQuery(BookCover.QUERY_GET_BY_BOOK_ID);
-                    query.setParameter("bookId", bookId);
+                    query.setParameter("bookId", Long.valueOf(bookId));
                     List<BookCover> coverList = query.getResultList();
                     if (!coverList.isEmpty()){
                         bookCover = coverList.get(0);
@@ -89,8 +90,18 @@ public class SaveBookEventHandler extends EventHandler {
                     bookCover = new BookCover();
                     bookCover.setBook(book);
                 }
-                bookCover.setFront(loadFile(System.getProperty("covers.dir") + File.separator + frontCover));
-                bookCover.setBack(loadFile(System.getProperty("covers.dir") + File.separator + backCover));
+                byte[] frontCoverData = loadFile(RequestUtils.getImagePath(new File(frontCover).getName()));
+                if (frontCoverData.length >0) {
+                    bookCover.setFront(frontCoverData);
+                } else {
+                    bookCover.setFront(null);
+                }
+                byte[] backCoverData = loadFile(RequestUtils.getImagePath(new File(backCover).getName()));
+                if (backCoverData.length >0){
+                    bookCover.setBack(backCoverData);
+                } else {
+                    bookCover.setBack(null);
+                }
                 bookCover.store(conn);
             }
 

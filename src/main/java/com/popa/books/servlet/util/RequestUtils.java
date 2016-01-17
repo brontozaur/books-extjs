@@ -84,10 +84,16 @@ public class RequestUtils {
         return buffer.toByteArray();
     }
 
-    public static String getImagePath(final boolean isFrontCover) {
+    public static String exportImageToDisk(final String bookId, final boolean isFrontCover) {
         String path = LoggerMyWay.class.getClassLoader().getResource("").getPath();
         path += "../../data";
-        File file = new File(path + File.separator + System.currentTimeMillis()+ (isFrontCover? "front":"")+ ".jpg");
-        return file.getAbsolutePath();
+        return path + File.separator + bookId + (isFrontCover? "front":"")+ ".jpg";
     }
+
+    public static String getImagePath(final String imageName) {
+        String path = LoggerMyWay.class.getClassLoader().getResource("").getPath();
+        path += "../../data";
+        return path + File.separator + imageName;
+    }
+
 }

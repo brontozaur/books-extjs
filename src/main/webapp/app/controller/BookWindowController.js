@@ -92,13 +92,15 @@ Ext.define('BM.controller.BookWindowController', {
 
             uploadFrontCover: function(fileUploadField, value, eOpts) {
                 var form = fileUploadField.up('bookwindow').down('form[itemId=frontUploadform]');
+                var bookForm = fileUploadField.up('bookwindow').down('form[itemId=bookform]');
                 if (form.isValid()) {
                     form.submit({
                                 url: 'books',
                                 method: 'POST',
                                 params: {
                                     event: 'upload-front-cover',
-                                    fileName: value
+                                    fileName: value,
+                                    bookId: bookForm.down('hidden[name=bookId]').getValue()
                                 },
                                 success: function(form, action) {
                                     var response = Ext.JSON.decode(action.response.responseText);
@@ -115,13 +117,15 @@ Ext.define('BM.controller.BookWindowController', {
 
             uploadBackCover: function(fileUploadField, value, eOpts) {
                 var form = fileUploadField.up('bookwindow').down('form[itemId=backUploadform]');
+                var bookForm = fileUploadField.up('bookwindow').down('form[itemId=bookform]');
                 if (form.isValid()) {
                     form.submit({
                                 url: 'books',
                                 method: 'POST',
                                 params: {
                                     event: 'upload-back-cover',
-                                    fileName: value
+                                    fileName: value,
+                                    bookId: bookForm.down('hidden[name=bookId]').getValue()
                                 },
                                 success: function(form, action) {
                                     var response = Ext.JSON.decode(action.response.responseText);

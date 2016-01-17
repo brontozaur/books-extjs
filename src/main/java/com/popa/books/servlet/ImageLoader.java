@@ -8,12 +8,10 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.popa.books.LoggerMyWay;
 import com.popa.books.dao.BookCover;
 import com.popa.books.dao.persistence.BorgPersistence;
 import com.popa.books.servlet.util.RequestUtils;
@@ -45,21 +43,48 @@ public class ImageLoader extends HttpServlet {
 
     @Override
     protected void doPost(final HttpServletRequest request, final HttpServletResponse response) throws ServletException, IOException {
+            final String bookId = request.getParameter("bookId");
+            final boolean isFrontCover = Boolean.valueOf(request.getParameter("isFrontCover"));
+            if (isFrontCover) {
+                File frontCover = new File(RequestUtils.getImagePath(bookId + "front.jpg"));
+                if (frontCover.exists() && frontCover.isFile()) {
+                    response.setContentType("text/html;charset=UTF-8");
+                    response.getWriter().write(frontCover.getName());
+                } else {
+                    exportImageData(response, bookId, true);
+                }
+            } else {
+                File backCover = new File (RequestUtils.getImagePath(bookId + ".jpg"));
+                if (backCover.exists() && backCover.isFile()) {
+                    response.setContentType("text/html;charset=UTF-8");
+                    response.getWriter().write(backCover.getName());
+                } else {
+                    exportImageData(response, bookId, false);
+                }
+            }
+
+    }
+
+    private void exportImageData(final HttpServletResponse response,
+                                           String bookId,
+                                           final boolean isFrontCover) throws ServletException, IOException{
         EntityManager conn = null;
         try {
             conn = BorgPersistence.getEntityManager();
-            final boolean isFrontCover = Boolean.valueOf(request.getParameter("isFrontCover"));
             Query query = conn.createNamedQuery(isFrontCover ? BookCover.QUERY_GET_FRONT : BookCover.QUERY_GET_BACK);
-            query.setParameter("bookId", Long.valueOf(request.getParameter("bookId")));
-            List imageDatas = query.getResultList();
-            if (!imageDatas.isEmpty()) {
-                File file = new File(RequestUtils.getImagePath(isFrontCover));
-                file.deleteOnExit();
-                FileOutputStream fos = new FileOutputStream(file);
-                fos.write((byte[]) imageDatas.get(0));
-                fos.close();
-                response.setContentType("text/html;charset=UTF-8");
-                response.getWriter().write(file.getName());
+            query.setParameter("bookId", Long.valueOf(bookId));
+            List imageData = query.getResultList();
+            if (!imageData.isEmpty()) {
+                byte[] imageContent = (byte[])imageData.get(0);
+                if (imageContent != null && imageContent.length >0) {
+                    File file = new File(RequestUtils.exportImageToDisk(bookId, isFrontCover));
+                    file.deleteOnExit();
+                    FileOutputStream fos = new FileOutputStream(file);
+                    fos.write((byte[]) imageData.get(0));
+                    fos.close();
+                    response.setContentType("text/html;charset=UTF-8");
+                    response.getWriter().write(file.getName());
+                }
             }
         } catch (Exception e) {
             response.addHeader(ResponseKey.ERROR_MESSAGE, "A intervenit o eroare la incarcarea imaginii!");
