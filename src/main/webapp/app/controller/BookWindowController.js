@@ -62,7 +62,7 @@ Ext.define('BM.controller.BookWindowController', {
                     form.submit({
                                 url: 'books',
                                 method: 'POST',
-                                params: {
+                                params: { //TODO validare pt editura si autor neselectati (scrii in combo, dar nu ai selectie)
                                     event: 'save-book',
                                     bookId: form.down('hidden[name=bookId]').getValue(),
                                     autorId: form.down('autorCombo[name=authorId]').getValue(),

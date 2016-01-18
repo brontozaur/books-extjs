@@ -86,7 +86,7 @@ function buildItems() {
                 {
                     xtype: 'image',
                     height: 180,
-                    width: 180,
+                    width: 160,
                     itemId: 'frontCoverInfo',
                     title: 'Front cover'
                 }
@@ -109,7 +109,7 @@ function buildItems() {
                 {
                     xtype: 'image',
                     height: 180,
-                    width: 180,
+                    width: 160,
                     itemId: 'backCoverInfo',
                     title: 'Back cover'
                 }

@@ -190,7 +190,7 @@ Ext.define('BM.view.book.BookWindow', {
                             itemId: 'cardLayoutPanel',
                             activeItem: 'frontUploadform',
                             border: false,
-                            padding: '0 0 0 20',
+                            padding: '0 0 0 40',
                             dockedItems: [
                                 {
                                     xtype: 'toolbar',
@@ -223,13 +223,13 @@ Ext.define('BM.view.book.BookWindow', {
                                     xtype: 'form',
                                     border: false,
                                     itemId: 'frontUploadform',
-                                    padding: '5 0 0 0',
+                                    padding: '5 10 0 5',
                                     header: false,
                                     items: [
                                         {
                                             xtype: 'image',
                                             height: 180,
-                                            width: 180,
+                                            width: 160,
                                             itemId: 'frontCoverPreview',
                                             name: 'frontCover'
                                         },
@@ -280,13 +280,13 @@ Ext.define('BM.view.book.BookWindow', {
                                     xtype: 'form',
                                     border: false,
                                     itemId: 'backUploadform',
-                                    padding: '5 0 0 0',
+                                    padding: '5 10 0 5',
                                     header: false,
                                     items: [
                                         {
                                             xtype: 'image',
                                             height: 180,
-                                            width: 180,
+                                            width: 160,
                                             itemId: 'backCoverPreview',
                                             name: 'backCover'
                                         },

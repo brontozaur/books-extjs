@@ -3,6 +3,7 @@ package com.popa.books.servlet;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -49,7 +50,7 @@ public class ImageLoader extends HttpServlet {
             File frontCover = new File(RequestUtils.getImagePath(bookId + "front.jpg"));
             if (frontCover.exists() && frontCover.isFile()) {
                 response.setContentType("text/html;charset=UTF-8");
-                response.getWriter().write(frontCover.getName());
+                response.getWriter().write(frontCover.getName() + "?time=" + new Date());
             } else {
                 exportImageData(response, bookId, true);
             }
@@ -57,7 +58,7 @@ public class ImageLoader extends HttpServlet {
             File backCover = new File(RequestUtils.getImagePath(bookId + ".jpg"));
             if (backCover.exists() && backCover.isFile()) {
                 response.setContentType("text/html;charset=UTF-8");
-                response.getWriter().write(backCover.getName());
+                response.getWriter().write(backCover.getName() + "?time=" + new Date());
             } else {
                 exportImageData(response, bookId, false);
             }
