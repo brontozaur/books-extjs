@@ -90,13 +90,15 @@ public class SaveBookEventHandler extends EventHandler {
                     bookCover = new BookCover();
                     bookCover.setBook(book);
                 }
-                byte[] frontCoverData = loadFile(RequestUtils.getImagePath(new File(frontCover).getName()));
+                String frontCoverName = frontCover.substring(0, frontCover.indexOf('?'));
+                byte[] frontCoverData = loadFile(RequestUtils.getImagePath(new File(frontCoverName).getName()));
                 if (frontCoverData.length >0) {
                     bookCover.setFront(frontCoverData);
                 } else {
                     bookCover.setFront(null);
                 }
-                byte[] backCoverData = loadFile(RequestUtils.getImagePath(new File(backCover).getName()));
+                String backCoverName = backCover.substring(0, backCover.indexOf('?'));
+                byte[] backCoverData = loadFile(RequestUtils.getImagePath(new File(backCoverName).getName()));
                 if (backCoverData.length >0){
                     bookCover.setBack(backCoverData);
                 } else {

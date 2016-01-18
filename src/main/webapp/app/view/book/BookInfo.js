@@ -85,8 +85,8 @@ function buildItems() {
                 },
                 {
                     xtype: 'image',
-                    height: 164,
-                    width: 128,
+                    height: 180,
+                    width: 180,
                     itemId: 'frontCoverInfo',
                     title: 'Front cover'
                 }
@@ -108,8 +108,8 @@ function buildItems() {
                 },
                 {
                     xtype: 'image',
-                    height: 164,
-                    width: 128,
+                    height: 180,
+                    width: 180,
                     itemId: 'backCoverInfo',
                     title: 'Back cover'
                 }
