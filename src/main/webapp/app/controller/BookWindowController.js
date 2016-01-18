@@ -43,8 +43,14 @@ Ext.define('BM.controller.BookWindowController', {
                             'bookwindow filefield[name=frontCoverUpload]': {
                                 change: this.uploadFrontCover
                             },
+                            'bookwindow button[itemId=removeFrontUpload]': {
+                                click: this.deleteFrontCover
+                            },
                             'bookwindow filefield[name=backCoverUpload]': {
                                 change: this.uploadBackCover
+                            },
+                            'bookwindow button[itemId=removeBackUpload]': {
+                                click: this.deleteBackCover
                             },
                             'bookwindow button[itemId=frontCoverButton]': {
                                 click: this.front
@@ -116,6 +122,27 @@ Ext.define('BM.controller.BookWindowController', {
                 }
             },
 
+            deleteFrontCover: function(button, e, eOpts) {
+                var bookForm = button.up('bookwindow').down('form[itemId=bookform]');
+                Ext.Ajax.request({
+                    url: 'books',
+                    method: 'POST',
+                    params: {
+                        event: 'del-upload',
+                        bookId: bookForm.down('hidden[name=bookId]').getValue(),
+                        isFrontCover: true
+                    },
+                    scope: this,
+                    success: function(result, request) {
+                        var imageCanvas = Ext.ComponentQuery.query('image[itemId=backCoverPreview]')[0];
+                        imageCanvas.setSrc(null);
+                    },
+                    failure: function(result, request) {
+                        createErrorWindow(result);
+                    }
+                });
+            },
+
             uploadBackCover: function(fileUploadField, value, eOpts) {
                 var form = fileUploadField.up('bookwindow').down('form[itemId=backUploadform]');
                 var bookForm = fileUploadField.up('bookwindow').down('form[itemId=bookform]');
@@ -140,6 +167,27 @@ Ext.define('BM.controller.BookWindowController', {
                                 }
                             });
                 }
+            },
+
+            deleteBackCover: function(button, e, eOpts) {
+                var bookForm = button.up('bookwindow').down('form[itemId=bookform]');
+                Ext.Ajax.request({
+                    url: 'books',
+                    method: 'POST',
+                    params: {
+                        event: 'del-upload',
+                        bookId: bookForm.down('hidden[name=bookId]').getValue(),
+                        isFrontCover: false
+                    },
+                    scope: this,
+                    success: function(result, request) {
+                        var imageCanvas = Ext.ComponentQuery.query('image[itemId=backCoverPreview]')[0];
+                        imageCanvas.setSrc(null);
+                    },
+                    failure: function(result, request) {
+                        createErrorWindow(result);
+                    }
+                });
             },
 
             back: function(button, e, eOpts) {

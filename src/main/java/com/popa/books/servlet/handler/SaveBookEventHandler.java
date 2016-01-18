@@ -76,36 +76,42 @@ public class SaveBookEventHandler extends EventHandler {
             String frontCover = request.getParameter("frontCoverImage");
             String backCover = request.getParameter("backCoverImage");
 
-            if (StringUtils.isNotEmpty(frontCover) || StringUtils.isNotEmpty(backCover)) {
-                BookCover bookCover = null;
-                if (StringUtils.isNotEmpty(bookId)) {
-                    Query query = conn.createNamedQuery(BookCover.QUERY_GET_BY_BOOK_ID);
-                    query.setParameter("bookId", Long.valueOf(bookId));
-                    List<BookCover> coverList = query.getResultList();
-                    if (!coverList.isEmpty()){
-                        bookCover = coverList.get(0);
-                    }
+            BookCover bookCover = null;
+            if (StringUtils.isNotEmpty(bookId)) {
+                Query query = conn.createNamedQuery(BookCover.QUERY_GET_BY_BOOK_ID);
+                query.setParameter("bookId", Long.valueOf(bookId));
+                List<BookCover> coverList = query.getResultList();
+                if (!coverList.isEmpty()) {
+                    bookCover = coverList.get(0);
                 }
-                if (bookCover == null) {
-                    bookCover = new BookCover();
-                    bookCover.setBook(book);
-                }
+            }
+            if (bookCover == null) {
+                bookCover = new BookCover();
+                bookCover.setBook(book);
+            }
+            if (StringUtils.isNotEmpty(frontCover)) {
                 String frontCoverName = frontCover.substring(0, frontCover.indexOf('?'));
                 byte[] frontCoverData = loadFile(RequestUtils.getImagePath(new File(frontCoverName).getName()));
-                if (frontCoverData.length >0) {
+                if (frontCoverData.length > 0) {
                     bookCover.setFront(frontCoverData);
                 } else {
                     bookCover.setFront(null);
                 }
+            } else {
+                bookCover.setFront(null);
+            }
+            if (StringUtils.isNotEmpty(backCover)) {
                 String backCoverName = backCover.substring(0, backCover.indexOf('?'));
                 byte[] backCoverData = loadFile(RequestUtils.getImagePath(new File(backCoverName).getName()));
-                if (backCoverData.length >0){
+                if (backCoverData.length > 0) {
                     bookCover.setBack(backCoverData);
                 } else {
                     bookCover.setBack(null);
                 }
-                bookCover.store(conn);
+            } else {
+                bookCover.setBack(null);
             }
+            bookCover.store(conn);
 
             conn.getTransaction().commit();
             return null;

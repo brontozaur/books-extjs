@@ -47,7 +47,7 @@ public class ImageLoaderHandler extends EventHandler {
             if (fileAlreadyExist != null) {
                 return fileAlreadyExist;
             }
-            return exportImageData(request).toString();
+            return exportImageData(request);
         } catch (Exception exc) {
             logger.error(exc, exc);
             throw new ServletException(exc);
@@ -57,7 +57,7 @@ public class ImageLoaderHandler extends EventHandler {
     private String handleFileExistOnServerCase(final HttpServletRequest request) {
         final String bookId = request.getParameter("bookId");
         final boolean isFrontCover = Boolean.valueOf(request.getParameter("isFrontCover"));
-        final String fileName = bookId + (isFrontCover ? "book.jpg" : ".jpg");
+        final String fileName = bookId + (isFrontCover ? "front.jpg" : ".jpg");
         File serverFile = new File(RequestUtils.getImagePath(fileName));
         if (serverFile.exists() && serverFile.isFile()) {
             JsonObject response = new JsonObject();
@@ -89,7 +89,7 @@ public class ImageLoaderHandler extends EventHandler {
         return response.toString();
     }
 
-    private JsonObject exportImageData(final HttpServletRequest request) throws ServletException, IOException {
+    private String exportImageData(final HttpServletRequest request) throws ServletException, IOException {
         EntityManager conn = null;
         try {
             conn = BorgPersistence.getEntityManager();
@@ -109,7 +109,7 @@ public class ImageLoaderHandler extends EventHandler {
                     JsonObject response = new JsonObject();
                     response.addProperty("success", true);
                     response.addProperty("fileName", file.getName() + "?time=" + new Date());
-                    return response;
+                    return response.toString();
                 }
             }
             return null;

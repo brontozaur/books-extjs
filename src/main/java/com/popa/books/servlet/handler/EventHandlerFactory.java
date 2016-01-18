@@ -45,6 +45,8 @@ public class EventHandlerFactory {
             handler = new GetTreeEdituriEventHandler();
         } else if (Events.IMAGE_LOADER.equals(eventName)) {
             handler = new ImageLoaderHandler();
+        } else if (Events.DELETE_UPLOAD.equals(eventName)) {
+            handler = new DeleteUploadEventHandler();
         }
         if (handler == null) {
             throw new NullPointerException("no handler was found for event: " + eventName);

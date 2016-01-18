@@ -23,4 +23,5 @@ public interface Events {
     String GET_TREE_EDITURI = "get-tree-edituri";
 
     String IMAGE_LOADER = "image-loader";
+    String DELETE_UPLOAD = "del-upload";
 }
