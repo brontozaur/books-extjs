@@ -37,16 +37,14 @@ public class EventHandlerFactory {
             handler = new DeleteCategorieEventHandler();
         } else if (Events.GET_CATEGORII.equals(eventName)) {
             handler = new GetCategoriiEventHandler();
-        } else if (Events.UPLOAD_FRONT_COVER.equals(eventName)) {
-            handler = new UploadFrontCoverEventHandler();
-        } else if (Events.UPLOAD_BACK_COVER.equals(eventName)) {
-            handler = new UploadBackCoverEventHandler();
         } else if (Events.GET_TREE_AUTORI.equals(eventName)) {
             handler = new GetTreeAutoriEventHandler();
         } else if (Events.GET_TREE_BOOKS.equals(eventName)) {
             handler = new GetTreeBooksEventHandler();
         } else if (Events.GET_TREE_EDITURI.equals(eventName)) {
             handler = new GetTreeEdituriEventHandler();
+        } else if (Events.IMAGE_LOADER.equals(eventName)) {
+            handler = new ImageLoaderHandler();
         }
         if (handler == null) {
             throw new NullPointerException("no handler was found for event: " + eventName);

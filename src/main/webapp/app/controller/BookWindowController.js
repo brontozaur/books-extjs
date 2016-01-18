@@ -98,8 +98,9 @@ Ext.define('BM.controller.BookWindowController', {
                                 url: 'books',
                                 method: 'POST',
                                 params: {
-                                    event: 'upload-front-cover',
-                                    fileName: value,
+                                    event: 'image-loader',
+                                    isUpload: true,
+                                    isFrontCover: 'true',
                                     bookId: bookForm.down('hidden[name=bookId]').getValue()
                                 },
                                 success: function(form, action) {
@@ -123,8 +124,9 @@ Ext.define('BM.controller.BookWindowController', {
                                 url: 'books',
                                 method: 'POST',
                                 params: {
-                                    event: 'upload-back-cover',
-                                    fileName: value,
+                                    event: 'image-loader',
+                                    isUpload: true,
+                                    isFrontCover: 'false',
                                     bookId: bookForm.down('hidden[name=bookId]').getValue()
                                 },
                                 success: function(form, action) {

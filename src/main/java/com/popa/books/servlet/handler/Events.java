@@ -18,10 +18,9 @@ public interface Events {
     String DEL_CATEGORIE = "del-categorie";
     String SAVE_CATEGORIE = "save-categorie";
 
-    String UPLOAD_FRONT_COVER = "upload-front-cover";
-    String UPLOAD_BACK_COVER = "upload-back-cover";
-
     String GET_TREE_AUTORI = "get-tree-autori";
     String GET_TREE_BOOKS = "get-tree-books";
     String GET_TREE_EDITURI = "get-tree-edituri";
+
+    String IMAGE_LOADER = "image-loader";
 }
