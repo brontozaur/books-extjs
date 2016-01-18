@@ -77,7 +77,7 @@ public class ImageLoaderHandler extends EventHandler {
         } else {
             imageData = RequestUtils.getByteArray(request, "backCoverUpload");
         }
-        File file = new File(RequestUtils.exportImageToDisk(bookId, true));
+        File file = new File(RequestUtils.exportImageToDisk(bookId, isFrontCover));
         file.deleteOnExit();
         FileOutputStream fso = new FileOutputStream(file);
         fso.write(imageData);
